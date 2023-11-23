@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CalendarioUniversitario"
+rootProject.name = "AgendaUniversitaria"
 include(":app")
  
