@@ -4,7 +4,8 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import cl.stomas.agendauniversitaria.db.Repo;
+import cl.stomas.agendauniversitaria.db.DB;
+import cl.stomas.agendauniversitaria.modelos.Asignatura;
 import cl.stomas.agendauniversitaria.modelos.Bloque;
 import cl.stomas.agendauniversitaria.modelos.Carrera;
 import cl.stomas.agendauniversitaria.modelos.Semestre;
@@ -16,9 +17,9 @@ public class SemestreControler {
     }
 
     public ArrayList<Semestre> execute(Carrera carrera){
-        ArrayList<Semestre> semestres = Repo.semestres(ctx).getFrom(carrera);
+        ArrayList<Semestre> semestres = DB.semestres(ctx).getFrom(carrera);
         for (Semestre semestre: semestres){
-            ArrayList<Bloque> bloques = Repo.bloques(ctx).getFrom(semestre);
+            ArrayList<Asignatura> asignaturas = DB.asignaturas().getFrom(semestre);
 
         }
         return semestres;

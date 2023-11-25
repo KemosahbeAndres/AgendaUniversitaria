@@ -2,9 +2,10 @@ package cl.stomas.agendauniversitaria.db;
 
 import android.content.Context;
 
-public final class Repo {
+public final class DB {
     private static DAOCarrera daoCarrera;
     private static DAOSemestre daoSemestre;
+    private static DAOAsignatura daoAsignatura;
     private static DAOBloque daoBloque;
 
     public static DAOCarrera carreras(Context context){
@@ -26,5 +27,12 @@ public final class Repo {
             daoBloque = new DAOBloque(context);
         }
         return daoBloque;
+    }
+
+    public static DAOAsignatura asignaturas(Context context) {
+        if(daoAsignatura == null){
+            daoAsignatura = new DAOAsignatura(context);
+        }
+        return daoAsignatura;
     }
 }

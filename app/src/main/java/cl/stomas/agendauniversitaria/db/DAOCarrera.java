@@ -41,8 +41,8 @@ public class DAOCarrera {
     public Carrera get(int id){
         SQLiteDatabase db = manager.getReadableDatabase();
         Carrera carrera = null;
-        Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_CARRERAS.NOMBRE + " WHERE id=" + String.valueOf(id), null);
-        while(rows.moveToNext()){
+        Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_CARRERAS.NOMBRE + " WHERE id="+id+" LIMIT 1", null);
+        while(rows.moveToFirst()){
             try{
                 int indexID = rows.getColumnIndexOrThrow(DBContract.TABLA_CARRERAS.COL_ID);
                 int indexNAME = rows.getColumnIndexOrThrow(DBContract.TABLA_CARRERAS.COL_NOMBRE);
