@@ -77,4 +77,14 @@ public class DAOSemestre {
         rows.close();
         return semestres;
     }
+
+    public void insert(Semestre semestre){
+
+    }
+    public void update(Semestre semestre){
+
+    }
+    public void delete(Semestre semestre){
+
+    }
 }
