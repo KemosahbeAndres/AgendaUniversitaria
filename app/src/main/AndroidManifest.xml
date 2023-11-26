@@ -13,8 +13,8 @@
         android:theme="@style/Theme.CalendarioUniversitario"
         tools:targetApi="31">
         <activity
-            android:name=".AgendaActivity"
-            android:exported="false" />
+            android:name=".vistas.AgendaActivity"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

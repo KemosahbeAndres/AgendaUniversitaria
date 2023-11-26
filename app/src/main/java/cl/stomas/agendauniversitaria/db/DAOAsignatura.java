@@ -126,9 +126,16 @@ public class DAOAsignatura {
         db.insert(DBContract.TABLA_ASIGNATURAS.NOMBRE, null, values);
     }
     public void update(Asignatura asignatura){
-
+        SQLiteDatabase db = manager.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DBContract.TABLA_ASIGNATURAS.COL_NOMBRE, asignatura.getNombre());
+        values.put(DBContract.TABLA_ASIGNATURAS.COL_DESCRIPCION, asignatura.getDescripcion());
+        values.put(DBContract.TABLA_ASIGNATURAS.COL_DOCENTE, asignatura.getDocente());
+        values.put(DBContract.TABLA_ASIGNATURAS.COL_COLOR, asignatura.getColor());
+        db.update(DBContract.TABLA_ASIGNATURAS.NOMBRE, values, "id="+asignatura.getId(), null);
     }
     public void delete(Asignatura asignatura){
-
+        SQLiteDatabase db = manager.getWritableDatabase();
+        db.delete(DBContract.TABLA_ASIGNATURAS.NOMBRE, "id="+asignatura.getId(), null);
     }
 }

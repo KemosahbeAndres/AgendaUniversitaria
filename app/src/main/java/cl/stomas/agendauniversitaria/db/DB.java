@@ -8,6 +8,10 @@ public final class DB {
     private static DAOAsignatura daoAsignatura;
     private static DAOBloque daoBloque;
 
+    private static DAOActividad daoActividad;
+
+    private DB(){}
+
     public static DAOCarrera carreras(Context context){
         if(daoCarrera == null){
             daoCarrera = new DAOCarrera(context);
@@ -21,7 +25,12 @@ public final class DB {
         }
         return daoSemestre;
     }
-
+    public static DAOAsignatura asignaturas(Context context) {
+        if(daoAsignatura == null){
+            daoAsignatura = new DAOAsignatura(context);
+        }
+        return daoAsignatura;
+    }
     public static DAOBloque bloques(Context context) {
         if(daoBloque == null){
             daoBloque = new DAOBloque(context);
@@ -29,10 +38,11 @@ public final class DB {
         return daoBloque;
     }
 
-    public static DAOAsignatura asignaturas(Context context) {
-        if(daoAsignatura == null){
-            daoAsignatura = new DAOAsignatura(context);
+    public static DAOActividad actividades(Context context){
+        if(daoActividad == null){
+            daoActividad = new DAOActividad(context);
         }
-        return daoAsignatura;
+        return daoActividad;
     }
+
 }
