@@ -16,6 +16,9 @@
             android:name=".vistas.AgendaActivity"
             android:exported="false"/>
         <activity
+            android:name=".vistas.AddDatesActivity"
+            android:exported="false"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

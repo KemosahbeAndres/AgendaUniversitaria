@@ -1,7 +1,26 @@
 <resources>
-    <string name="app_name">CalendarioUniversitario</string>
+    <string name="app_name">Agenda Universitaria</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+
+    <string name="materiaselect">Materia</string>
+    <string name="importanciatitle">Importancia</string>
+    <string name="tipotitle">Tipo</string>
+
+    <string-array name="seleccionimportancia">
+        <item>Bajo</item>
+        <item>Medio</item>
+        <item>Alto</item>
+    </string-array>
+    <string-array name="tipostrabajos">
+        <item>Informe</item>
+        <item>Prueba</item>
+        <item>Actividad</item>
+        <item>Terreno</item>
+        <item>Proyecto</item>
+    </string-array>
+    <string-array name="materiaslist">
+        <item>IoT</item>
+        <item>Adm. Empresa</item>
+        <item>Prog. Android</item>
+    </string-array>
 </resources>

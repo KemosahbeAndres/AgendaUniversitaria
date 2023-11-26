@@ -3,7 +3,7 @@ package cl.stomas.agendauniversitaria.db;
 public class DBContract {
 
     public final static String DB_NAME = "t1_agenda_universitaria.db";
-    public final static int DB_VERSION = 1;
+    public final static int DB_VERSION = 2;
 
     public final static class TABLA_CARRERAS {
         public final static String NOMBRE = "carreras";
@@ -40,10 +40,9 @@ public class DBContract {
         public final static String COL_ID = "id";
         public final static String COL_ID_ASIGNATURA = "id_asignatura";
         public final static String COL_ID_TIPO = "id_tipo";
-        public final static String COL_HORA = "hora";
+        public final static String COL_FECHA = "fecha";
         public final static String COL_DURACION = "duracion";
         public final static String COL_DIA_SEMANA = "dia_semana";
-        public final static String COL_FECHA = "fecha";
     }
     public final static class TABLA_TIPO_ACTIVIDAD {
         public final static String NOMBRE = "tipo_actividad";

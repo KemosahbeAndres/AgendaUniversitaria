@@ -6,30 +6,31 @@ import java.util.Date;
 public class Bloque {
 
     private int id;
+    private String tipo;
     private LocalTime hora;
     private int duracion;
     private int dia_semana;
     private Date fecha;
     private Asignatura asignatura;
 
-    public Bloque(int id, LocalTime hora, int duracion, int dia_semana, Date fecha, Asignatura asignatura) {
-        this(hora, duracion, dia_semana, fecha, asignatura);
+    public Bloque(int id, String tipo, int duracion, int dia_semana, Date fecha, Asignatura asignatura) {
+        this(tipo, duracion, dia_semana, fecha, asignatura);
         this.id = id;
     }
 
-    public Bloque(LocalTime hora, int duracion, int dia_semana, Date fecha, Asignatura asignatura) {
-        this(hora, duracion, dia_semana, fecha);
+    public Bloque(String tipo, int duracion, int dia_semana, Date fecha, Asignatura asignatura) {
+        this(tipo, duracion, dia_semana, fecha);
         this.asignatura = asignatura;
     }
 
-    public Bloque(int id, LocalTime hora, int duracion, int dia_semana, Date fecha) {
-        this(hora, duracion, dia_semana, fecha);
+    public Bloque(int id, String tipo, int duracion, int dia_semana, Date fecha) {
+        this(tipo, duracion, dia_semana, fecha);
         this.id = id;
     }
 
-    public Bloque(LocalTime hora, int duracion, int dia_semana, Date fecha) {
+    public Bloque(String tipo, int duracion, int dia_semana, Date fecha) {
         this.id = -1;
-        this.hora = hora;
+        this.tipo = tipo;
         this.duracion = duracion;
         this.dia_semana = dia_semana;
         this.fecha = fecha;
@@ -42,14 +43,6 @@ public class Bloque {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public LocalTime getHora() {
-        return hora;
-    }
-
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
     }
 
     public int getDuracion() {
