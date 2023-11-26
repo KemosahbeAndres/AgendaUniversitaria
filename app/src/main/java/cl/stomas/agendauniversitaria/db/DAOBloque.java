@@ -129,9 +129,9 @@ public class DAOBloque {
         return bloque;
     }
 
-    public void insert(Bloque bloque, Asignatura asignatura, String tipo){
+    public void insert(Bloque bloque, Asignatura asignatura){
         SQLiteDatabase db = manager.getWritableDatabase();
-        int typeID = this.idTipoBloque(tipo);
+        int typeID = this.idTipoBloque(bloque.getTipo());
         if(typeID < 0){
             typeID = this.idTipoBloque(Tipos.CATEDRA);
         }
@@ -141,40 +141,68 @@ public class DAOBloque {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
             values.put(DBContract.TABLA_BLOQUES.COL_FECHA, bloque.getFecha().toInstant().getEpochSecond());
         }
-        values.put(DBContract.TABLA_BLOQUES.COL_ID_TIPO, typeID);
-        values.put(DBContract.TABLA_BLOQUES.COL_ID_TIPO, typeID);
+        values.put(DBContract.TABLA_BLOQUES.COL_DURACION, bloque.getDuracion());
+        values.put(DBContract.TABLA_BLOQUES.COL_DIA_SEMANA, bloque.getDia_semana());
 
         db.insert(DBContract.TABLA_BLOQUES.NOMBRE, null, values);
     }
     public void update(Bloque bloque){
+        SQLiteDatabase db = manager.getWritableDatabase();
+        int typeID = this.idTipoBloque(bloque.getTipo());
+        if(typeID < 0){
+            typeID = this.idTipoBloque(Tipos.CATEDRA);
+        }
+        ContentValues values = new ContentValues();
+        values.put(DBContract.TABLA_BLOQUES.COL_ID_TIPO, typeID);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
+            values.put(DBContract.TABLA_BLOQUES.COL_FECHA, bloque.getFecha().toInstant().getEpochSecond());
+        }
+        values.put(DBContract.TABLA_BLOQUES.COL_DURACION, bloque.getDuracion());
+        values.put(DBContract.TABLA_BLOQUES.COL_DIA_SEMANA, bloque.getDia_semana());
 
+        db.update(DBContract.TABLA_BLOQUES.NOMBRE, values, "id="+bloque.getId(), null);
     }
     public void delete(Bloque bloque){
-
+        SQLiteDatabase db = manager.getWritableDatabase();
+        db.delete(DBContract.TABLA_BLOQUES.NOMBRE, "id="+bloque.getId(), null);
     }
 
     private int idTipoBloque(String tipo){
         String value = tipo.trim().toUpperCase();
         int id = -1;
         SQLiteDatabase db = manager.getReadableDatabase();
-        Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_TIPO_BLOQUE.NOMBRE+ " WHERE "+DBContract.TABLA_TIPO_BLOQUE.COL_NOMBRE+"="+value + " LIMIT 1", null);
-        if (rows.moveToFirst()){
-            int idxID = rows.getColumnIndex(DBContract.TABLA_TIPO_BLOQUE.COL_ID);
-            id = rows.getInt(idxID);
+        Cursor rows = null;
+        try {
+            rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_TIPO_BLOQUE.NOMBRE+ " WHERE "+DBContract.TABLA_TIPO_BLOQUE.COL_NOMBRE+"="+value + " LIMIT 1", null);
+            if (rows.moveToFirst()){
+                int idxID = rows.getColumnIndex(DBContract.TABLA_TIPO_BLOQUE.COL_ID);
+                id = rows.getInt(idxID);
+            }
+            rows.close();
+        }catch(Exception e){
+            if(rows != null){
+                rows.close();
+            }
         }
-        rows.close();
         return id;
     }
 
     private String nombreTipoBloque(int id){
         String tipo = "";
         SQLiteDatabase db = manager.getReadableDatabase();
-        Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_TIPO_BLOQUE.NOMBRE+ " WHERE id="+id + " LIMIT 1", null);
-        if (rows.moveToFirst()){
-            int idxTYPE = rows.getColumnIndex(DBContract.TABLA_TIPO_BLOQUE.COL_NOMBRE);
-            tipo = String.valueOf(rows.getString(idxTYPE));
+        Cursor rows = null;
+        try {
+            rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_TIPO_BLOQUE.NOMBRE+ " WHERE id="+id + " LIMIT 1", null);
+            if (rows.moveToFirst()){
+                int idxTYPE = rows.getColumnIndex(DBContract.TABLA_TIPO_BLOQUE.COL_NOMBRE);
+                tipo = String.valueOf(rows.getString(idxTYPE));
+            }
+            rows.close();
+        }catch (Exception e){
+            if (rows != null){
+                rows.close();
+            }
         }
-        rows.close();
         return tipo;
     }
 }

@@ -7,7 +7,6 @@ public class Bloque {
 
     private int id;
     private String tipo;
-    private LocalTime hora;
     private int duracion;
     private int dia_semana;
     private Date fecha;
@@ -43,6 +42,14 @@ public class Bloque {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public int getDuracion() {
