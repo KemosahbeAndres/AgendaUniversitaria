@@ -84,7 +84,7 @@ public class DAOSemestre {
         Semestre semestre = null;
         SQLiteDatabase db = manager.getReadableDatabase();
         Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_CARRERAS.NOMBRE+ " WHERE id="+id+" LIMIT 1", null);
-        while(rows.moveToFirst()){
+        if(rows.moveToFirst()){
             try{
                 int indexID = rows.getColumnIndexOrThrow(DBContract.TABLA_SEMESTRES.COL_ID);
                 int indexSTART = rows.getColumnIndexOrThrow(DBContract.TABLA_SEMESTRES.COL_FECHA_INICIO);

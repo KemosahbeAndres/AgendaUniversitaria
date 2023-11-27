@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,13 +19,13 @@ import cl.stomas.agendauniversitaria.db.DB;
 import cl.stomas.agendauniversitaria.modelos.Carrera;
 import cl.stomas.agendauniversitaria.modelos.Semestre;
 
-public class AgregarSemestreActivity extends AppCompatActivity {
+public class AgregarCarreraActivity extends AppCompatActivity {
 
     private Config config;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agregar_semestre);
+        setContentView(R.layout.activity_agregar_carrera);
 
         config = Config.getConfig(this);
         config.load();
@@ -51,7 +50,7 @@ public class AgregarSemestreActivity extends AppCompatActivity {
                     editNombre.getText().toString(),
                     anio
                 );
-                long idCarrera = DB.carreras(AgregarSemestreActivity.this).insert(carrera);
+                long idCarrera = DB.carreras(AgregarCarreraActivity.this).insert(carrera);
                 carrera.setId(idCarrera);
                 config.setIdCarrera(idCarrera);
                 config.save();
@@ -61,16 +60,16 @@ public class AgregarSemestreActivity extends AppCompatActivity {
                     Date end = Date.from(Instant.parse(editFechaFin.getText().toString()));
 
                     Semestre semestre = new Semestre(start, end);
-                    long idSemestre = DB.semestres(AgregarSemestreActivity.this).insert(semestre, carrera);
+                    long idSemestre = DB.semestres(AgregarCarreraActivity.this).insert(semestre, carrera);
                     config.setIdSemestre(idSemestre);
                     config.save();
 
                     config.load();
-                    Carrera c = DB.carreras(AgregarSemestreActivity.this).get(config.getIdCarrera());
+                    Carrera c = DB.carreras(AgregarCarreraActivity.this).get(config.getIdCarrera());
                     if(config.getIdSemestre() < 0){
-                        if(DB.semestres(AgregarSemestreActivity.this).getAll().size() <= 0){
+                        if(DB.semestres(AgregarCarreraActivity.this).getAll().size() <= 0){
                             //Crear Semestre
-                            Toast.makeText(AgregarSemestreActivity.this, "Semestre no encontrado!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AgregarCarreraActivity.this, "Semestre no encontrado!", Toast.LENGTH_SHORT).show();
                             finishActivity(0);
                             finish();
                             System.exit(0);
@@ -78,7 +77,7 @@ public class AgregarSemestreActivity extends AppCompatActivity {
                             Date hoy = null;
                             hoy = Date.from(Instant.now());
                             Semestre semestreSeleccionado = null;
-                            ArrayList<Semestre> semestres = DB.semestres(AgregarSemestreActivity.this).getFrom(c);
+                            ArrayList<Semestre> semestres = DB.semestres(AgregarCarreraActivity.this).getFrom(c);
                             for (Semestre sem: semestres){
                                 if(hoy.before(sem.getFecha_inicio()) && hoy.after(sem.getFecha_fin())){
                                     semestreSeleccionado = sem;
@@ -94,7 +93,7 @@ public class AgregarSemestreActivity extends AppCompatActivity {
                     }
 
                 }else{
-                    Toast.makeText(AgregarSemestreActivity.this, "Error del SDK!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarCarreraActivity.this, "Error del SDK!", Toast.LENGTH_SHORT).show();
                 }
 
                 finishActivity(0);

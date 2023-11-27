@@ -42,7 +42,7 @@ public class DAOCarrera {
         SQLiteDatabase db = manager.getReadableDatabase();
         Carrera carrera = null;
         Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_CARRERAS.NOMBRE + " WHERE id="+id+" LIMIT 1", null);
-        while(rows.moveToFirst()){
+        if(rows.moveToFirst()){
             try{
                 int indexID = rows.getColumnIndexOrThrow(DBContract.TABLA_CARRERAS.COL_ID);
                 int indexNAME = rows.getColumnIndexOrThrow(DBContract.TABLA_CARRERAS.COL_NOMBRE);

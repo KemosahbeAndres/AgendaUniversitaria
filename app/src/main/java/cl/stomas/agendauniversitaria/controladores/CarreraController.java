@@ -24,7 +24,7 @@ public final class CarreraController {
         carrera.addSemestres(semestres);
         return carrera;
     }
-    public Carrera execute(int id){
+    public Carrera execute(long id){
         return this.execute(DB.carreras(ctx).get(id));
     }
 }

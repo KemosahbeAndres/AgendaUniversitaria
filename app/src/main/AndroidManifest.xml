@@ -16,7 +16,7 @@
             android:name=".vistas.SeleccionarCarreraActivity"
             android:exported="false" />
         <activity
-            android:name=".vistas.AgregarSemestreActivity"
+            android:name=".vistas.AgregarCarreraActivity"
             android:exported="false" />
         <activity
             android:name=".vistas.AgendaActivity"

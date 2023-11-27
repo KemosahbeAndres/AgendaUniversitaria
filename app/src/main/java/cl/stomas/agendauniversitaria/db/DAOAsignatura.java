@@ -92,7 +92,7 @@ public class DAOAsignatura {
         SQLiteDatabase db = manager.getReadableDatabase();
         Asignatura asignatura = null;
         Cursor rows = db.rawQuery("SELECT * FROM "+DBContract.TABLA_ASIGNATURAS.NOMBRE+" WHERE id="+id+" LIMIT 1", null);
-        while(rows.moveToFirst()){
+        if(rows.moveToFirst()){
             try{
                 int indexID = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_ID);
                 int indexNAME = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_NOMBRE);
