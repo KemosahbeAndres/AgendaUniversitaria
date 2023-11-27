@@ -114,32 +114,27 @@ public class DBConnectionManager extends SQLiteOpenHelper {
         Cursor tactividades = db.rawQuery("SELECT * FROM "+DBContract.TABLA_TIPO_ACTIVIDAD.NOMBRE, null);
         if(tbloques.getCount() <= 0){
             // Insertar Tipos de Bloques
-            ContentValues tipo_bloque = new ContentValues();
-            tipo_bloque.put(DBContract.TABLA_TIPO_BLOQUE.COL_NOMBRE, "CATEDRA");
-            db.insert(DBContract.TABLA_TIPO_BLOQUE.NOMBRE, null, tipo_bloque);
-
-            tipo_bloque = new ContentValues();
-            tipo_bloque.put(DBContract.TABLA_TIPO_BLOQUE.COL_NOMBRE, "EXPOSICION");
-            db.insert(DBContract.TABLA_TIPO_BLOQUE.NOMBRE, null, tipo_bloque);
-
-            tipo_bloque = new ContentValues();
-            tipo_bloque.put(DBContract.TABLA_TIPO_BLOQUE.COL_NOMBRE, "RECUPERACION");
-            db.insert(DBContract.TABLA_TIPO_BLOQUE.NOMBRE, null, tipo_bloque);
+            String[] tipos_bloques = new String[]{
+                    "CATEDRA", "LABORATORIO", "RECUPERACION"
+            };
+            for(String TIPO: tipos_bloques){
+                ContentValues tipo_bloque = new ContentValues();
+                tipo_bloque.put(DBContract.TABLA_TIPO_BLOQUE.COL_NOMBRE, TIPO);
+                db.insert(DBContract.TABLA_TIPO_BLOQUE.NOMBRE, null, tipo_bloque);
+            }
         }
 
         if(tactividades.getCount() <= 0){
             // Insertar Tipos de Actividades
-            ContentValues tipo_act = new ContentValues();
-            tipo_act.put(DBContract.TABLA_TIPO_ACTIVIDAD.COL_NOMBRE, "EVALUACION");
-            db.insert(DBContract.TABLA_TIPO_ACTIVIDAD.NOMBRE, null, tipo_act);
+            String[] tipos_act = new String[]{
+                    "ACTIVIDAD", "INFORME", "EVALUACION", "EXPOSICION", "PROYECTO", "TERRENO"
+            };
 
-            tipo_act = new ContentValues();
-            tipo_act.put(DBContract.TABLA_TIPO_ACTIVIDAD.COL_NOMBRE, "EXPOSICION");
-            db.insert(DBContract.TABLA_TIPO_ACTIVIDAD.NOMBRE, null, tipo_act);
-
-            tipo_act = new ContentValues();
-            tipo_act.put(DBContract.TABLA_TIPO_ACTIVIDAD.COL_NOMBRE, "TRABAJO");
-            db.insert(DBContract.TABLA_TIPO_ACTIVIDAD.NOMBRE, null, tipo_act);
+            for(String TIPO: tipos_act){
+                ContentValues tipo_act = new ContentValues();
+                tipo_act.put(DBContract.TABLA_TIPO_ACTIVIDAD.COL_NOMBRE, TIPO);
+                db.insert(DBContract.TABLA_TIPO_ACTIVIDAD.NOMBRE, null, tipo_act);
+            }
         }
 
     }

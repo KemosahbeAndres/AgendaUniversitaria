@@ -1,6 +1,5 @@
 package cl.stomas.agendauniversitaria.db;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,21 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 
 import java.time.Instant;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
 import cl.stomas.agendauniversitaria.modelos.Asignatura;
 import cl.stomas.agendauniversitaria.modelos.Bloque;
-import cl.stomas.agendauniversitaria.modelos.Semestre;
 
 public class DAOBloque {
-
-    public final static class Tipos {
-        public final static String RECUPERACION = "RECUPERACION";
-        public final static String CATEDRA = "CATEDRA";
-        public final static String LABORATORIO = "LABORATORIO";
-    }
 
     private DBConnectionManager manager;
 
@@ -43,7 +34,7 @@ public class DAOBloque {
             Bloque bloque = null;
             // Obtenemos el nombre del tipo de bloque
             Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_TIPO_BLOQUE.NOMBRE+ " WHERE id="+idxIDTYPE, null);
-            String tipo = Tipos.CATEDRA;
+            String tipo = Bloque.Tipo.CATEDRA;
             if (rows.moveToFirst()){
                 int idxTYPE = rows.getColumnIndex(DBContract.TABLA_TIPO_BLOQUE.COL_NOMBRE);
                 tipo = String.valueOf(rows.getString(idxTYPE));
@@ -58,6 +49,8 @@ public class DAOBloque {
                         cursor.getInt(idxDAYOFWEEK),
                         Date.from(Instant.ofEpochSecond(cursor.getInt(idxDATE)))
                 );
+            }else{
+                continue;
             }
             bloques.add(bloque);
         }
@@ -92,6 +85,8 @@ public class DAOBloque {
                         cursor.getInt(idxDAYOFWEEK),
                         Date.from(Instant.ofEpochSecond(cursor.getInt(idxDATE)))
                 );
+            }else {
+                continue;
             }
             bloques.add(bloque);
         }
@@ -133,7 +128,7 @@ public class DAOBloque {
         SQLiteDatabase db = manager.getWritableDatabase();
         int typeID = this.idTipoBloque(bloque.getTipo());
         if(typeID < 0){
-            typeID = this.idTipoBloque(Tipos.CATEDRA);
+            typeID = this.idTipoBloque(Bloque.Tipo.CATEDRA);
         }
         ContentValues values = new ContentValues();
         values.put(DBContract.TABLA_BLOQUES.COL_ID_ASIGNATURA, asignatura.getId());
@@ -150,7 +145,7 @@ public class DAOBloque {
         SQLiteDatabase db = manager.getWritableDatabase();
         int typeID = this.idTipoBloque(bloque.getTipo());
         if(typeID < 0){
-            typeID = this.idTipoBloque(Tipos.CATEDRA);
+            typeID = this.idTipoBloque(Bloque.Tipo.CATEDRA);
         }
         ContentValues values = new ContentValues();
         values.put(DBContract.TABLA_BLOQUES.COL_ID_TIPO, typeID);
@@ -173,7 +168,13 @@ public class DAOBloque {
         SQLiteDatabase db = manager.getReadableDatabase();
         Cursor rows = null;
         try {
-            rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_TIPO_BLOQUE.NOMBRE+ " WHERE "+DBContract.TABLA_TIPO_BLOQUE.COL_NOMBRE+"="+value + " LIMIT 1", null);
+            rows = db.rawQuery(
+                    "SELECT * FROM "+ DBContract.TABLA_TIPO_BLOQUE.NOMBRE+ " WHERE ? = ? LIMIT 1",
+                    new String[]{
+                            DBContract.TABLA_TIPO_BLOQUE.COL_NOMBRE,
+                            value
+                    }
+                );
             if (rows.moveToFirst()){
                 int idxID = rows.getColumnIndex(DBContract.TABLA_TIPO_BLOQUE.COL_ID);
                 id = rows.getInt(idxID);

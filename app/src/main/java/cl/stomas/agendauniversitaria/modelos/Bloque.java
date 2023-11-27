@@ -1,10 +1,13 @@
 package cl.stomas.agendauniversitaria.modelos;
 
-import java.time.LocalTime;
 import java.util.Date;
 
 public class Bloque {
-
+    public final static class Tipo {
+        public final static String RECUPERACION = "RECUPERACION";
+        public final static String CATEDRA = "CATEDRA";
+        public final static String LABORATORIO = "LABORATORIO";
+    }
     private int id;
     private String tipo;
     private int duracion;
