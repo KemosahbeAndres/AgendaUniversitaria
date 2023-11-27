@@ -38,7 +38,7 @@ public class DAOCarrera {
         return carreras;
     }
 
-    public Carrera get(int id){
+    public Carrera get(long id){
         SQLiteDatabase db = manager.getReadableDatabase();
         Carrera carrera = null;
         Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_CARRERAS.NOMBRE + " WHERE id="+id+" LIMIT 1", null);
@@ -48,7 +48,7 @@ public class DAOCarrera {
                 int indexNAME = rows.getColumnIndexOrThrow(DBContract.TABLA_CARRERAS.COL_NOMBRE);
                 int indexANIO = rows.getColumnIndexOrThrow(DBContract.TABLA_CARRERAS.COL_ANIO);
                 carrera = new Carrera(
-                        rows.getInt(indexID),
+                        rows.getLong(indexID),
                         rows.getString(indexNAME),
                         rows.getInt(indexANIO)
                 );
@@ -58,17 +58,15 @@ public class DAOCarrera {
         return carrera;
     }
 
-    public boolean insert(Carrera carrera){
+    public long insert(Carrera carrera){
         try{
             SQLiteDatabase db = manager.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(DBContract.TABLA_CARRERAS.COL_NOMBRE, carrera.getNombre());
             values.put(DBContract.TABLA_CARRERAS.COL_ANIO, carrera.getAnio());
-            db.insert(DBContract.TABLA_CARRERAS.NOMBRE, null, values);
-        }catch (Exception e){
-            return false;
-        }
-        return true;
+            return db.insert(DBContract.TABLA_CARRERAS.NOMBRE, null, values);
+        }catch (Exception e){ }
+        return -1;
     }
 
     public boolean update(Carrera carrera){

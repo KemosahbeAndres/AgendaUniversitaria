@@ -105,7 +105,7 @@ public class DAOSemestre {
         return semestre;
     }
 
-    public void insert(Semestre semestre, Carrera carrera) throws Exception{
+    public long insert(Semestre semestre, Carrera carrera){
         SQLiteDatabase db = manager.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DBContract.TABLA_SEMESTRES.COL_ID_CARRERA, carrera.getId());
@@ -113,9 +113,9 @@ public class DAOSemestre {
             values.put(DBContract.TABLA_SEMESTRES.COL_FECHA_INICIO, semestre.getFecha_inicio().toInstant().getEpochSecond());
             values.put(DBContract.TABLA_SEMESTRES.COL_FECHA_FIN, semestre.getFecha_fin().toInstant().getEpochSecond());
         }else {
-            throw new Exception("No se puede guardar las fechas!");
+            return -1;
         }
-        db.insert(DBContract.TABLA_SEMESTRES.NOMBRE, null, values);
+        return db.insert(DBContract.TABLA_SEMESTRES.NOMBRE, null, values);
     }
     public void update(Semestre semestre) throws Exception{
         SQLiteDatabase db = manager.getWritableDatabase();

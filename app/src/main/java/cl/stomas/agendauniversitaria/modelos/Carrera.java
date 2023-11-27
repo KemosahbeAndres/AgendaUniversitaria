@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class Carrera {
 
-    private int id;
+    private long id;
     private String nombre;
     private int anio;
 
     private ArrayList<Semestre> semestres;
 
-    public Carrera (int id, String name, int anio, ArrayList<Semestre> semestres){
+    public Carrera (long id, String name, int anio, ArrayList<Semestre> semestres){
         this(id, name, anio);
         this.addSemestres(semestres);
     }
@@ -22,7 +22,7 @@ public class Carrera {
         this.semestres = new ArrayList<>();
     }
 
-    public Carrera(int id, String name, int anio) {
+    public Carrera(long id, String name, int anio) {
         this(name, anio);
         this.id = id;
     }
@@ -39,11 +39,11 @@ public class Carrera {
         this.semestres.add(semestre);
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

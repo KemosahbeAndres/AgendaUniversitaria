@@ -13,14 +13,20 @@
         android:theme="@style/Theme.CalendarioUniversitario"
         tools:targetApi="31">
         <activity
+            android:name=".vistas.SeleccionarCarreraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".vistas.AgregarSemestreActivity"
+            android:exported="false" />
+        <activity
             android:name=".vistas.AgendaActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".vistas.AddDatesActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".vistas.ActivityDetalles"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
