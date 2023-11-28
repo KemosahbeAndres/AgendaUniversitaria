@@ -38,6 +38,12 @@ public final class Config {
         return editor.commit();
     }
 
+    public void reset(){
+        setIdCarrera(-1);
+        setIdSemestre(-1);
+        this.save();
+    }
+
     public long getIdCarrera() {
         return idCarrera;
     }

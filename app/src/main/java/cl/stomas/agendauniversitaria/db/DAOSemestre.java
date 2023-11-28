@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.util.Log;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -23,25 +24,25 @@ public class DAOSemestre {
     public ArrayList<Semestre> getAll(){
         ArrayList<Semestre> semestres = new ArrayList<>();
         SQLiteDatabase db = manager.getReadableDatabase();
-        Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_CARRERAS.NOMBRE, null);
+        Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_SEMESTRES.NOMBRE, null);
         while(rows.moveToNext()){
             try{
                 int indexID = rows.getColumnIndexOrThrow(DBContract.TABLA_SEMESTRES.COL_ID);
                 int indexSTART = rows.getColumnIndexOrThrow(DBContract.TABLA_SEMESTRES.COL_FECHA_INICIO);
                 int indexEND = rows.getColumnIndexOrThrow(DBContract.TABLA_SEMESTRES.COL_FECHA_FIN);
                 Semestre c = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    c = new Semestre(
-                            rows.getInt(indexID),
-                            Date.from(Instant.ofEpochSecond(rows.getInt(indexSTART))),
-                            Date.from(Instant.ofEpochSecond(rows.getInt(indexEND)))
-                    );
-                }else {
-                    throw new Exception("SDK antiguo!");
-                }
+                Date start = new Date(rows.getLong(indexSTART)*1000);
+                Date end = new Date(rows.getLong(indexEND)*1000);
+                c = new Semestre(
+                        rows.getInt(indexID),
+                        start,
+                        end
+                );
                 semestres.add(c);
 
-            }catch (Exception e){}
+            }catch (Exception e){
+                Log.println(Log.ERROR, "[ALL SEMESTRES]", "Encontrado pero no se pudo agregar");
+            }
         }
         rows.close();
         return semestres;
@@ -51,30 +52,34 @@ public class DAOSemestre {
         ArrayList<Semestre> semestres = new ArrayList<>();
         SQLiteDatabase db = manager.getReadableDatabase();
         Cursor rows = db.rawQuery(
-                "SELECT * FROM "+ DBContract.TABLA_CARRERAS.NOMBRE+ " WHERE ?=?",
-                new String[]{
-                    DBContract.TABLA_SEMESTRES.COL_ID_CARRERA,
-                    String.valueOf(carrera.getId())
-                });
-        while(rows.moveToNext()){
+                "SELECT * FROM "+ DBContract.TABLA_SEMESTRES.NOMBRE,
+                null
+        );
+        while (rows.moveToNext()){
             try{
+                int idxID_CARRERA = rows.getColumnIndex(DBContract.TABLA_SEMESTRES.COL_ID_CARRERA);
+                long id_carrera = rows.getLong(idxID_CARRERA);
+                if(id_carrera != carrera.getId()){
+                    continue;
+                }
                 int indexID = rows.getColumnIndexOrThrow(DBContract.TABLA_SEMESTRES.COL_ID);
                 int indexSTART = rows.getColumnIndexOrThrow(DBContract.TABLA_SEMESTRES.COL_FECHA_INICIO);
                 int indexEND = rows.getColumnIndexOrThrow(DBContract.TABLA_SEMESTRES.COL_FECHA_FIN);
-                Semestre c = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    c = new Semestre(
-                            rows.getInt(indexID),
-                            Date.from(Instant.ofEpochSecond(rows.getInt(indexSTART))),
-                            Date.from(Instant.ofEpochSecond(rows.getInt(indexEND))),
-                            carrera
-                    );
-                }else {
-                    throw new Exception("SDK antiguo!");
-                }
-                semestres.add(c);
-
-            }catch (Exception e){}
+                Date start = new Date(rows.getLong(indexSTART)*1000);
+                Date end = new Date(rows.getLong(indexEND)*1000);
+                Semestre s = new Semestre(
+                        rows.getLong(indexID),
+                        start,
+                        end,
+                        carrera
+                );
+                Log.v("[DB SEMESTRES FROM]", "Found semestre for "+ carrera.getNombre());
+                semestres.add(s);
+                Log.println(Log.ERROR, "[SEMESTRES FROM]", "Encontrado PARa"+ carrera.getNombre());
+            }catch (Exception e){
+                Log.v("[DB SEMESTRES FROM]", e.toString());
+                Log.println(Log.ERROR, "[SEMESTRES FROM]", "Encontrado pero no se pudo agregar");
+            }
         }
         rows.close();
         return semestres;
@@ -83,22 +88,20 @@ public class DAOSemestre {
     public Semestre get(int id){
         Semestre semestre = null;
         SQLiteDatabase db = manager.getReadableDatabase();
-        Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_CARRERAS.NOMBRE+ " WHERE id="+id+" LIMIT 1", null);
+        Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_SEMESTRES.NOMBRE+ " WHERE id="+id+" LIMIT 1", null);
         if(rows.moveToFirst()){
             try{
                 int indexID = rows.getColumnIndexOrThrow(DBContract.TABLA_SEMESTRES.COL_ID);
                 int indexSTART = rows.getColumnIndexOrThrow(DBContract.TABLA_SEMESTRES.COL_FECHA_INICIO);
                 int indexEND = rows.getColumnIndexOrThrow(DBContract.TABLA_SEMESTRES.COL_FECHA_FIN);
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    semestre = new Semestre(
-                            rows.getInt(indexID),
-                            Date.from(Instant.ofEpochSecond(rows.getInt(indexSTART))),
-                            Date.from(Instant.ofEpochSecond(rows.getInt(indexEND)))
-                    );
-                }else {
-                    throw new Exception("SDK antiguo!");
-                }
 
+                Date start = new Date(rows.getLong(indexSTART)*1000);
+                Date end = new Date(rows.getLong(indexEND)*1000);
+                semestre = new Semestre(
+                        rows.getLong(indexID),
+                        start,
+                        end
+                );
             }catch (Exception e){}
         }
         rows.close();
@@ -109,24 +112,18 @@ public class DAOSemestre {
         SQLiteDatabase db = manager.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DBContract.TABLA_SEMESTRES.COL_ID_CARRERA, carrera.getId());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            values.put(DBContract.TABLA_SEMESTRES.COL_FECHA_INICIO, semestre.getFecha_inicio().toInstant().getEpochSecond());
-            values.put(DBContract.TABLA_SEMESTRES.COL_FECHA_FIN, semestre.getFecha_fin().toInstant().getEpochSecond());
-        }else {
-            return -1;
-        }
+        values.put(DBContract.TABLA_SEMESTRES.COL_FECHA_INICIO, semestre.getFecha_inicio().getTime()/1000);
+        values.put(DBContract.TABLA_SEMESTRES.COL_FECHA_FIN, semestre.getFecha_fin().getTime()/1000);
+
         return db.insert(DBContract.TABLA_SEMESTRES.NOMBRE, null, values);
     }
     public void update(Semestre semestre) throws Exception{
         SQLiteDatabase db = manager.getWritableDatabase();
         ContentValues values = new ContentValues();
         //values.put(DBContract.TABLA_SEMESTRES.COL_ID_CARRERA, carrera.getId());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            values.put(DBContract.TABLA_SEMESTRES.COL_FECHA_INICIO, semestre.getFecha_inicio().toInstant().getEpochSecond());
-            values.put(DBContract.TABLA_SEMESTRES.COL_FECHA_FIN, semestre.getFecha_fin().toInstant().getEpochSecond());
-        }else {
-            throw new Exception("No se puede guardar las fechas!");
-        }
+        values.put(DBContract.TABLA_SEMESTRES.COL_FECHA_INICIO, semestre.getFecha_inicio().getTime()/1000);
+        values.put(DBContract.TABLA_SEMESTRES.COL_FECHA_FIN, semestre.getFecha_fin().getTime()/1000);
+
         db.update(DBContract.TABLA_SEMESTRES.NOMBRE, values, "id="+semestre.getId(), null);
     }
     public void delete(Semestre semestre){

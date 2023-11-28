@@ -36,8 +36,8 @@ public class DBConnectionManager extends SQLiteOpenHelper {
         String create_semestres_query = "CREATE TABLE IF NOT EXISTS '"+DBContract.TABLA_SEMESTRES.NOMBRE+"' (" +
                 DBContract.TABLA_SEMESTRES.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 DBContract.TABLA_SEMESTRES.COL_ID_CARRERA + " INTEGER NOT NULL," +
-                DBContract.TABLA_SEMESTRES.COL_FECHA_INICIO + " DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP," +
-                DBContract.TABLA_SEMESTRES.COL_FECHA_FIN + "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP" +
+                DBContract.TABLA_SEMESTRES.COL_FECHA_INICIO + " INTEGER NOT NULL DEFAULT CURRENT_TIMESTAMP," +
+                DBContract.TABLA_SEMESTRES.COL_FECHA_FIN + " INTEGER NOT NULL DEFAULT CURRENT_TIMESTAMP" +
                 ",FOREIGN KEY ("+DBContract.TABLA_SEMESTRES.COL_ID_CARRERA+") " +
                 "REFERENCES "+ DBContract.TABLA_CARRERAS.NOMBRE + "("+DBContract.TABLA_CARRERAS.COL_ID+")" +
                 "ON DELETE SET NULL ON UPDATE CASCADE" +
@@ -67,7 +67,7 @@ public class DBConnectionManager extends SQLiteOpenHelper {
                 DBContract.TABLA_BLOQUES.COL_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 DBContract.TABLA_BLOQUES.COL_ID_ASIGNATURA+" INTEGER, " +
                 DBContract.TABLA_BLOQUES.COL_ID_TIPO + " INTEGER, " +
-                DBContract.TABLA_BLOQUES.COL_FECHA+" DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+                DBContract.TABLA_BLOQUES.COL_FECHA+" INTEGER DEFAULT CURRENT_TIMESTAMP, " +
                 DBContract.TABLA_BLOQUES.COL_DURACION+" INTEGER DEFAULT "+DBContract.TABLA_BLOQUES.DURACION_DEFAULT+", " +
                 DBContract.TABLA_BLOQUES.COL_DIA_SEMANA+" INTEGER DEFAULT "+DBContract.TABLA_BLOQUES.DIA_DEFAULT +
                 ",FOREIGN KEY ("+DBContract.TABLA_BLOQUES.COL_ID_ASIGNATURA+")" +
@@ -91,7 +91,7 @@ public class DBConnectionManager extends SQLiteOpenHelper {
                 DBContract.TABLA_ACTIVIDADES.COL_ID_TIPO+" INTEGER, " +
                 DBContract.TABLA_ACTIVIDADES.COL_NOMBRE+" TEXT NOT NULL DEFAULT 'Actividad Sin Nombre', " +
                 DBContract.TABLA_ACTIVIDADES.COL_DESCRIPCION+" TEXT NOT NULL DEFAULT '', " +
-                DBContract.TABLA_ACTIVIDADES.COL_FECHA+" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, " +
+                DBContract.TABLA_ACTIVIDADES.COL_FECHA+" INTEGER NOT NULL DEFAULT CURRENT_TIMESTAMP, " +
                 DBContract.TABLA_ACTIVIDADES.COL_DURACION+" INTEGER DEFAULT 0, " +
                 DBContract.TABLA_ACTIVIDADES.COL_IMPORTANCIA+" TEXT DEFAULT 'BAJA', " +
                 DBContract.TABLA_ACTIVIDADES.COL_PORCENTAJE+" INTEGER NOT NULL DEFAULT 0, " +
@@ -136,6 +136,9 @@ public class DBConnectionManager extends SQLiteOpenHelper {
                 db.insert(DBContract.TABLA_TIPO_ACTIVIDAD.NOMBRE, null, tipo_act);
             }
         }
+
+        tbloques.close();
+        tactividades.close();
 
     }
 

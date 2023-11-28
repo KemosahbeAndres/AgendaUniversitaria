@@ -13,6 +13,12 @@
         android:theme="@style/Theme.CalendarioUniversitario"
         tools:targetApi="31">
         <activity
+            android:name=".vistas.NuevoSemestreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".vistas.CarreraActivity"
+            android:exported="false" />
+        <activity
             android:name=".vistas.SeleccionarCarreraActivity"
             android:exported="false" />
         <activity

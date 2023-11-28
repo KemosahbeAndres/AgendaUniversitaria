@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Semestre {
 
-    private int id;
+    private long id;
     private Date fecha_inicio;
     private Date fecha_fin;
     private ArrayList<Asignatura> asignaturas;
@@ -19,34 +19,34 @@ public class Semestre {
         this.carrera = null;
     }
 
-    public Semestre(int id, Date fecha_inicio, Date fecha_fin) {
+    public Semestre(long id, Date fecha_inicio, Date fecha_fin) {
         this(fecha_inicio, fecha_fin);
         this.id = id;
         this.asignaturas = new ArrayList<>();
         this.carrera = null;
     }
 
-    public Semestre(int id, Date fecha_inicio, Date fecha_fin, Carrera carrera) {
+    public Semestre(long id, Date fecha_inicio, Date fecha_fin, Carrera carrera) {
         this(id, fecha_inicio, fecha_fin);
         this.carrera = carrera;
     }
 
-    public Semestre(int id, Date fecha_inicio, Date fecha_fin, ArrayList<Asignatura> asignaturas) {
+    public Semestre(long id, Date fecha_inicio, Date fecha_fin, ArrayList<Asignatura> asignaturas) {
         this(id, fecha_inicio, fecha_fin);
         this.addAsignaturas(asignaturas);
     }
 
-    public Semestre(int id, Date fecha_inicio, Date fecha_fin, ArrayList<Asignatura> asignaturas, Carrera carrera) {
+    public Semestre(long id, Date fecha_inicio, Date fecha_fin, ArrayList<Asignatura> asignaturas, Carrera carrera) {
         this(id, fecha_inicio, fecha_fin);
         this.addAsignaturas(asignaturas);
         this.carrera = carrera;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

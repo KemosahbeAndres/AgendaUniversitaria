@@ -26,7 +26,7 @@ public class DAOCarrera {
                 int indexNAME = rows.getColumnIndexOrThrow(DBContract.TABLA_CARRERAS.COL_NOMBRE);
                 int indexANIO = rows.getColumnIndexOrThrow(DBContract.TABLA_CARRERAS.COL_ANIO);
                 Carrera c = new Carrera(
-                    rows.getInt(indexID),
+                    rows.getLong(indexID),
                     rows.getString(indexNAME),
                     rows.getInt(indexANIO)
                 );

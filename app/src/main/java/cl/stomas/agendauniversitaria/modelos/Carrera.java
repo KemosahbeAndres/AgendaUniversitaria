@@ -1,6 +1,7 @@
 package cl.stomas.agendauniversitaria.modelos;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Carrera {
 
@@ -61,5 +62,27 @@ public class Carrera {
 
     public void setAnio(int anio) {
         this.anio = anio;
+    }
+
+    public Semestre getSemestreActual(){
+        Date fecha = new Date();
+        Semestre seleccionado = null;
+        for(Semestre semestre: semestres){
+            if(semestre.getFecha_inicio().before(fecha) && semestre.getFecha_fin().after(fecha)){
+                seleccionado = semestre;
+                break;
+            }
+        }
+        return seleccionado;
+    }
+
+    @Override
+    public String toString() {
+        return "Carrera {" +
+                "# ID = " + id +
+                "# Nombre = '" + nombre + '\'' +
+                "# Año = " + anio +
+                "Semestres = " + semestres.size() +
+                '}';
     }
 }

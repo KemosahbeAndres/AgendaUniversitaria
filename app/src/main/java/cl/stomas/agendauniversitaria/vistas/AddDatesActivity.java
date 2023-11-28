@@ -17,10 +17,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import cl.stomas.agendauniversitaria.MainActivity;
 import cl.stomas.agendauniversitaria.R;
+import cl.stomas.agendauniversitaria.controladores.CarreraController;
+import cl.stomas.agendauniversitaria.db.Config;
+import cl.stomas.agendauniversitaria.db.DB;
+import cl.stomas.agendauniversitaria.modelos.Asignatura;
+import cl.stomas.agendauniversitaria.modelos.Carrera;
+import cl.stomas.agendauniversitaria.modelos.Semestre;
 
 public class AddDatesActivity extends AppCompatActivity {
 
@@ -34,11 +41,22 @@ public class AddDatesActivity extends AppCompatActivity {
     MaterialAutoCompleteTextView txtmateria;
     MaterialAutoCompleteTextView txtimportance;
     Calendar fechas = Calendar.getInstance();
+    ArrayList<Asignatura> asignaturas;
+    Config config;
+    Carrera carrera;
+    CarreraController finder;
+    private String[] materias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adddates);
+
+        config = Config.getConfig(this);
+        config.load();
+
+        finder = new CarreraController(this);
+
         txtdate = findViewById(R.id.txtfechaentrega);
         txtname = findViewById(R.id.txtnameactivity);
         txtimportance= findViewById(R.id.txtimportancia);
@@ -48,6 +66,24 @@ public class AddDatesActivity extends AppCompatActivity {
         txtdescr = findViewById(R.id.txtdescripcion);
         buttonadd = findViewById(R.id.addbutton);
         backbutton = findViewById(R.id.backbutton);
+
+        carrera = finder.execute(config.getIdCarrera());
+
+        Semestre semestre = carrera.getSemestreActual();
+
+        if(semestre == null){
+            Toast.makeText(this, "No hay un semestre activo", Toast.LENGTH_SHORT).show();
+            finish();
+        }else {
+            asignaturas = semestre.getAsignaturas();
+            materias = new String[asignaturas.size()];
+
+            for(int i = 0; i < asignaturas.size(); i++){
+                materias[i] = asignaturas.get(i).getNombre();
+            }
+
+            txtmateria.setSimpleItems(materias);
+        }
 
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,9 +113,9 @@ public class AddDatesActivity extends AppCompatActivity {
                     Toast.makeText(AddDatesActivity.this,"No dejar el campo tipo vacio", Toast.LENGTH_SHORT).show();
                 }else{
                     //aqui añadir la transferencia de los datos a la bd y el intent final
+
                     Toast.makeText(AddDatesActivity.this,"yippee", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AddDatesActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    finish();
                 }
 
             }
@@ -127,4 +163,4 @@ public class AddDatesActivity extends AppCompatActivity {
         }, fechas.get(Calendar.YEAR),fechas.get(Calendar.MONTH),fechas.get(Calendar.DAY_OF_MONTH));
         select.show();
     }
-    }
+}

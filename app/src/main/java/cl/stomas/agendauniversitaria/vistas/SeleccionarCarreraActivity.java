@@ -34,6 +34,8 @@ public class SeleccionarCarreraActivity extends AppCompatActivity {
         config = Config.getConfig(this);
         config.load();
 
+        nombres = new ArrayList<>();
+
         if(config.getIdCarrera() >= 0){
             finishActivity(0);
         }
@@ -64,7 +66,7 @@ public class SeleccionarCarreraActivity extends AppCompatActivity {
                 }
                 config.setIdCarrera(idCarrera);
                 config.save();
-                finishActivity(0);
+                finish();
             }
         });
     }

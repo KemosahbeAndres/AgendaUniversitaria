@@ -20,6 +20,7 @@ import cl.stomas.agendauniversitaria.db.DB;
 import cl.stomas.agendauniversitaria.modelos.Carrera;
 import cl.stomas.agendauniversitaria.vistas.AgendaActivity;
 import cl.stomas.agendauniversitaria.vistas.AgregarCarreraActivity;
+import cl.stomas.agendauniversitaria.vistas.CarreraActivity;
 import cl.stomas.agendauniversitaria.vistas.SeleccionarCarreraActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,20 +38,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        finder = new CarreraController(this);
+        config = Config.getConfig(this);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             initApplicationState();
         }
+
+        config.load();
 
         TextView txtFechaHoy = findViewById(R.id.txtDia);
         TextView txtCarrera = findViewById(R.id.txtCarrera);
         Button btnAgenda = findViewById(R.id.btnAgenda);
 
-        finder = new CarreraController(this);
-
         btnAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AgendaActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button btnReset = findViewById(R.id.btnReset);
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                config.reset();
+            }
+        });
+
+        Button btnCarrera = findViewById(R.id.btnCarrera);
+
+        btnCarrera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CarreraActivity.class);
                 startActivity(intent);
             }
         });
@@ -65,25 +87,38 @@ public class MainActivity extends AppCompatActivity {
 
         Carrera carrera = finder.execute(config.getIdCarrera());
         //Carrera carrera = DB.carreras(this).get(config.getIdCarrera());
-        txtCarrera.setText(carrera.getNombre());
+        if(carrera != null){
+            txtCarrera.setText(carrera.getNombre());
+            long id = carrera.getSemestreActual().getId();
+            config.setIdSemestre(id);
+            config.save();
+        }
 
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void initApplicationState(){
         config = Config.getConfig(this);
         config.load();
-        // Seleccionar carrera
-        if(config.getIdCarrera() < 0){
-            if(DB.carreras(this).getAll().size() <= 0){
-                // Crear Carrera
-                Intent add_semestre_intent = new Intent(MainActivity.this, AgregarCarreraActivity.class);
-                startActivity(add_semestre_intent);
-            }else{
-                // Seleccionar Carrera
+        // Verificamos si existen carreras en la base de datos
+        if(DB.carreras(this).getAll().size() <= 0){
+            // Si no existen entonces creamos una Carrera y la seleccionamos
+            Intent add_semestre_intent = new Intent(MainActivity.this, AgregarCarreraActivity.class);
+            startActivity(add_semestre_intent);
+        }else{
+            // Si hay carreras en la base de datos entonces verificamos seleccion
+            if(config.getIdCarrera() < 0) { // No hay carrera seleccionada en la configuracion entonces pedimos una
                 Intent sel_carrera_intent = new Intent(MainActivity.this, SeleccionarCarreraActivity.class);
                 startActivity(sel_carrera_intent);
+            }else{ // Hay una carrera seleccionada entonces
+                // Verificamos que el id seleccionado sea correcto y exista en la base de datos
+                if(DB.carreras(this).get(config.getIdCarrera()) == null){
+                    // Si no existe entonces la creamos y seleccionamos
+                    Intent add_semestre_intent = new Intent(MainActivity.this, AgregarCarreraActivity.class);
+                    startActivity(add_semestre_intent);
+                }
+                // Si existe entonces podemos proseguir
             }
         }
-        config.load();
+        config.load(); // Recargamos cualquier configuracion que haya sido modificada!
     }
 }

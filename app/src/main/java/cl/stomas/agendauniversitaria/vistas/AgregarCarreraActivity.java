@@ -2,12 +2,19 @@ package cl.stomas.agendauniversitaria.vistas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,6 +42,20 @@ public class AgregarCarreraActivity extends AppCompatActivity {
         EditText editFechaInicio = findViewById(R.id.editStartDate);
         EditText editFechaFin = findViewById(R.id.editEndDate);
 
+        editFechaInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EleccionFecha(editFechaInicio);
+            }
+        });
+
+        editFechaFin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EleccionFecha(editFechaFin);
+            }
+        });
+
         Button btnSave = findViewById(R.id.btnSaveSemestre);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -56,13 +77,19 @@ public class AgregarCarreraActivity extends AppCompatActivity {
                 config.save();
 
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    Date start = Date.from(Instant.parse(editFechaInicio.getText().toString()));
-                    Date end = Date.from(Instant.parse(editFechaFin.getText().toString()));
 
-                    Semestre semestre = new Semestre(start, end);
-                    long idSemestre = DB.semestres(AgregarCarreraActivity.this).insert(semestre, carrera);
-                    config.setIdSemestre(idSemestre);
-                    config.save();
+                    try{ // Intentamos guardar el semestre con las fechas entregadas
+                        SimpleDateFormat sformat = new SimpleDateFormat("yyyy/MM/dd");
+                        Date start = sformat.parse(editFechaInicio.getText().toString());
+                        Date end = Date.from(Instant.parse(editFechaFin.getText().toString()));
+                        Semestre semestre = new Semestre(start, end);
+                        long idSemestre = DB.semestres(AgregarCarreraActivity.this).insert(semestre, carrera);
+                        config.setIdSemestre(idSemestre);
+                        config.save();
+
+                    }catch(Exception e){
+                        Toast.makeText(AgregarCarreraActivity.this, "Formato de fechas incorrecto!", Toast.LENGTH_SHORT).show();
+                    }
 
                     config.load();
                     Carrera c = DB.carreras(AgregarCarreraActivity.this).get(config.getIdCarrera());
@@ -95,9 +122,33 @@ public class AgregarCarreraActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(AgregarCarreraActivity.this, "Error del SDK!", Toast.LENGTH_SHORT).show();
                 }
-
-                finishActivity(0);
+                finish();
             }
         });
+    }
+    private void EleccionFecha(TextView textView){
+        Calendar calendario = Calendar.getInstance();
+        if(!textView.getText().toString().isEmpty()){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                try{
+                    SimpleDateFormat sformat = new SimpleDateFormat("yyyy/MM/dd");
+                    Date date = sformat.parse(textView.getText().toString());
+                    //Toast.makeText(NuevoSemestreActivity.this, "Fecha: "+date.toString(), Toast.LENGTH_SHORT).show();
+                    calendario.setTime(date);
+                }catch (Exception e){
+                    Log.w("[DatePicker]", e.toString());
+                }
+            }
+        }
+        DatePickerDialog select = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                String format = year +"/"+(month+1)+"/"+dayOfMonth;
+                textView.setText(format);
+            }
+        }, calendario.get(Calendar.YEAR),calendario.get(Calendar.MONTH),calendario.get(Calendar.DAY_OF_MONTH));
+
+        select.show();
     }
 }
