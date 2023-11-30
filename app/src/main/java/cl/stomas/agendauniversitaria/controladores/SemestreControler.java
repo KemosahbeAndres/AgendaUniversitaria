@@ -27,7 +27,7 @@ public class SemestreControler {
         return semestre;
     }
 
-    public Semestre execute(int id){
+    public Semestre execute(long id){
         return this.execute(DB.semestres(ctx).get(id));
     }
 }

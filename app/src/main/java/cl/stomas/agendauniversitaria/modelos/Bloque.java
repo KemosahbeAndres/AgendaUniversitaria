@@ -1,8 +1,9 @@
 package cl.stomas.agendauniversitaria.modelos;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Bloque {
+public class Bloque implements Serializable {
     public final static class Tipo {
         public final static String RECUPERACION = "RECUPERACION";
         public final static String CATEDRA = "CATEDRA";

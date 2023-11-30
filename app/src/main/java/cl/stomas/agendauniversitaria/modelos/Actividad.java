@@ -1,8 +1,10 @@
 package cl.stomas.agendauniversitaria.modelos;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Actividad {
+public class Actividad implements Serializable {
 
     public final static class Tipo {
         public final static String ACTIVIDAD = "ACTIVIDAD";
@@ -92,6 +94,10 @@ public class Actividad {
     public Date getFecha() {
         return fecha;
     }
+    public String getHora(){
+        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
+        return formatter.format(this.getFecha());
+    }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
@@ -113,11 +119,11 @@ public class Actividad {
         this.importancia = importancia;
     }
 
-    public boolean isCompletado() {
+    public boolean completado() {
         return completado;
     }
 
-    public void setCompletado(boolean completado) {
+    public void completar(boolean completado) {
         this.completado = completado;
     }
 

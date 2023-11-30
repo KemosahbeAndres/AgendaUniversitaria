@@ -166,7 +166,7 @@ public class DAOActividad {
             values.put(DBContract.TABLA_ACTIVIDADES.COL_DURACION, actividad.getDuracion());
             values.put(DBContract.TABLA_ACTIVIDADES.COL_IMPORTANCIA, actividad.getImportancia());
             int completedVal = 0;
-            if(actividad.isCompletado()){
+            if(actividad.completado()){
                 completedVal = 1;
             }
             values.put(DBContract.TABLA_ACTIVIDADES.COL_COMPLETADO, completedVal);
@@ -189,7 +189,7 @@ public class DAOActividad {
             values.put(DBContract.TABLA_ACTIVIDADES.COL_DURACION, actividad.getDuracion());
             values.put(DBContract.TABLA_ACTIVIDADES.COL_IMPORTANCIA, actividad.getImportancia());
             int completedVal = 0;
-            if(actividad.isCompletado()){
+            if(actividad.completado()){
                 completedVal = 1;
             }
             values.put(DBContract.TABLA_ACTIVIDADES.COL_COMPLETADO, completedVal);

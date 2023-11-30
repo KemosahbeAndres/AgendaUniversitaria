@@ -1,9 +1,10 @@
 package cl.stomas.agendauniversitaria.modelos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Carrera {
+public class Carrera implements Serializable {
 
     private long id;
     private String nombre;

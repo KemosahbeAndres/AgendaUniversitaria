@@ -1,8 +1,9 @@
 package cl.stomas.agendauniversitaria.modelos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Asignatura {
+public class Asignatura implements Serializable {
     private int id;
     private String nombre;
     private String descripcion;

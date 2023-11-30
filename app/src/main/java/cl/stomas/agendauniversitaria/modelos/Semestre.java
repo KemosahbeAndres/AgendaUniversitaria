@@ -1,9 +1,12 @@
 package cl.stomas.agendauniversitaria.modelos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.function.Consumer;
 
-public class Semestre {
+public class Semestre implements Serializable {
 
     private long id;
     private Date fecha_inicio;
@@ -84,5 +87,30 @@ public class Semestre {
 
     public void setCarrera(Carrera carrera) {
         this.carrera = carrera;
+    }
+
+    public ArrayList<Actividad> getAllActividades(){
+        ArrayList<Actividad> actividades = new ArrayList<>();
+        for (Asignatura asignatura: this.asignaturas){
+            actividades.addAll(asignatura.getActividades());
+        }
+        actividades.sort(new Comparator<Actividad>() {
+            @Override
+            public int compare(Actividad o1, Actividad o2) {
+                return o1.getFecha().compareTo(o2.getFecha());
+            }
+        });
+        return actividades;
+    }
+
+    public ArrayList<Actividad> getAllActividadesDesde(Date fecha){
+        ArrayList<Actividad> allActividades = this.getAllActividades();
+        ArrayList<Actividad> filtradas = new ArrayList<>();
+        for (Actividad actividad: allActividades){
+            if(actividad.getFecha().compareTo(fecha) >= 0){
+                filtradas.add(actividad);
+            }
+        }
+        return filtradas;
     }
 }

@@ -11,36 +11,42 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cl.stomas.agendauniversitaria.R;
+import cl.stomas.agendauniversitaria.modelos.Actividad;
 
 public class ActivityDetalles extends AppCompatActivity {
-    //y aqui se recibirian cada dato según el elemento del RecyclerView seleccionado
+
+    // Y aqui se recibirian cada dato según el elemento del RecyclerView seleccionado
+    private Actividad actividad;
+    private TextView trabSet;
+    TextView asigSet;
+    TextView porSet;
+    TextView statSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
-        Bundle parametros =getIntent().getExtras();
 
-
-        String trab =  parametros.getString("trab");
-        String asig = parametros.getString("asig");
-        String por = parametros.getString("por");
-        String stat = parametros.getString("stat");
-
-        TextView trabSet = (TextView) findViewById(R.id.trabSet);
-        TextView asigSet = (TextView) findViewById(R.id.asigSet);
-        TextView porSet = (TextView) findViewById(R.id.porSet);
-        TextView statSet = (TextView) findViewById(R.id.statSet);
-        trabSet.setText(trab+ ".");
-        asigSet.setText(asig+ ".");
-        porSet.setText(por+ ".");
-        statSet.setText(stat+ ".");
-
+        try {
+            Bundle parametros = getIntent().getExtras();
+            actividad = (Actividad) parametros.getSerializable("actividad");
+            if(actividad == null){
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "No pudimos obtener la actividad!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        trabSet = (TextView) findViewById(R.id.trabSet);
+        asigSet = (TextView) findViewById(R.id.asigSet);
+        porSet = (TextView) findViewById(R.id.porSet);
+        statSet = (TextView) findViewById(R.id.statSet);
         //Este boton seria para volver hacia atras
 
         Button buttonBack = (Button) findViewById(R.id.buttonBack);
@@ -48,10 +54,22 @@ public class ActivityDetalles extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                finishActivity(0);
             }
         });
+    }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(actividad != null){
+            trabSet.setText(actividad.getNombre());
+            asigSet.setText(actividad.getAsignatura().getNombre());
+            porSet.setText(actividad.getPorcentaje());
+            if(actividad.completado()){
+                statSet.setText("Completado");
+            }else{
+                statSet.setText("Pendiente");
+            }
+        }
     }
 }

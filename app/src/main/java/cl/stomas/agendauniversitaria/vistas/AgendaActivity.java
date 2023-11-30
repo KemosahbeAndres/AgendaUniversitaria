@@ -7,22 +7,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cl.stomas.agendauniversitaria.R;
+import cl.stomas.agendauniversitaria.controladores.SemestreControler;
+import cl.stomas.agendauniversitaria.db.Config;
+import cl.stomas.agendauniversitaria.modelos.Actividad;
+import cl.stomas.agendauniversitaria.modelos.Semestre;
 
 public class AgendaActivity extends AppCompatActivity {
-    List<ListElement> elements;
+    private ArrayList<Actividad> elements;
+    private ListAdapter adapter;
+    private Config config;
+    private SemestreControler controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda);
+
+        config = Config.getConfig(this);
+
+        controller = new SemestreControler(this);
 
         FloatingActionButton btnAddEvent = findViewById(R.id.btnAddEvent);
         btnAddEvent.setOnClickListener(new View.OnClickListener() {
@@ -33,21 +44,29 @@ public class AgendaActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         init();
     }
 
     public void init(){
+        config.load();
         elements = new ArrayList<>();
-        elements.add(new ListElement("Expocicion", "Algebra", "15%", "Pendiente"));
-        elements.add(new ListElement("Expocicion", "Ingles", "20%", "Pendiente"));
-        elements.add(new ListElement("Proyecto", "Programcion Android", "40%", "Entregado"));
-        elements.add(new ListElement("Trabajo", "Arquitectura de sistema", "40%", "Pendiente"));
-        elements.add(new ListElement("Expocicion", "Emprendimiento", "35%", "Entregado"));
 
-        ListAdapter listAdapter = new ListAdapter(elements, this);
-        RecyclerView recyclerView = findViewById(R.id.listRecyclerViw);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(listAdapter);
+        long id = config.getIdSemestre();
+        if(id >= 0){
+            Semestre semestre = controller.execute(id);
+
+            elements.addAll(semestre.getAllActividadesDesde(new Date()));
+
+            adapter = new ListAdapter(elements, this);
+            RecyclerView recyclerView = findViewById(R.id.listRecyclerViw);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
+        }
     }
 }

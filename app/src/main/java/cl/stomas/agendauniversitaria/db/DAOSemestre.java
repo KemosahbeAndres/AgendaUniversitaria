@@ -85,7 +85,7 @@ public class DAOSemestre {
         return semestres;
     }
 
-    public Semestre get(int id){
+    public Semestre get(long id){
         Semestre semestre = null;
         SQLiteDatabase db = manager.getReadableDatabase();
         Cursor rows = db.rawQuery("SELECT * FROM "+ DBContract.TABLA_SEMESTRES.NOMBRE+ " WHERE id="+id+" LIMIT 1", null);
