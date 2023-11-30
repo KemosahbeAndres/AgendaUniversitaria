@@ -18,6 +18,7 @@ import cl.stomas.agendauniversitaria.controladores.CarreraController;
 import cl.stomas.agendauniversitaria.db.Config;
 import cl.stomas.agendauniversitaria.db.DB;
 import cl.stomas.agendauniversitaria.modelos.Carrera;
+import cl.stomas.agendauniversitaria.modelos.Semestre;
 import cl.stomas.agendauniversitaria.vistas.AgendaActivity;
 import cl.stomas.agendauniversitaria.vistas.AgregarCarreraActivity;
 import cl.stomas.agendauniversitaria.vistas.CarreraActivity;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
             "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
     };
+    private TextView txtFechaHoy;
+    private TextView txtCarrera;
+    private Button btnAgenda;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
         config.load();
 
-        TextView txtFechaHoy = findViewById(R.id.txtDia);
-        TextView txtCarrera = findViewById(R.id.txtCarrera);
-        Button btnAgenda = findViewById(R.id.btnAgenda);
+        txtFechaHoy = findViewById(R.id.txtDia);
+        txtCarrera = findViewById(R.id.txtCarrera);
+        btnAgenda = findViewById(R.id.btnAgenda);
 
         btnAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +80,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        config = Config.getConfig(this);
+        config.load();
+        Carrera carrera = finder.execute(config.getIdCarrera());
+        //Carrera carrera = DB.carreras(this).get(config.getIdCarrera());
+        if(carrera != null){
+            txtCarrera.setText(carrera.getNombre());
+            Semestre semestre = carrera.getSemestreActual();
+            if(semestre != null){
+                long id = semestre.getId();
+                config.setIdSemestre(id);
+                config.save();
+            }
+        }
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -84,17 +106,8 @@ public class MainActivity extends AppCompatActivity {
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
         int mes = calendar.get(Calendar.MONTH);
         txtFechaHoy.setText(dias[dia_semana]+" "+dia+" de "+meses[mes]);
-
-        Carrera carrera = finder.execute(config.getIdCarrera());
-        //Carrera carrera = DB.carreras(this).get(config.getIdCarrera());
-        if(carrera != null){
-            txtCarrera.setText(carrera.getNombre());
-            long id = carrera.getSemestreActual().getId();
-            config.setIdSemestre(id);
-            config.save();
-        }
-
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void initApplicationState(){
         config = Config.getConfig(this);
