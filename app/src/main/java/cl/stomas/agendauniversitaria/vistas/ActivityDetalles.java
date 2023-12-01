@@ -24,9 +24,9 @@ public class ActivityDetalles extends AppCompatActivity {
     // Y aqui se recibirian cada dato según el elemento del RecyclerView seleccionado
     private Actividad actividad;
     private TextView trabSet;
-    TextView asigSet;
-    TextView porSet;
-    TextView statSet;
+    private TextView asigSet;
+    private TextView porSet;
+    private TextView statSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
