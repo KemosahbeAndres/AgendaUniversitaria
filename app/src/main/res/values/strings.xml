@@ -5,6 +5,7 @@
     <string name="materiaselect">Materia</string>
     <string name="importanciatitle">Importancia</string>
     <string name="tipotitle">Tipo</string>
+    <string name="colortitle">Color</string>
 
     <string-array name="seleccionimportancia">
         <item>Bajo</item>
@@ -22,5 +23,10 @@
         <item>IoT</item>
         <item>Adm. Empresa</item>
         <item>Prog. Android</item>
+    </string-array>
+    <string-array name="tiposcolores">
+        <item>Rojo</item>
+        <item>Verde</item>
+        <item>Azul</item>
     </string-array>
 </resources>

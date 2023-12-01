@@ -20,6 +20,7 @@ import cl.stomas.agendauniversitaria.db.DB;
 import cl.stomas.agendauniversitaria.modelos.Carrera;
 import cl.stomas.agendauniversitaria.modelos.Semestre;
 import cl.stomas.agendauniversitaria.vistas.AgendaActivity;
+import cl.stomas.agendauniversitaria.vistas.AgregarAsignaturasActivity;
 import cl.stomas.agendauniversitaria.vistas.AgregarCarreraActivity;
 import cl.stomas.agendauniversitaria.vistas.CarreraActivity;
 import cl.stomas.agendauniversitaria.vistas.SeleccionarCarreraActivity;
@@ -71,6 +72,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button btnAsignatura = findViewById(R.id.btnAsignaturas);
+        btnAsignatura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AgregarAsignaturasActivity.class);
+                startActivity(intent);
+            }
+        });
         Button btnCarrera = findViewById(R.id.btnCarrera);
 
         btnCarrera.setOnClickListener(new View.OnClickListener() {

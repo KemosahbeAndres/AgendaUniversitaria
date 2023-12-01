@@ -7,6 +7,30 @@
     tools:context=".vistas.AddDatesActivity">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutduracion"
+        android:layout_width="160dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.341">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtduracion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Duracion en Dias"
+            android:inputType="number"
+            android:maxLength="2" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layouttipo"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="159dp"
@@ -21,7 +45,7 @@
         app:layout_constraintHorizontal_bias="0.995"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.482">
+        app:layout_constraintVertical_bias="0.572">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/txttrabajo"
@@ -30,6 +54,32 @@
             android:clickable="false"
             android:inputType="none"
             app:simpleItems="@array/tipostrabajos" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutmaterias"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:hint="@string/materiaselect"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.459">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/txtmateria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:inputType="none"
+            app:simpleItems="@array/materiaslist" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -47,7 +97,7 @@
         app:layout_constraintHorizontal_bias="0.004"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.482">
+        app:layout_constraintVertical_bias="0.572">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/txtimportancia"
@@ -152,32 +202,6 @@
             android:inputType="date" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutmaterias"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="340dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:hint="@string/materiaselect"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.369">
-
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/txtmateria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:inputType="none"
-            app:simpleItems="@array/materiaslist" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/backbutton"
         android:layout_width="128dp"
@@ -189,10 +213,10 @@
         android:text="Atras"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.965"
+        app:layout_constraintHorizontal_bias="0.948"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.634" />
+        app:layout_constraintVertical_bias="0.718" />
 
     <Button
         android:id="@+id/addbutton"
@@ -208,12 +232,12 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.634" />
+        app:layout_constraintVertical_bias="0.718" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/imageView3"
-        android:layout_width="285dp"
-        android:layout_height="255dp"
+        android:layout_width="233dp"
+        android:layout_height="207dp"
         android:src="@drawable/gatofrontiet"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
