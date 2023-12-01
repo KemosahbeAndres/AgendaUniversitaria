@@ -43,22 +43,18 @@ public class DAOActividad {
             if(cursor.getInt(idxCOMPLETED) >= 1){
                 completed = true;
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                actividad = new Actividad(
-                        cursor.getInt(idxID),
-                        this.getNombreTipo(cursor.getInt(idxTYPEID)),
-                        cursor.getString(idxNAME),
-                        cursor.getString(idxDESC),
-                        Date.from(Instant.ofEpochSecond(cursor.getLong(idxDATE))),
-                        cursor.getInt(idxDURATION),
-                        cursor.getString(idxIMPORTANCE),
-                        completed,
-                        cursor.getInt(idxPERCENT),
-                        cursor.getInt(idxVALUE)
-                );
-            }else {
-                continue;
-            }
+            actividad = new Actividad(
+                    cursor.getInt(idxID),
+                    this.getNombreTipo(cursor.getInt(idxTYPEID)),
+                    cursor.getString(idxNAME),
+                    cursor.getString(idxDESC),
+                    new Date(cursor.getLong(idxDATE)*1000),
+                    cursor.getInt(idxDURATION),
+                    cursor.getString(idxIMPORTANCE),
+                    completed,
+                    cursor.getInt(idxPERCENT),
+                    cursor.getInt(idxVALUE)
+            );
             actividades.add(actividad);
         }
         cursor.close();
@@ -91,22 +87,18 @@ public class DAOActividad {
             if(cursor.getInt(idxCOMPLETED) >= 1){
                 completed = true;
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                actividad = new Actividad(
-                        cursor.getInt(idxID),
-                        this.getNombreTipo(cursor.getInt(idxTYPEID)),
-                        cursor.getString(idxNAME),
-                        cursor.getString(idxDESC),
-                        Date.from(Instant.ofEpochSecond(cursor.getLong(idxDATE))),
-                        cursor.getInt(idxDURATION),
-                        cursor.getString(idxIMPORTANCE),
-                        completed,
-                        cursor.getInt(idxPERCENT),
-                        cursor.getInt(idxVALUE)
-                );
-            }else {
-                continue;
-            }
+            actividad = new Actividad(
+                    cursor.getInt(idxID),
+                    this.getNombreTipo(cursor.getInt(idxTYPEID)),
+                    cursor.getString(idxNAME),
+                    cursor.getString(idxDESC),
+                    new Date(cursor.getLong(idxDATE)*1000),
+                    cursor.getInt(idxDURATION),
+                    cursor.getString(idxIMPORTANCE),
+                    completed,
+                    cursor.getInt(idxPERCENT),
+                    cursor.getInt(idxVALUE)
+            );
             actividades.add(actividad);
         }
         cursor.close();
@@ -137,22 +129,18 @@ public class DAOActividad {
             if(cursor.getInt(idxCOMPLETED) >= 1){
                 completed = true;
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                actividad = new Actividad(
-                        cursor.getInt(idxID),
-                        this.getNombreTipo(cursor.getInt(idxTYPEID)),
-                        cursor.getString(idxNAME),
-                        cursor.getString(idxDESC),
-                        Date.from(Instant.ofEpochSecond(cursor.getLong(idxDATE))),
-                        cursor.getInt(idxDURATION),
-                        cursor.getString(idxIMPORTANCE),
-                        completed,
-                        cursor.getInt(idxPERCENT),
-                        cursor.getInt(idxVALUE)
-                );
-            }else {
-                return null;
-            }
+            actividad = new Actividad(
+                    cursor.getInt(idxID),
+                    this.getNombreTipo(cursor.getInt(idxTYPEID)),
+                    cursor.getString(idxNAME),
+                    cursor.getString(idxDESC),
+                    new Date(cursor.getLong(idxDATE)*1000),
+                    cursor.getInt(idxDURATION),
+                    cursor.getString(idxIMPORTANCE),
+                    completed,
+                    cursor.getInt(idxPERCENT),
+                    cursor.getInt(idxVALUE)
+            );
         }
         cursor.close();
         return actividad;

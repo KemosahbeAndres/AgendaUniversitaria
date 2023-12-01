@@ -2,6 +2,7 @@ package cl.stomas.agendauniversitaria.modelos;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class Asignatura implements Serializable {
     private long id;
@@ -9,6 +10,7 @@ public class Asignatura implements Serializable {
     private String descripcion;
     private String color;
     private String docente;
+    private Semestre semestre;
     private ArrayList<Bloque> bloques;
     private ArrayList<Actividad> actividades;
 
@@ -85,6 +87,12 @@ public class Asignatura implements Serializable {
 
     public void addBloques(ArrayList<Bloque> bloques) {
         this.bloques.addAll(bloques);
+        this.bloques.forEach(new Consumer<Bloque>() {
+            @Override
+            public void accept(Bloque bloque) {
+                bloque.setAsignatura(Asignatura.this);
+            }
+        });
     }
 
     public ArrayList<Actividad> getActividades() {
@@ -93,5 +101,19 @@ public class Asignatura implements Serializable {
 
     public void addActividades(ArrayList<Actividad> actividades) {
         this.actividades.addAll(actividades);
+        this.actividades.forEach(new Consumer<Actividad>() {
+            @Override
+            public void accept(Actividad actividad) {
+                actividad.setAsignatura(Asignatura.this);
+            }
+        });
+    }
+
+    public Semestre getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
     }
 }

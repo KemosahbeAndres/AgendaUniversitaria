@@ -1,5 +1,6 @@
 package cl.stomas.agendauniversitaria.vistas;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,10 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +30,8 @@ public class AgendaActivity extends AppCompatActivity {
     private ListAdapter adapter;
     private Config config;
     private SemestreControler controller;
+    private CalendarView calendario;
+    private Date fecha_seleccionada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,33 @@ public class AgendaActivity extends AppCompatActivity {
         controller = new SemestreControler(this);
 
         FloatingActionButton btnAddEvent = findViewById(R.id.btnAddEvent);
+
+        calendario = findViewById(R.id.calendarView);
+        calendario.setDate(new Date().getTime());
+
+        try {
+            fecha_seleccionada = new Date(calendario.getDate());
+        } catch (Exception e) {
+            fecha_seleccionada = new Date();
+        }
+
+        Toast.makeText(this, fecha_seleccionada.toString(), Toast.LENGTH_SHORT).show();
+
+        init();
+
+
+        calendario.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
+                try {
+                    fecha_seleccionada = formater.parse(year + "/" + (month + 1) + "/" + dayOfMonth);
+                } catch (ParseException e) {
+                    fecha_seleccionada = new Date();
+                }
+                init();
+            }
+        });
         btnAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +77,7 @@ public class AgendaActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
     }
 
@@ -67,7 +101,7 @@ public class AgendaActivity extends AppCompatActivity {
         if(id >= 0){
             Semestre semestre = controller.execute(id);
 
-            elements.addAll(semestre.getAllActividades());
+            elements.addAll(semestre.getAllActividadesDesde(fecha_seleccionada));
 
             Toast.makeText(this, "Found: "+elements.size(), Toast.LENGTH_SHORT).show();
             adapter = new ListAdapter(elements, this);

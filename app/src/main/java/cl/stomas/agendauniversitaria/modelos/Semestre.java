@@ -79,6 +79,12 @@ public class Semestre implements Serializable {
 
     public void addAsignaturas(ArrayList<Asignatura> asignaturas) {
         this.asignaturas.addAll(asignaturas);
+        this.asignaturas.forEach(new Consumer<Asignatura>() {
+            @Override
+            public void accept(Asignatura asignatura) {
+                asignatura.setSemestre(Semestre.this);
+            }
+        });
     }
 
     public Carrera getCarrera() {
