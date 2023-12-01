@@ -107,7 +107,7 @@ public class Semestre implements Serializable {
         ArrayList<Actividad> allActividades = this.getAllActividades();
         ArrayList<Actividad> filtradas = new ArrayList<>();
         for (Actividad actividad: allActividades){
-            if(actividad.getFecha().compareTo(fecha) >= 0){
+            if(actividad.getFecha().compareTo(fecha) == 0){
                 filtradas.add(actividad);
             }
         }

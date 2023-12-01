@@ -77,6 +77,8 @@ public class AddDatesActivity extends AppCompatActivity {
         buttonadd = findViewById(R.id.addbutton);
         backbutton = findViewById(R.id.backbutton);
 
+        txttipo.setSimpleItems(DB.actividades(this).allTypes());
+
         carrera = finder.execute(config.getIdCarrera());
 
         Semestre semestre = carrera.getSemestreActual();
@@ -104,14 +106,11 @@ public class AddDatesActivity extends AppCompatActivity {
                 finishActivity(0);
             }
         });
-        txtmateria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        txtmateria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectedAsignatura = idsAsignaturas.get(position);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+                Toast.makeText(AddDatesActivity.this, "id-asignatura: "+selectedAsignatura, Toast.LENGTH_SHORT).show();
             }
         });
         buttonadd.setOnClickListener(new View.OnClickListener() {
@@ -145,14 +144,13 @@ public class AddDatesActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
                     Actividad envio = new Actividad(txttipo.getText().toString(), txtname.getText().toString(), txtdescr.getText().toString(), fecha,Integer.parseInt(txtdurac.getText().toString()),txtimportance.getText().toString(),false,Integer.parseInt(txtperc.getText().toString()),0);
-                    DAOAsignatura asignaturaclase=new DAOAsignatura(AddDatesActivity.this);
+                    DAOAsignatura asignaturaclase = DB.asignaturas(AddDatesActivity.this);
                     Asignatura asignaturaenvio= asignaturaclase.get(selectedAsignatura);
                     DAOActividad enviofinal= new DAOActividad(AddDatesActivity.this);
                     enviofinal.insert(envio,asignaturaenvio);
                     Toast.makeText(AddDatesActivity.this,"Actividad Añadida", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-
             }
         });
         txtdate.setOnClickListener(new View.OnClickListener() {

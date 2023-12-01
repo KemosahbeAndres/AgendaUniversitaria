@@ -52,6 +52,12 @@ public class AgendaActivity extends AppCompatActivity {
         init();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        init();
+    }
+
     public void init(){
         config.load();
         elements = new ArrayList<>();

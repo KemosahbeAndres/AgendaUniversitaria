@@ -258,4 +258,19 @@ public class DAOActividad {
         }
         return tipo.toUpperCase();
     }
+
+    public String[] allTypes(){
+        SQLiteDatabase db = manager.getReadableDatabase();
+        String[] tipos;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DBContract.TABLA_TIPO_ACTIVIDAD.NOMBRE, null);
+        tipos = new String[cursor.getCount()];
+        int index = 0;
+        while(cursor.moveToNext()){
+            int idxName = cursor.getColumnIndex(DBContract.TABLA_TIPO_ACTIVIDAD.COL_NOMBRE);
+            tipos[index] = cursor.getString(idxName);
+            index ++;
+        }
+        cursor.close();
+        return tipos;
+    }
 }

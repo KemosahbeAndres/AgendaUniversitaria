@@ -32,20 +32,18 @@ public class DAOAsignatura {
                 int indexDESC = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_DESCRIPCION);
                 int indexCOLOR = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_COLOR);
                 int indexTEACHER = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_DOCENTE);
-                Asignatura c = null;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    c = new Asignatura(
+                    Asignatura c = new Asignatura(
                             rows.getInt(indexID),
                             rows.getString(indexNAME),
                             rows.getString(indexDESC),
                             rows.getString(indexCOLOR),
                             rows.getString(indexTEACHER)
                     );
+                    asignaturas.add(c);
                 }else {
                     throw new Exception("SDK antiguo!");
                 }
-                asignaturas.add(c);
-
             }catch (Exception e){}
         }
         rows.close();
