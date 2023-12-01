@@ -61,13 +61,14 @@ public class DAOBloque {
         ArrayList<Bloque> bloques = new ArrayList<Bloque>();
         SQLiteDatabase db = manager.getReadableDatabase();
         Cursor cursor = db.rawQuery(
-                "SELECT * FROM "+DBContract.TABLA_BLOQUES.NOMBRE + " WHERE ?=?",
-                new String[]{
-                        DBContract.TABLA_BLOQUES.COL_ID_ASIGNATURA,
-                        String.valueOf(asignatura.getId())
-                }
+                "SELECT * FROM "+DBContract.TABLA_BLOQUES.NOMBRE,null
         );
         while(cursor.moveToNext()){
+            int idxASIG = cursor.getColumnIndex(DBContract.TABLA_BLOQUES.COL_ID_ASIGNATURA);
+            long id_asig = cursor.getLong(idxASIG);
+            if(asignatura.getId() != id_asig){
+                continue;
+            }
             int idxID = cursor.getColumnIndex(DBContract.TABLA_BLOQUES.COL_ID);
             int idxIDTYPE = cursor.getColumnIndex(DBContract.TABLA_BLOQUES.COL_ID_TIPO);
             int idxDURATION = cursor.getColumnIndex(DBContract.TABLA_BLOQUES.COL_DURACION);
@@ -79,7 +80,7 @@ public class DAOBloque {
             //Continuacion del codigo para obtener el bloque
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 bloque = new Bloque(
-                        cursor.getInt(idxID),
+                        cursor.getLong(idxID),
                         tipo,
                         cursor.getInt(idxDURATION),
                         cursor.getInt(idxDAYOFWEEK),

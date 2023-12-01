@@ -68,13 +68,14 @@ public class DAOActividad {
         ArrayList<Actividad> actividades = new ArrayList<>();
         SQLiteDatabase db = manager.getReadableDatabase();
         Cursor cursor = db.rawQuery(
-                "SELECT * FROM " + DBContract.TABLA_ACTIVIDADES.NOMBRE+ " WHERE ?=?",
-                new String[]{
-                        DBContract.TABLA_ACTIVIDADES.COL_ID_ASIGNATURA,
-                        String.valueOf(asignatura.getId())
-                }
+                "SELECT * FROM " + DBContract.TABLA_ACTIVIDADES.NOMBRE,null
                 );
         while(cursor.moveToNext()){
+            int idxID_ASIG = cursor.getColumnIndex(DBContract.TABLA_ACTIVIDADES.COL_ID_ASIGNATURA);
+            long id_asignatura = cursor.getLong(idxID_ASIG);
+            if(id_asignatura != asignatura.getId()){
+                continue;
+            }
             Actividad actividad = null;
             int idxID = cursor.getColumnIndex(DBContract.TABLA_ACTIVIDADES.COL_ID);
             int idxTYPEID = cursor.getColumnIndex(DBContract.TABLA_ACTIVIDADES.COL_ID_TIPO);
@@ -159,71 +160,64 @@ public class DAOActividad {
     public long insert(Actividad actividad, Asignatura asignatura){
         SQLiteDatabase db = manager.getWritableDatabase();
         ContentValues values = new ContentValues();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_NOMBRE, actividad.getNombre().trim());
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_DESCRIPCION, actividad.getDescripcion().trim());
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_FECHA, actividad.getFecha().toInstant().getEpochSecond());
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_DURACION, actividad.getDuracion());
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_IMPORTANCIA, actividad.getImportancia());
-            int completedVal = 0;
-            if(actividad.completado()){
-                completedVal = 1;
-            }
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_COMPLETADO, completedVal);
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_PORCENTAJE, actividad.getPorcentaje());
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_NOTA, actividad.getNota());
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_ID_TIPO, this.getIdTipo(actividad.getTipo()));
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_ID_ASIGNATURA, asignatura.getId());
-        } else{
-            return -1;
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_NOMBRE, actividad.getNombre().trim());
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_DESCRIPCION, actividad.getDescripcion().trim());
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_FECHA, actividad.getFecha().getTime()/1000);
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_DURACION, actividad.getDuracion());
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_IMPORTANCIA, actividad.getImportancia());
+        int completedVal = 0;
+        if(actividad.completado()){
+            completedVal = 1;
         }
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_COMPLETADO, completedVal);
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_PORCENTAJE, actividad.getPorcentaje());
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_NOTA, actividad.getNota());
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_ID_TIPO, this.getIdTipo(actividad.getTipo()));
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_ID_ASIGNATURA, asignatura.getId());
+
         return db.insert(DBContract.TABLA_ACTIVIDADES.NOMBRE, null, values);
     }
     public int update(Actividad actividad){
         SQLiteDatabase db = manager.getWritableDatabase();
         ContentValues values = new ContentValues();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_NOMBRE, actividad.getNombre().trim());
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_DESCRIPCION, actividad.getDescripcion().trim());
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_FECHA, actividad.getFecha().toInstant().getEpochSecond());
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_DURACION, actividad.getDuracion());
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_IMPORTANCIA, actividad.getImportancia());
-            int completedVal = 0;
-            if(actividad.completado()){
-                completedVal = 1;
-            }
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_COMPLETADO, completedVal);
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_PORCENTAJE, actividad.getPorcentaje());
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_NOTA, actividad.getNota());
-            int tipo = this.getIdTipo(actividad.getTipo());
-            if(tipo < 0){
-                tipo = this.getIdTipo(Actividad.Tipo.ACTIVIDAD);
-            }
-            values.put(DBContract.TABLA_ACTIVIDADES.COL_ID_TIPO, tipo);
-        } else{
-            return -1;
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_NOMBRE, actividad.getNombre().trim());
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_DESCRIPCION, actividad.getDescripcion().trim());
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_FECHA, actividad.getFecha().getTime()/1000);
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_DURACION, actividad.getDuracion());
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_IMPORTANCIA, actividad.getImportancia());
+        int completedVal = 0;
+        if(actividad.completado()){
+            completedVal = 1;
         }
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_COMPLETADO, completedVal);
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_PORCENTAJE, actividad.getPorcentaje());
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_NOTA, actividad.getNota());
+        long tipo = this.getIdTipo(actividad.getTipo());
+        if(tipo < 0){
+            tipo = this.getIdTipo(Actividad.Tipo.ACTIVIDAD);
+        }
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_ID_TIPO, tipo);
+
         return db.update(DBContract.TABLA_ACTIVIDADES.NOMBRE, values, "id="+actividad.getId(), null);
     }
     public void delete(Actividad actividad){
         SQLiteDatabase db = manager.getWritableDatabase();
         db.delete(DBContract.TABLA_ACTIVIDADES.NOMBRE, "id="+actividad.getId(), null);
     }
-    private int getIdTipo(String nombre) {
-        int id = -1;
+    private long getIdTipo(String nombre) {
+        long id = -1;
         SQLiteDatabase db = manager.getReadableDatabase();
         Cursor cursor = null;
         try {
-            cursor = db.rawQuery(
-                    "SELECT * FROM " + DBContract.TABLA_TIPO_ACTIVIDAD.NOMBRE + " WHERE ? = ? LIMIT 1",
-                    new String[]{
-                            DBContract.TABLA_TIPO_ACTIVIDAD.COL_NOMBRE,
-                            nombre.trim().toUpperCase()
-                    }
-            );
-            if (cursor.moveToFirst()) {
+            cursor = db.rawQuery("SELECT * FROM " + DBContract.TABLA_TIPO_ACTIVIDAD.NOMBRE, null);
+            while(cursor.moveToNext()) {
                 int idxID = cursor.getColumnIndex(DBContract.TABLA_TIPO_ACTIVIDAD.COL_ID);
-                id = cursor.getInt(idxID);
+                int idxNAME = cursor.getColumnIndex(DBContract.TABLA_TIPO_ACTIVIDAD.COL_NOMBRE);
+                String name = cursor.getString(idxNAME);
+                if(nombre.equals(name)){
+                    id = cursor.getLong(idxID);
+                    break;
+                }
             }
             cursor.close();
         }catch(Exception e){
@@ -234,21 +228,23 @@ public class DAOActividad {
         return id;
     }
 
-    private String getNombreTipo(int id){
+    private String getNombreTipo(long id){
         String tipo = "";
         SQLiteDatabase db = manager.getReadableDatabase();
         Cursor cursor = null;
         try{
             cursor = db.rawQuery(
-                    "SELECT * FROM "+ DBContract.TABLA_TIPO_ACTIVIDAD.NOMBRE + " WHERE ?=? LIMIT 1",
-                    new String[]{
-                            DBContract.TABLA_TIPO_ACTIVIDAD.COL_ID,
-                            String.valueOf(id)
-                    }
+                    "SELECT * FROM "+ DBContract.TABLA_TIPO_ACTIVIDAD.NOMBRE,
+                    null
             );
-            if(cursor.moveToFirst()){
-                int idxTYPE = cursor.getColumnIndex(DBContract.TABLA_TIPO_ACTIVIDAD.COL_NOMBRE);
-                tipo = String.valueOf(cursor.getString(idxTYPE));
+            while(cursor.moveToNext()){
+                int idxID = cursor.getColumnIndex(DBContract.TABLA_TIPO_ACTIVIDAD.COL_ID);
+                int idxNAME = cursor.getColumnIndex(DBContract.TABLA_TIPO_ACTIVIDAD.COL_NOMBRE);
+                long idRow = cursor.getLong(idxID);
+                if(id == idRow){
+                    tipo = String.valueOf(cursor.getString(idxNAME));
+                    break;
+                }
             }
             cursor.close();
         }catch(Exception e){

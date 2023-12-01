@@ -53,34 +53,30 @@ public class DAOAsignatura {
         SQLiteDatabase db = manager.getReadableDatabase();
         ArrayList<Asignatura> asignaturas = new ArrayList<>();
         Cursor rows = db.rawQuery(
-                "SELECT * FROM "+ DBContract.TABLA_ASIGNATURAS.NOMBRE+" WHERE ?=?",
-                new String[]{
-                        DBContract.TABLA_ASIGNATURAS.COL_ID_SEMESTRE,
-                        String.valueOf(semestre.getId())
-                }
+                "SELECT * FROM "+ DBContract.TABLA_ASIGNATURAS.NOMBRE,null
                 );
         while(rows.moveToNext()){
+            int idxASIG = rows.getColumnIndex(DBContract.TABLA_ASIGNATURAS.COL_ID_SEMESTRE);
+            long id_semestre = rows.getLong(idxASIG);
+            if(id_semestre != semestre.getId()){
+                continue;
+            }
             try{
                 int indexID = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_ID);
                 int indexNAME = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_NOMBRE);
                 int indexDESC = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_DESCRIPCION);
                 int indexCOLOR = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_COLOR);
                 int indexTEACHER = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_DOCENTE);
-                Asignatura c = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    c = new Asignatura(
+                Asignatura c = new Asignatura(
                             rows.getInt(indexID),
                             rows.getString(indexNAME),
                             rows.getString(indexDESC),
                             rows.getString(indexCOLOR),
                             rows.getString(indexTEACHER)
                     );
-                }else {
-                    throw new Exception("SDK antiguo!");
-                }
                 asignaturas.add(c);
 
-            }catch (Exception e){}
+            }catch (Exception ignored){}
         }
         rows.close();
         return asignaturas;
@@ -110,6 +106,7 @@ public class DAOAsignatura {
                 }
             }catch (Exception e){}
         }
+        rows.close();
         return asignatura;
     }
 

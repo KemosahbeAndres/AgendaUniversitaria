@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -66,8 +67,9 @@ public class AgendaActivity extends AppCompatActivity {
         if(id >= 0){
             Semestre semestre = controller.execute(id);
 
-            elements.addAll(semestre.getAllActividadesDesde(new Date()));
+            elements.addAll(semestre.getAllActividades());
 
+            Toast.makeText(this, "Found: "+elements.size(), Toast.LENGTH_SHORT).show();
             adapter = new ListAdapter(elements, this);
             RecyclerView recyclerView = findViewById(R.id.listRecyclerViw);
             recyclerView.setHasFixedSize(true);

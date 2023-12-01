@@ -9,14 +9,14 @@ public class Bloque implements Serializable {
         public final static String CATEDRA = "CATEDRA";
         public final static String LABORATORIO = "LABORATORIO";
     }
-    private int id;
+    private long id;
     private String tipo;
     private int duracion;
     private int dia_semana;
     private Date fecha;
     private Asignatura asignatura;
 
-    public Bloque(int id, String tipo, int duracion, int dia_semana, Date fecha, Asignatura asignatura) {
+    public Bloque(long id, String tipo, int duracion, int dia_semana, Date fecha, Asignatura asignatura) {
         this(tipo, duracion, dia_semana, fecha, asignatura);
         this.id = id;
     }
@@ -26,7 +26,7 @@ public class Bloque implements Serializable {
         this.asignatura = asignatura;
     }
 
-    public Bloque(int id, String tipo, int duracion, int dia_semana, Date fecha) {
+    public Bloque(long id, String tipo, int duracion, int dia_semana, Date fecha) {
         this(tipo, duracion, dia_semana, fecha);
         this.id = id;
     }
@@ -40,11 +40,11 @@ public class Bloque implements Serializable {
         this.asignatura = null;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

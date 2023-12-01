@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Asignatura implements Serializable {
-    private int id;
+    private long id;
     private String nombre;
     private String descripcion;
     private String color;
@@ -12,7 +12,7 @@ public class Asignatura implements Serializable {
     private ArrayList<Bloque> bloques;
     private ArrayList<Actividad> actividades;
 
-    public Asignatura(int id, String nombre, String descripcion, String color, String docente, ArrayList<Bloque> bloques, ArrayList<Actividad> actividades) {
+    public Asignatura(long id, String nombre, String descripcion, String color, String docente, ArrayList<Bloque> bloques, ArrayList<Actividad> actividades) {
         this(id, nombre, descripcion, color, docente);
         this.addBloques(bloques);
         this.addActividades(actividades);
@@ -24,7 +24,7 @@ public class Asignatura implements Serializable {
         this.addActividades(actividades);
     }
 
-    public Asignatura(int id, String nombre, String descripcion, String color, String docente) {
+    public Asignatura(long id, String nombre, String descripcion, String color, String docente) {
         this(nombre, descripcion, color, docente);
         this.id = id;
     }
@@ -39,11 +39,11 @@ public class Asignatura implements Serializable {
         this.actividades = new ArrayList<>();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
