@@ -16,6 +16,9 @@
             android:name=".vistas.AsignaturasActivity"
             android:exported="false" />
         <activity
+            android:name=".vistas.AgregarAsignaturasActivity"
+            android:exported="false" />
+        <activity
             android:name=".vistas.NuevoSemestreActivity"
             android:exported="false" />
         <activity
