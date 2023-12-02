@@ -12,22 +12,22 @@ import cl.stomas.agendauniversitaria.modelos.Carrera;
 import cl.stomas.agendauniversitaria.modelos.Semestre;
 
 public class SemestreControler {
-    private Context ctx;
-    public SemestreControler(Context ctx) {
-        this.ctx = ctx;
+    private Context context;
+    public SemestreControler(Context context) {
+        this.context = context;
     }
 
     public Semestre execute(Semestre semestre){
-        ArrayList<Asignatura> asignaturas = DB.asignaturas(ctx).getFrom(semestre);
+        ArrayList<Asignatura> asignaturas = DB.asignaturas(context).getFrom(semestre);
         for(Asignatura asignatura: asignaturas){
-            asignatura.addBloques(DB.bloques(ctx).getFrom(asignatura));
-            asignatura.addActividades(DB.actividades(ctx).getFrom(asignatura));
+            asignatura.addBloques(DB.bloques(context).getFrom(asignatura));
+            asignatura.addActividades(DB.actividades(context).getFrom(asignatura));
         }
         semestre.addAsignaturas(asignaturas);
         return semestre;
     }
 
     public Semestre execute(long id){
-        return this.execute(DB.semestres(ctx).get(id));
+        return this.execute(DB.semestres(context).get(id));
     }
 }

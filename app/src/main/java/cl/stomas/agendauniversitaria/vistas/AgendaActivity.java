@@ -53,11 +53,6 @@ public class AgendaActivity extends AppCompatActivity {
             fecha_seleccionada = new Date();
         }
 
-        Toast.makeText(this, fecha_seleccionada.toString(), Toast.LENGTH_SHORT).show();
-
-        init();
-
-
         calendario.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -95,10 +90,10 @@ public class AgendaActivity extends AppCompatActivity {
 
     public void init(){
         config.load();
-        elements = new ArrayList<>();
-
         long id = config.getIdSemestre();
+
         if(id >= 0){
+            elements = new ArrayList<>();
             Semestre semestre = controller.execute(id);
 
             elements.addAll(semestre.getAllActividadesDesde(fecha_seleccionada));

@@ -43,6 +43,7 @@ public class ActivityDetalles extends AppCompatActivity {
             Toast.makeText(this, "No pudimos obtener la actividad!", Toast.LENGTH_SHORT).show();
             finish();
         }
+        Toast.makeText(this, "Actividad lista", Toast.LENGTH_SHORT).show();
         trabSet = (TextView) findViewById(R.id.trabSet);
         asigSet = (TextView) findViewById(R.id.asigSet);
         porSet = (TextView) findViewById(R.id.porSet);
@@ -64,7 +65,8 @@ public class ActivityDetalles extends AppCompatActivity {
         if(actividad != null){
             trabSet.setText(actividad.getNombre());
             asigSet.setText(actividad.getAsignatura().getNombre());
-            porSet.setText(actividad.getPorcentaje());
+            String porcentaje = actividad.getPorcentaje() + "%";
+            porSet.setText(porcentaje);
             if(actividad.completado()){
                 statSet.setText("Completado");
             }else{

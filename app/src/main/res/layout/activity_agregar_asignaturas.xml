@@ -52,8 +52,8 @@
 
     <Button
         android:id="@+id/addbutton2"
-        android:layout_width="128dp"
-        android:layout_height="100dp"
+        android:layout_width="353dp"
+        android:layout_height="61dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
@@ -113,22 +113,6 @@
             android:inputType="none"
             app:simpleItems="@array/tiposcolores" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/backbutton2"
-        android:layout_width="128dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="Atras"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.559" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/imageView6"

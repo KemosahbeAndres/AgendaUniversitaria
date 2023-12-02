@@ -3,6 +3,7 @@ package cl.stomas.agendauniversitaria;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import cl.stomas.agendauniversitaria.modelos.Semestre;
 import cl.stomas.agendauniversitaria.vistas.AgendaActivity;
 import cl.stomas.agendauniversitaria.vistas.AgregarAsignaturasActivity;
 import cl.stomas.agendauniversitaria.vistas.AgregarCarreraActivity;
+import cl.stomas.agendauniversitaria.vistas.AsignaturasActivity;
 import cl.stomas.agendauniversitaria.vistas.CarreraActivity;
 import cl.stomas.agendauniversitaria.vistas.SeleccionarCarreraActivity;
 
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         btnAsignatura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AgregarAsignaturasActivity.class);
+                Intent intent = new Intent(MainActivity.this, AsignaturasActivity.class);
                 startActivity(intent);
             }
         });
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onStart() {
         super.onStart();
@@ -114,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         int dia_semana = calendar.get(Calendar.DAY_OF_WEEK);
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
         int mes = calendar.get(Calendar.MONTH);
-        txtFechaHoy.setText(dias[dia_semana]+" "+dia+" de "+meses[mes]);
+        txtFechaHoy.setText(dias[dia_semana-1]+" "+(dia-1)+" de "+meses[mes-1]);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
