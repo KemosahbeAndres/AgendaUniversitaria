@@ -57,11 +57,7 @@ public class AsignaturasActivity extends AppCompatActivity {
 
         asignaturas = new ArrayList<>();
 
-        adapter = new AsignaturaArrayAdapter();
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        recyclerView.setAdapter(adapter);
 
     }
 
@@ -107,8 +103,8 @@ public class AsignaturasActivity extends AppCompatActivity {
         if(idSemestre >= 0){
             Semestre semestre = controller.execute(idSemestre);
             asignaturas = semestre.getAsignaturas();
-            adapter.replaceAll(asignaturas);
-
+            adapter = new AsignaturaArrayAdapter(asignaturas);
+            recyclerView.setAdapter(adapter);
         }
     }
 }

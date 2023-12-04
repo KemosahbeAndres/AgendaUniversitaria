@@ -1,6 +1,7 @@
 package cl.stomas.agendauniversitaria.vistas;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +39,17 @@ public class AgendaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda);
 
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+
+            // showing the back button in action bar
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+
+        }
+
         config = Config.getConfig(this);
 
         controller = new SemestreControler(this);
@@ -74,6 +86,12 @@ public class AgendaActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 
     @Override

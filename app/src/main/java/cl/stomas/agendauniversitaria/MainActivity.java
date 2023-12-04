@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         txtFechaHoy = findViewById(R.id.txtDia);
         txtCarrera = findViewById(R.id.txtCarrera);
-        btnAgenda = findViewById(R.id.btnAgenda);
+        btnAgenda = findViewById(R.id.btnAbrirAgenda);
 
         btnAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,15 +66,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnReset = findViewById(R.id.btnReset);
+        /*Button btnReset = findViewById(R.id.btnReset);
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 config.reset();
             }
-        });
+        });*/
 
-        Button btnAsignatura = findViewById(R.id.btnAsignaturas);
+        Button btnAsignatura = findViewById(R.id.btnAbrirSemestre);
         btnAsignatura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Button btnCarrera = findViewById(R.id.btnCarrera);
+        /*Button btnCarrera = findViewById(R.id.);
 
         btnCarrera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, CarreraActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
     @SuppressLint("SetTextI18n")

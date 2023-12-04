@@ -3,44 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/btnAgenda"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
-        android:text="AGENDA"
-        app:layout_constraintBottom_toTopOf="@+id/btnCarrera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnAsignaturas"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
-        android:text="ASIGNATURAS"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnReset"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
-        android:text="RESET"
-        app:layout_constraintBottom_toTopOf="@+id/btnAsignaturas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    android:layout_height="match_parent"
+    android:layout_margin="0dp">
 
     <TextView
         android:id="@+id/txtDia"
@@ -69,7 +33,7 @@
         android:id="@+id/txtPromedio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:text="Promedio General"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/txtPromedioSemestre"
@@ -80,7 +44,7 @@
         android:id="@+id/txtPromedioSemestre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:text="Promedio Semestre"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,50 +55,40 @@
         android:id="@+id/txtInscritas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
         android:text="Asignaturas Inscritas: 5"
         android:textColor="#3F51B5"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtAprobadas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNotaGeneral" />
 
     <TextView
         android:id="@+id/txtAprobadas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:text="Asignaturas Aprobadas: 23"
         android:textColor="#4CAF50"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtReprobadas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtInscritas" />
 
     <TextView
         android:id="@+id/txtReprobadas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
         android:text="Asignaturas Reprobadas: 2"
         android:textColor="#FF0909"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="20dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/btnAgenda"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAprobadas" />
 
     <TextView
         android:id="@+id/txtNotaGeneral"
@@ -159,15 +113,13 @@
         app:layout_constraintStart_toEndOf="@+id/txtNotaGeneral"
         app:layout_constraintTop_toBottomOf="@+id/txtPromedioSemestre" />
 
-    <Button
-        android:id="@+id/btnCarrera"
+    <include
+        android:id="@+id/include"
+        layout="@layout/local_toolbar"
         android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
-        android:text="Carrera"
-        app:layout_constraintBottom_toTopOf="@+id/btnReset"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

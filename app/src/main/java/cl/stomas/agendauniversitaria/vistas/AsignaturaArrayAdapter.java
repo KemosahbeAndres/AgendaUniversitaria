@@ -41,6 +41,7 @@ public class AsignaturaArrayAdapter extends RecyclerView.Adapter<AsignaturaArray
     }
 
     public AsignaturaArrayAdapter(ArrayList<Asignatura> asignaturas) {
+        this();
         this.asignaturas.addAll(asignaturas);
     }
     public void replaceAll(ArrayList<Asignatura> asignaturas_nuevas){

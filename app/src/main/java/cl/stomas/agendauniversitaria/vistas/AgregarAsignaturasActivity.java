@@ -42,10 +42,10 @@ public class AgregarAsignaturasActivity extends AppCompatActivity {
         }
 
         addButton = findViewById(R.id.addbutton2);
-        nameAsign=findViewById(R.id.txtnameasig);
-        descAsign=findViewById(R.id.txtdescasig);
-        docenAsign=findViewById(R.id.txtdescdocente);
-        colorAsign= findViewById(R.id.txtcolores);
+        nameAsign = findViewById(R.id.txtnameasig);
+        descAsign = findViewById(R.id.txtdescasig);
+        docenAsign = findViewById(R.id.txtdescdocente);
+        colorAsign = findViewById(R.id.txtcolores);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,13 +78,13 @@ public class AgregarAsignaturasActivity extends AppCompatActivity {
     }
 
     private void save(){
-        if (nameAsign.getText().toString().equals("")){
+        if (nameAsign.getText().toString().isEmpty()){
             Toast.makeText(AgregarAsignaturasActivity.this,"No dejar el campo nombre vacio", Toast.LENGTH_SHORT).show();
-        }else if (descAsign.getText().toString().equals("")){
+        }else if (descAsign.getText().toString().isEmpty()){
             Toast.makeText(AgregarAsignaturasActivity.this,"No dejar el campo descripcion vacio", Toast.LENGTH_SHORT).show();
-        }else if (docenAsign.getText().toString().equals("")){
+        }else if (docenAsign.getText().toString().isEmpty()){
             Toast.makeText(AgregarAsignaturasActivity.this,"No dejar el campo docente vacio", Toast.LENGTH_SHORT).show();
-        }else if (colorAsign.getText().toString().equals("")){
+        }else if (colorAsign.getText().toString().isEmpty()){
             Toast.makeText(AgregarAsignaturasActivity.this,"No dejar el campo color vacio", Toast.LENGTH_SHORT).show();
         }else{
             //aqui añadir la transferencia de los datos a la bd y el intent final
