@@ -99,28 +99,29 @@ public class AgregarCarreraActivity extends AppCompatActivity {
                     Toast.makeText(AgregarCarreraActivity.this, "Debes ingresar una fecha de fin valida!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-
-                    try{ // Intentamos guardar el semestre con las fechas entregadas
-                        SimpleDateFormat sformat = new SimpleDateFormat("yyyy/MM/dd");
-                        Date start = sformat.parse(editFechaInicio.getText().toString());
-                        Date end = sformat.parse(editFechaFin.getText().toString());
-                        Date hoy = new Date();
-                        if((start != null && start.before(hoy)) && (end != null && end.after(hoy))){
-                            Semestre semestre = new Semestre(start, end);
-                            long idSemestre = DB.semestres(AgregarCarreraActivity.this).insert(semestre, carrera);
+                try{ // Intentamos guardar el semestre con las fechas entregadas
+                    SimpleDateFormat sformat = new SimpleDateFormat("yyyy/MM/dd");
+                    Date start = sformat.parse(editFechaInicio.getText().toString());
+                    Date end = sformat.parse(editFechaFin.getText().toString());
+                    Date hoy = new Date();
+                    if(start != null && end != null ){
+                        Semestre semestre = new Semestre(start, end);
+                        long idSemestre = DB.semestres(AgregarCarreraActivity.this).insert(semestre, carrera);
+                        if(start.before(hoy) && end.after(hoy) && idSemestre >= 0){
                             config.setIdSemestre(idSemestre);
                             config.save();
-                            finish();
                         }else{
-                            Toast.makeText(AgregarCarreraActivity.this, "Fecha seleccionada fuera de rango!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AgregarCarreraActivity.this, "No se pudo guardar el semestre!", Toast.LENGTH_SHORT).show();
+                            config.setIdSemestre(-1);
+                            config.save();
                         }
-                    }catch(Exception e){
+                    }else{
                         Toast.makeText(AgregarCarreraActivity.this, "Formato de fechas incorrecto!", Toast.LENGTH_SHORT).show();
+                        return;
                     }
-                }else{
-                    Toast.makeText(AgregarCarreraActivity.this, "Error del SDK!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }catch(Exception e){
+                    Toast.makeText(AgregarCarreraActivity.this, "Formato de fechas incorrecto!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -128,18 +129,17 @@ public class AgregarCarreraActivity extends AppCompatActivity {
     private void EleccionFecha(TextView textView){
         Calendar calendario = Calendar.getInstance();
         if(!textView.getText().toString().isEmpty()){
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                try{
-                    SimpleDateFormat sformat = new SimpleDateFormat("yyyy/MM/dd");
-                    Date date = sformat.parse(textView.getText().toString());
-                    //Toast.makeText(NuevoSemestreActivity.this, "Fecha: "+date.toString(), Toast.LENGTH_SHORT).show();
-                    if (date != null) {
-                        calendario.setTime(date);
-                    }
-                }catch (Exception e){
-                    Log.w("[DatePicker]", e.toString());
+            try{
+                SimpleDateFormat sformat = new SimpleDateFormat("yyyy/MM/dd");
+                Date date = sformat.parse(textView.getText().toString());
+                //Toast.makeText(NuevoSemestreActivity.this, "Fecha: "+date.toString(), Toast.LENGTH_SHORT).show();
+                if (date != null) {
+                    calendario.setTime(date);
                 }
+            }catch (Exception e){
+                Log.w("[DatePicker]", e.toString());
             }
+
         }
         DatePickerDialog select = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @SuppressLint("SetTextI18n")

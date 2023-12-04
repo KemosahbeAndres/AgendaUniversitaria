@@ -1,12 +1,17 @@
 package cl.stomas.agendauniversitaria;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -92,7 +97,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.carreras_menu_item){
+            Intent intent = new Intent(MainActivity.this, SeleccionarCarreraActivity.class);
+            startActivity(intent);
+            return true;
+        }else{
+            return super.onOptionsItemSelected(item);
+        }
+    }
     @SuppressLint("SetTextI18n")
     @Override
     protected void onStart() {
