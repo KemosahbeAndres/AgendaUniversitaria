@@ -116,4 +116,24 @@ public class Asignatura implements Serializable {
     public void setSemestre(Semestre semestre) {
         this.semestre = semestre;
     }
+
+    public boolean verificarPonderacion(){
+        int ponderacion = 0;
+        for (Actividad actividad: actividades){
+            if (actividad.getPorcentaje() > 0){
+                ponderacion += actividad.getPorcentaje();
+            }
+        }
+        return ponderacion <= 100;
+    }
+
+    public int promedio(){
+        int promedio = 0;
+        for (Actividad actividad: actividades){
+            if(actividad.getPorcentaje() > 0){
+                promedio += actividad.getNota() * (actividad.getPorcentaje() / 100);
+            }
+        }
+        return promedio;
+    }
 }

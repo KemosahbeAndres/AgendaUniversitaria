@@ -86,4 +86,16 @@ public class Carrera implements Serializable {
                 "Semestres = " + semestres.size() +
                 '}';
     }
+
+    public int promedio(){
+        int suma = 0;
+        int cantidad = semestres.size();
+        for(Semestre semestre: semestres){
+            suma += semestre.promedio();
+        }
+        if(cantidad == 0){
+            return 0;
+        }
+        return suma / cantidad;
+    }
 }

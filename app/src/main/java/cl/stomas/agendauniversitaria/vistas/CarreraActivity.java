@@ -91,6 +91,11 @@ public class CarreraActivity extends AppCompatActivity {
 
         adapter.clear();
         adapter.addAll(nombres);
+        adapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                nombres
+        );
     }
 
     @Override
@@ -106,5 +111,10 @@ public class CarreraActivity extends AppCompatActivity {
 
         adapter.clear();
         adapter.addAll(nombres);
+        adapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                nombres
+        );
     }
 }

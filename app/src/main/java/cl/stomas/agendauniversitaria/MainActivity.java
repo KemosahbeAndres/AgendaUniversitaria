@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
             "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
     };
-    private TextView txtFechaHoy;
-    private TextView txtCarrera;
+    private TextView txtFechaHoy, txtCarrera, promedioGral, promedioSemetre;
     private Button btnAgenda;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +52,15 @@ public class MainActivity extends AppCompatActivity {
         finder = new CarreraController(this);
         config = Config.getConfig(this);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            initApplicationState();
-        }
+        initApplicationState();
 
         config.load();
 
         txtFechaHoy = findViewById(R.id.txtDia);
         txtCarrera = findViewById(R.id.txtCarrera);
         btnAgenda = findViewById(R.id.btnAbrirAgenda);
+        promedioGral = findViewById(R.id.txtNotaGeneral);
+        promedioSemetre = findViewById(R.id.txtNotaSemestre);
 
         btnAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,14 +70,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*Button btnReset = findViewById(R.id.btnReset);
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                config.reset();
-            }
-        });*/
-
         Button btnAsignatura = findViewById(R.id.btnAbrirSemestre);
         btnAsignatura.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,15 +78,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        /*Button btnCarrera = findViewById(R.id.);
 
-        btnCarrera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CarreraActivity.class);
-                startActivity(intent);
-            }
-        });*/
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,12 +98,17 @@ public class MainActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
     }
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onStart() {
         super.onStart();
+        initMainView();
+    }
+
+    private void initMainView(){
         config = Config.getConfig(this);
         config.load();
+        promedioSemetre.setText("0");
+        promedioGral.setText("0");
         Carrera carrera = finder.execute(config.getIdCarrera());
         //Carrera carrera = DB.carreras(this).get(config.getIdCarrera());
         if(carrera != null){
@@ -128,7 +118,9 @@ public class MainActivity extends AppCompatActivity {
                 long id = semestre.getId();
                 config.setIdSemestre(id);
                 config.save();
+                promedioSemetre.setText(String.valueOf(semestre.promedio()));
             }
+            promedioGral.setText(String.valueOf(carrera.promedio()));
         }
 
         Calendar calendar = Calendar.getInstance();
@@ -140,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
         txtFechaHoy.setText(dias[dia_semana-1]+" "+(dia-1)+" de "+meses[mes-1]);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void initApplicationState(){
         config = Config.getConfig(this);
         config.load();

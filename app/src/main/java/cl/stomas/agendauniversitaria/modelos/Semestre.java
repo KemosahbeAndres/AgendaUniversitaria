@@ -119,4 +119,16 @@ public class Semestre implements Serializable {
         }
         return filtradas;
     }
+
+    public int promedio(){
+        int suma = 0;
+        int cantidad = asignaturas.size();
+        for (Asignatura asignatura: this.asignaturas){
+            suma += asignatura.promedio();
+        }
+        if(cantidad == 0){
+            return 0;
+        }
+        return suma / cantidad;
+    }
 }
