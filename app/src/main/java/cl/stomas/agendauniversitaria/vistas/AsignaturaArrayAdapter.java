@@ -1,6 +1,7 @@
 package cl.stomas.agendauniversitaria.vistas;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import cl.stomas.agendauniversitaria.modelos.Asignatura;
 public class AsignaturaArrayAdapter extends RecyclerView.Adapter<AsignaturaArrayAdapter.AsignaturaViewHolder>{
     public class AsignaturaViewHolder extends RecyclerView.ViewHolder {
         private TextView inicial, nombre, docente;
+        private Asignatura asignatura;
         public AsignaturaViewHolder(View itemView) {
             super(itemView);
             inicial = itemView.findViewById(R.id.inicialAsignatura);
@@ -24,6 +26,7 @@ public class AsignaturaArrayAdapter extends RecyclerView.Adapter<AsignaturaArray
             docente = itemView.findViewById(R.id.nombre_docente);
         }
         public void bindData(final Asignatura item){
+            asignatura = item;
             try{
                 String substring = item.getNombre().substring(0,1);
                 inicial.setText(substring);
@@ -33,11 +36,17 @@ public class AsignaturaArrayAdapter extends RecyclerView.Adapter<AsignaturaArray
                 nombre.setText("Error al cargar la asignatura!");
             }
         }
+
+        public Asignatura getAsignatura() {
+            return asignatura;
+        }
     }
 
     private ArrayList<Asignatura> asignaturas;
+    private Context context;
     public AsignaturaArrayAdapter(){
         this.asignaturas = new ArrayList<>();
+        this.context = null;
     }
 
     public AsignaturaArrayAdapter(ArrayList<Asignatura> asignaturas) {
@@ -51,6 +60,7 @@ public class AsignaturaArrayAdapter extends RecyclerView.Adapter<AsignaturaArray
     @NonNull
     @Override
     public AsignaturaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.asignatura_item, null);
         view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
         return new AsignaturaViewHolder(view);
@@ -59,6 +69,14 @@ public class AsignaturaArrayAdapter extends RecyclerView.Adapter<AsignaturaArray
     @Override
     public void onBindViewHolder(@NonNull AsignaturaViewHolder holder, int position) {
         holder.bindData(asignaturas.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AsignaturaDetail.class);
+                intent.putExtra("asignatura", holder.getAsignatura());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

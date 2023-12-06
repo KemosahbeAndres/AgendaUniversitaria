@@ -29,4 +29,23 @@
         <item>Verde</item>
         <item>Azul</item>
     </string-array>
+
+    <string name="hint_promedio">0</string>
+
+    <string name="edit_subject_item_menu">Editar</string>
+    <string name="delete_subject_item_menu">Eliminar</string>
+    <string name="hint_title_subject_name">Asignatura</string>
+    <string name="label_subject_id">ID:</string>
+    <string name="hint_subject_id">ID Asignatura</string>
+    <string name="label_subject_name">Nombre:</string>
+    <string name="hint_subject_name">Nombre asignatura</string>
+    <string name="label_subject_description">Descripcion:</string>
+    <string name="hint_subject_description">Descripcion</string>
+    <string name="label_subject_teacher">Docente:</string>
+    <string name="hint_subject_teacher">Nombre docente</string>
+    <string name="label_subject_average">Promedio:</string>
+    <string name="hint_subject_average">0</string>
+
+    <string name="confirm">Aceptar</string>
+    <string name="cancel">Cancelar</string>
 </resources>

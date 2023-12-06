@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:hint="I"
+                android:hint="A"
                 android:textAllCaps="true"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -48,7 +48,7 @@
                 android:id="@+id/nombre_asignatura"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Matematicas"
+                android:hint="Asignatura"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -63,16 +63,27 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="50dp"
+            android:layout_width="60dp"
             android:layout_height="50dp"
-            android:layout_weight="2">
+            android:layout_weight="4">
+            <TextView
+                android:id="@+id/txtPromedioItemAsignatura"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_promedio"
+                android:textSize="24sp"
+                android:layout_centerInParent="true"
+                android:layout_toStartOf="@+id/chevron_img"
+                android:layout_alignParentStart="true"/>
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/chevron_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/chevron_gray" />
+                android:src="@drawable/baseline_chevron_right_24" />
         </RelativeLayout>
     </LinearLayout>
 

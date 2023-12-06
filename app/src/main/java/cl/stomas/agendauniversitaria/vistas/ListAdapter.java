@@ -84,7 +84,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             trabajo.setText(item.getNombre());
             fecha.setText(item.getHora());
             asignatura.setText(item.getAsignatura().getNombre());
-            porcentaje.setText(String.valueOf(item.getPorcentaje())+ "%");
+            porcentaje.setText(item.getPorcentaje() + "%");
             if (item.completado()){
                 status.setText("Completado");
             }else{
