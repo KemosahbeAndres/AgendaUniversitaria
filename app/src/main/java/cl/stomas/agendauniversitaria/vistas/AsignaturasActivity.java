@@ -29,7 +29,6 @@ public class AsignaturasActivity extends AppCompatActivity {
     private SemestreControler controller;
     private AsignaturaArrayAdapter adapter;
     private ArrayList<Asignatura> asignaturas;
-
     private RecyclerView recyclerView;
 
     @Override
@@ -45,7 +44,8 @@ public class AsignaturasActivity extends AppCompatActivity {
             // showing the back button in action bar
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setSubtitle("Subtitulo");
+            actionBar.setTitle("Lista de Asignaturas");
+            actionBar.setSubtitle(R.string.actionbar_subtitle);
 
         }
 

@@ -25,7 +25,7 @@
             android:id="@+id/txtdescdocente"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Nombre Docente"
+            android:hint="@string/hint_subject_teacher"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,26 +45,10 @@
             android:id="@+id/txtnameasig"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Nombre Asignatura"
+            android:hint="@string/hint_subject_name"
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/addbutton2"
-        android:layout_width="353dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="Añadir"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.559" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutdescrasig"
@@ -85,33 +69,8 @@
             android:id="@+id/txtdescasig"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Descripcion"
+            android:hint="@string/hint_subject_description"
             android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layouttipo"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="159dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:hint="@string/colortitle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.367">
-
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/txtcolores"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:inputType="none"
-            app:simpleItems="@array/tiposcolores" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <pl.droidsonroids.gif.GifImageView
@@ -127,4 +86,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.899"
         android:src="@drawable/output_onlinegiftools" />
+
+    <Spinner
+        android:id="@+id/spColor"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="30dp"
+        android:spinnerMode="dropdown"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutdescdocente" />
 </androidx.constraintlayout.widget.ConstraintLayout>

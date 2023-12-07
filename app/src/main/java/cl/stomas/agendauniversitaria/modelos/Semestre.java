@@ -1,6 +1,10 @@
 package cl.stomas.agendauniversitaria.modelos;
 
+import android.widget.Toast;
+
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -110,10 +114,11 @@ public class Semestre implements Serializable {
     }
 
     public ArrayList<Actividad> getAllActividadesDesde(Date fecha){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         ArrayList<Actividad> allActividades = this.getAllActividades();
         ArrayList<Actividad> filtradas = new ArrayList<>();
         for (Actividad actividad: allActividades){
-            if(actividad.getFecha().compareTo(fecha) == 0){
+            if(formatter.format(fecha).equals(formatter.format(actividad.getFecha()))){
                 filtradas.add(actividad);
             }
         }

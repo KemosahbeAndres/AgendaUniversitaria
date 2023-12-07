@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class AgendaActivity extends AppCompatActivity {
     private CalendarView calendario;
     private Date fecha_seleccionada;
 
+    private static Calendar calendar = Calendar.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +49,8 @@ public class AgendaActivity extends AppCompatActivity {
 
             // showing the back button in action bar
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setTitle("Agenda");
+            actionBar.setSubtitle(R.string.actionbar_subtitle);
 
         }
 
@@ -68,9 +72,9 @@ public class AgendaActivity extends AppCompatActivity {
         calendario.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
+                SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd HH:mm");
                 try {
-                    fecha_seleccionada = formater.parse(year + "/" + (month + 1) + "/" + dayOfMonth);
+                    fecha_seleccionada = formater.parse(year + "/" + (month + 1) + "/" + dayOfMonth + " " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
                 } catch (ParseException e) {
                     fecha_seleccionada = new Date();
                 }
@@ -81,6 +85,7 @@ public class AgendaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AgendaActivity.this, AddDatesActivity.class);
+                intent.putExtra("date", fecha_seleccionada);
                 startActivity(intent);
             }
         });
@@ -116,7 +121,6 @@ public class AgendaActivity extends AppCompatActivity {
 
             elements.addAll(semestre.getAllActividadesDesde(fecha_seleccionada));
 
-            Toast.makeText(this, "Found: "+elements.size(), Toast.LENGTH_SHORT).show();
             adapter = new ListAdapter(elements, this);
             RecyclerView recyclerView = findViewById(R.id.listRecyclerViw);
             recyclerView.setHasFixedSize(true);

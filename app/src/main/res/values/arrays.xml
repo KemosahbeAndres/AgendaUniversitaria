@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string-array name="seleccionimportancia">
+        <item>Bajo</item>
+        <item>Medio</item>
+        <item>Alto</item>
+    </string-array>
+    <string-array name="tipostrabajos">
+        <item>Informe</item>
+        <item>Prueba</item>
+        <item>Actividad</item>
+        <item>Terreno</item>
+        <item>Proyecto</item>
+    </string-array>
+    <string-array name="materiaslist">
+        <item>IoT</item>
+        <item>Adm. Empresa</item>
+        <item>Prog. Android</item>
+    </string-array>
+    <string-array name="tiposcolores">
+        <item>Rojo</item>
+        <item>Verde</item>
+        <item>Azul</item>
+    </string-array>
 </resources>

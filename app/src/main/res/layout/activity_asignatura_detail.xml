@@ -13,7 +13,6 @@
         android:layout_marginTop="30dp"
         android:hint="@string/hint_title_subject_name"
         android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -92,8 +91,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         android:hint="@string/hint_subject_description"
-        android:lines="3"
-        android:maxLines="3"
+        android:lines="2"
+        android:maxLines="2"
         android:singleLine="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

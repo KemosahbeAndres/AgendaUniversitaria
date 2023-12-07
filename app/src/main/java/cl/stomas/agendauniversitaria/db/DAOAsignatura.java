@@ -82,7 +82,7 @@ public class DAOAsignatura {
         return asignaturas;
     }
 
-    public Asignatura get(int id){
+    public Asignatura get(long id){
         SQLiteDatabase db = manager.getReadableDatabase();
         Asignatura asignatura = null;
         Cursor rows = db.rawQuery("SELECT * FROM "+DBContract.TABLA_ASIGNATURAS.NOMBRE+" WHERE id="+id+" LIMIT 1", null);
@@ -93,17 +93,14 @@ public class DAOAsignatura {
                 int indexDESC = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_DESCRIPCION);
                 int indexCOLOR = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_COLOR);
                 int indexTEACHER = rows.getColumnIndexOrThrow(DBContract.TABLA_ASIGNATURAS.COL_DOCENTE);
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    asignatura = new Asignatura(
-                            rows.getInt(indexID),
-                            rows.getString(indexNAME),
-                            rows.getString(indexDESC),
-                            rows.getString(indexCOLOR),
-                            rows.getString(indexTEACHER)
-                    );
-                }else {
-                    throw new Exception("SDK antiguo!");
-                }
+                asignatura = new Asignatura(
+                        rows.getLong(indexID),
+                        rows.getString(indexNAME),
+                        rows.getString(indexDESC),
+                        rows.getString(indexCOLOR),
+                        rows.getString(indexTEACHER)
+                );
+
             }catch (Exception e){}
         }
         rows.close();
@@ -120,17 +117,17 @@ public class DAOAsignatura {
         values.put(DBContract.TABLA_ASIGNATURAS.COL_COLOR, asignatura.getColor());
         db.insert(DBContract.TABLA_ASIGNATURAS.NOMBRE, null, values);
     }
-    public void update(Asignatura asignatura){
+    public boolean update(Asignatura asignatura){
         SQLiteDatabase db = manager.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DBContract.TABLA_ASIGNATURAS.COL_NOMBRE, asignatura.getNombre());
         values.put(DBContract.TABLA_ASIGNATURAS.COL_DESCRIPCION, asignatura.getDescripcion());
         values.put(DBContract.TABLA_ASIGNATURAS.COL_DOCENTE, asignatura.getDocente());
         values.put(DBContract.TABLA_ASIGNATURAS.COL_COLOR, asignatura.getColor());
-        db.update(DBContract.TABLA_ASIGNATURAS.NOMBRE, values, "id="+asignatura.getId(), null);
+        return db.update(DBContract.TABLA_ASIGNATURAS.NOMBRE, values, "id="+asignatura.getId(), null) == 1;
     }
-    public void delete(Asignatura asignatura){
+    public boolean delete(Asignatura asignatura){
         SQLiteDatabase db = manager.getWritableDatabase();
-        db.delete(DBContract.TABLA_ASIGNATURAS.NOMBRE, "id="+asignatura.getId(), null);
+        return db.delete(DBContract.TABLA_ASIGNATURAS.NOMBRE, "id="+asignatura.getId(), null) == 1;
     }
 }

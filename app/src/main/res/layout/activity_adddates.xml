@@ -8,24 +8,24 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutduracion"
-        android:layout_width="160dp"
-        android:layout_height="62dp"
+        android:layout_width="362dp"
+        android:layout_height="69dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.341">
+        app:layout_constraintVertical_bias="0.372">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtduracion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Duracion en Dias"
+            android:hint="@string/hint_activity_duration"
             android:inputType="number"
             android:maxLength="2" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -33,27 +33,26 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layouttipo"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="159dp"
-        android:layout_height="65dp"
+        android:layout_width="352dp"
+        android:layout_height="58dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:hint="@string/tipotitle"
+        android:hint="@string/hint_activity_type"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.995"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.572">
+        app:layout_constraintVertical_bias="0.734">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/txttrabajo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
-            android:inputType="none"
-            app:simpleItems="@array/tipostrabajos" />
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -65,47 +64,45 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:hint="@string/materiaselect"
+        android:hint="@string/hint_activity_subject_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.459">
+        app:layout_constraintVertical_bias="0.499">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/txtmateria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
-            android:inputType="none"
-            app:simpleItems="@array/materiaslist" />
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutimportancia"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="159dp"
-        android:layout_height="65dp"
+        android:layout_width="349dp"
+        android:layout_height="63dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:hint="@string/importanciatitle"
+        android:hint="@string/hint_activity_importance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.004"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.572">
+        app:layout_constraintVertical_bias="0.619">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/txtimportancia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
-            android:inputType="none"
-            app:simpleItems="@array/seleccionimportancia" />
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -124,7 +121,7 @@
             android:id="@+id/txtnameactivity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Nombre Actividad"
+            android:hint="@string/hint_activity_name"
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -148,7 +145,7 @@
             android:id="@+id/txtdescripcion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Descripcion"
+            android:hint="@string/hint_activity_description"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -171,14 +168,14 @@
             android:id="@+id/txtpercent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Porcentaje"
+            android:hint="@string/hint_activity_percent_label"
             android:inputType="number"
             android:maxLength="2" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/clicarfecha"
-        android:layout_width="160dp"
+        android:layout_width="190dp"
         android:layout_height="62dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="24dp"
@@ -198,46 +195,14 @@
             android:layout_height="match_parent"
             android:clickable="false"
             android:focusable="false"
-            android:hint="Fecha Entrega"
-            android:inputType="date" />
+            android:hint="@string/hint_activity_date"
+            android:inputType="datetime" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/backbutton"
-        android:layout_width="128dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="Atras"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.718" />
-
-    <Button
-        android:id="@+id/addbutton"
-        android:layout_width="128dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="Añadir"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.718" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/imageView3"
-        android:layout_width="233dp"
-        android:layout_height="207dp"
+        android:layout_width="198dp"
+        android:layout_height="154dp"
         android:src="@drawable/gatofrontiet"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

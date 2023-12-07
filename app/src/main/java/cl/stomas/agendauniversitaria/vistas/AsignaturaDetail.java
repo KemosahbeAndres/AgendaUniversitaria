@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,11 +29,15 @@ public class AsignaturaDetail extends AppCompatActivity {
 
         if(actionbar != null){
             actionbar.setDisplayHomeAsUpEnabled(true);
+            actionbar.setTitle("Detalle Asignatura");
+            actionbar.setSubtitle(R.string.actionbar_subtitle);
         }
 
         Bundle extras = getIntent().getExtras();
 
-        asignatura = (Asignatura) extras.getSerializable("asignatura");
+        if(extras != null){
+            asignatura = (Asignatura) extras.getSerializable("asignatura");
+        }
 
         if(asignatura == null){
             Toast.makeText(this, "No se pudo cargar la actividad!", Toast.LENGTH_SHORT).show();
@@ -63,7 +68,9 @@ public class AsignaturaDetail extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.edit_subject_item_menu){
-            Toast.makeText(this, "Editando...", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(AsignaturaDetail.this, AgregarAsignaturasActivity.class);
+            intent.putExtra("asignatura", asignatura);
+            startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.delete_subject_item_menu){
             ConfirmDialog.BuildConfirmDialog(this, "Eliminar", "¿Desea eliminar esta asignatura?", new onDialogResponseListener() {
@@ -85,6 +92,18 @@ public class AsignaturaDetail extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        setValues();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        asignatura = DB.asignaturas(this).get(asignatura.getId());
+        Toast.makeText(this, "es nulo? "+ (asignatura == null), Toast.LENGTH_SHORT).show();
+        setValues();
+    }
+
+    private void setValues(){
         txtId.setText(String.valueOf(asignatura.getId()));
         txtNombre.setText(asignatura.getNombre());
         txtDescripcion.setText(asignatura.getDescripcion());

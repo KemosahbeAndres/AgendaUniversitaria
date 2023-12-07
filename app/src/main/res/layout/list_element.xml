@@ -6,108 +6,92 @@
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
     app:cardCornerRadius="8dp"
-    app:cardElevation="1dp"
-    app:cardMaxElevation="1dp"
+    app:cardElevation="0dp"
+    app:cardMaxElevation="0dp"
     app:cardUseCompatPadding="true">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        android:orientation="vertical"
-        android:paddingLeft="12dp"
-        android:paddingTop="8dp"
-        android:paddingRight="12dp"
-        android:paddingBottom="8dp">
+        android:orientation="horizontal"
+        android:padding="6dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txtFecha"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="6dp">
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/hint_activity_time"
+            android:textAlignment="center"
+            android:textColor="#000000">
+
+        </TextView>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_toEndOf="@+id/txtFecha"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtFecha"
-                android:layout_width="60dp"
+                android:id="@+id/txtTrabajo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:text="19:20"
-                android:textAlignment="center"
-                android:textColor="#000000">
-
-            </TextView>
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="205dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_toEndOf="@+id/txtFecha"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtTrabajo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:text="Exposicion"
-                    android:textAlignment="textStart"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"></TextView>
-
-                <TextView
-                    android:id="@+id/txtAsignatura"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:text="Programacion Android"
-                    android:textAlignment="textStart"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="normal">
-
-                </TextView>
-
-                <TextView
-                    android:id="@+id/txtPorcentaje"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:text="20%"
-                    android:textAlignment="textEnd"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="normal">
-
-                </TextView>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="14dp"
-                android:layout_marginRight="14dp"
-                android:text="Pendiente"
+                android:layout_marginBottom="2dp"
+                android:text="@string/hint_activity_name"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/black"
                 android:textSize="15sp"
-                android:textStyle="bold">
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/txtAsignatura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="@string/hint_activity_subject"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="normal">
 
             </TextView>
 
-        </RelativeLayout>
+            <TextView
+                android:id="@+id/txtPorcentaje"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="@string/hint_activity_percent"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="normal">
 
-    </LinearLayout>
+            </TextView>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="14dp"
+            android:text="@string/hint_activity_state"
+            android:textSize="15sp"
+            android:textStyle="bold">
+
+        </TextView>
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

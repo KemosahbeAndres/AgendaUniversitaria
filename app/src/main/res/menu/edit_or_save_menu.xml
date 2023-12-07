@@ -6,8 +6,8 @@
         android:id="@+id/save_menu_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/save1_white"
-        android:title="Guardar"
+        android:icon="@drawable/baseline_check_24"
+        android:title="@string/save"
         android:visible="true"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>

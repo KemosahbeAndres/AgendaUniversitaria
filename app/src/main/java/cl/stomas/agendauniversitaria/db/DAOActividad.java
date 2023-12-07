@@ -108,11 +108,8 @@ public class DAOActividad {
         Actividad actividad = null;
         SQLiteDatabase db = manager.getReadableDatabase();
         Cursor cursor = db.rawQuery(
-                "SELECT * FROM " + DBContract.TABLA_ACTIVIDADES.NOMBRE+ " WHERE ?=? LIMIT 1",
-                new String[]{
-                        DBContract.TABLA_ACTIVIDADES.COL_ID,
-                        String.valueOf(id)
-                }
+                "SELECT * FROM " + DBContract.TABLA_ACTIVIDADES.NOMBRE+ " WHERE id="+id+" LIMIT 1",
+                null
         );
         if(cursor.moveToFirst()){
             int idxID = cursor.getColumnIndex(DBContract.TABLA_ACTIVIDADES.COL_ID);

@@ -2,14 +2,23 @@ package cl.stomas.agendauniversitaria.vistas;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BlendMode;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import cl.stomas.agendauniversitaria.R;
@@ -18,12 +27,15 @@ import cl.stomas.agendauniversitaria.modelos.Asignatura;
 public class AsignaturaArrayAdapter extends RecyclerView.Adapter<AsignaturaArrayAdapter.AsignaturaViewHolder>{
     public class AsignaturaViewHolder extends RecyclerView.ViewHolder {
         private TextView inicial, nombre, docente;
+        private ImageView shape;
+
         private Asignatura asignatura;
         public AsignaturaViewHolder(View itemView) {
             super(itemView);
             inicial = itemView.findViewById(R.id.inicialAsignatura);
             nombre = itemView.findViewById(R.id.nombre_asignatura);
             docente = itemView.findViewById(R.id.nombre_docente);
+            shape = itemView.findViewById(R.id.backgroundShape);
         }
         public void bindData(final Asignatura item){
             asignatura = item;
@@ -35,6 +47,10 @@ public class AsignaturaArrayAdapter extends RecyclerView.Adapter<AsignaturaArray
             }catch (Exception e){
                 nombre.setText("Error al cargar la asignatura!");
             }
+            try{
+                Drawable background = shape.getBackground();
+                background.setColorFilter(Color.parseColor(asignatura.getColor()), PorterDuff.Mode.SRC_ATOP);
+            }catch (Exception e){}
         }
 
         public Asignatura getAsignatura() {

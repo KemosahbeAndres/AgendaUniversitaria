@@ -95,7 +95,12 @@ public class Actividad implements Serializable {
         return fecha;
     }
     public String getHora(){
-        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        return formatter.format(this.getFecha());
+    }
+
+    public String getDia(){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         return formatter.format(this.getFecha());
     }
 

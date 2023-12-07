@@ -1,34 +1,7 @@
 <resources>
     <string name="app_name">Agenda Universitaria</string>
     <string name="title_activity_main">MainActivity</string>
-
-    <string name="materiaselect">Materia</string>
-    <string name="importanciatitle">Importancia</string>
-    <string name="tipotitle">Tipo</string>
-    <string name="colortitle">Color</string>
-
-    <string-array name="seleccionimportancia">
-        <item>Bajo</item>
-        <item>Medio</item>
-        <item>Alto</item>
-    </string-array>
-    <string-array name="tipostrabajos">
-        <item>Informe</item>
-        <item>Prueba</item>
-        <item>Actividad</item>
-        <item>Terreno</item>
-        <item>Proyecto</item>
-    </string-array>
-    <string-array name="materiaslist">
-        <item>IoT</item>
-        <item>Adm. Empresa</item>
-        <item>Prog. Android</item>
-    </string-array>
-    <string-array name="tiposcolores">
-        <item>Rojo</item>
-        <item>Verde</item>
-        <item>Azul</item>
-    </string-array>
+    <string name="actionbar_subtitle">Agenda Universitaria</string>
 
     <string name="hint_promedio">0</string>
 
@@ -37,15 +10,31 @@
     <string name="hint_title_subject_name">Asignatura</string>
     <string name="label_subject_id">ID:</string>
     <string name="hint_subject_id">ID Asignatura</string>
+    <string name="hint_subject_letter">A</string>
     <string name="label_subject_name">Nombre:</string>
     <string name="hint_subject_name">Nombre asignatura</string>
     <string name="label_subject_description">Descripcion:</string>
-    <string name="hint_subject_description">Descripcion</string>
+    <string name="hint_subject_description">Descripcion asignatura</string>
     <string name="label_subject_teacher">Docente:</string>
     <string name="hint_subject_teacher">Nombre docente</string>
     <string name="label_subject_average">Promedio:</string>
     <string name="hint_subject_average">0</string>
 
+    <string name="hint_activity_time">19:20</string>
+    <string name="hint_activity_name">Nombre actividad</string>
+    <string name="hint_activity_description">Descripcion actividad</string>
+    <string name="hint_activity_date">Fecha entrega</string>
+    <string name="hint_activity_duration">Duracion (minutos)</string>
+    <string name="hint_activity_subject">Nombre asignatura</string>
+    <string name="hint_activity_percent">0%</string>
+    <string name="hint_activity_percent_label">Porcentaje</string>
+    <string name="hint_activity_state">Pendiente</string>
+    <string name="hint_activity_subject_label">Asignatura</string>
+    <string name="hint_activity_importance">Importancia</string>
+    <string name="hint_activity_type">Tipo</string>
+    <string name="hint_activity_color">Color</string>
+
     <string name="confirm">Aceptar</string>
     <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
 </resources>

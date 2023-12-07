@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -21,10 +20,10 @@
             android:layout_weight="1">
 
             <ImageView
+                android:id="@+id/backgroundShape"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
                 android:src="@drawable/white_circle" />
 
             <TextView
@@ -32,7 +31,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:hint="A"
+                android:hint="@string/hint_subject_letter"
+                android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -48,7 +48,7 @@
                 android:id="@+id/nombre_asignatura"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Asignatura"
+                android:hint="@string/hint_subject_name"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/nombre_asignatura"
-                android:hint="Docente"
+                android:hint="@string/hint_subject_teacher"
                 android:textSize="12sp" />
 
         </RelativeLayout>
@@ -66,15 +66,6 @@
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:layout_weight="4">
-            <TextView
-                android:id="@+id/txtPromedioItemAsignatura"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_promedio"
-                android:textSize="24sp"
-                android:layout_centerInParent="true"
-                android:layout_toStartOf="@+id/chevron_img"
-                android:layout_alignParentStart="true"/>
 
             <ImageView
                 android:id="@+id/chevron_img"

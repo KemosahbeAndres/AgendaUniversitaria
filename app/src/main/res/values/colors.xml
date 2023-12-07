@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="Rojo">#E63333</color>
+    <color name="Azul">#254CBF</color>
+    <color name="Amarillo">#CDC426</color>
+    <color name="Verde">#42C52B</color>
+    <color name="Morado">#A436C3</color>
+    <color name="Cafe">#BF6B10</color>
+    <color name="Negro">#303030</color>
+    <color name="Blanco">#CDCDCD</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
