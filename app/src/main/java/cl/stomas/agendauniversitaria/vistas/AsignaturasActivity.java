@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -30,6 +32,7 @@ public class AsignaturasActivity extends AppCompatActivity {
     private AsignaturaArrayAdapter adapter;
     private ArrayList<Asignatura> asignaturas;
     private RecyclerView recyclerView;
+    private TextView empty_message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,9 @@ public class AsignaturasActivity extends AppCompatActivity {
         }
 
         recyclerView = findViewById(R.id.recyclerAsignaturas);
+        empty_message = findViewById(R.id.lblEmptySubjects);
+
+        empty_message.setVisibility(View.VISIBLE);
 
         config = Config.getConfig(this);
 
@@ -103,6 +109,11 @@ public class AsignaturasActivity extends AppCompatActivity {
         if(idSemestre >= 0){
             Semestre semestre = controller.execute(idSemestre);
             asignaturas = semestre.getAsignaturas();
+            if(asignaturas.size() > 0){
+                empty_message.setVisibility(View.GONE);
+            }else{
+                empty_message.setVisibility(View.VISIBLE);
+            }
             adapter = new AsignaturaArrayAdapter(asignaturas);
             recyclerView.setAdapter(adapter);
         }

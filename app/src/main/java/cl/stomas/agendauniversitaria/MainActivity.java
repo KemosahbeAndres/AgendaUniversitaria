@@ -19,12 +19,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import cl.stomas.agendauniversitaria.controladores.CarreraController;
 import cl.stomas.agendauniversitaria.db.Config;
 import cl.stomas.agendauniversitaria.db.DB;
+import cl.stomas.agendauniversitaria.modelos.Asignatura;
 import cl.stomas.agendauniversitaria.modelos.Carrera;
 import cl.stomas.agendauniversitaria.modelos.Semestre;
 import cl.stomas.agendauniversitaria.vistas.AgendaActivity;
@@ -33,6 +35,7 @@ import cl.stomas.agendauniversitaria.vistas.AgregarCarreraActivity;
 import cl.stomas.agendauniversitaria.vistas.AsignaturasActivity;
 import cl.stomas.agendauniversitaria.vistas.CarreraActivity;
 import cl.stomas.agendauniversitaria.vistas.ListAdapter;
+import cl.stomas.agendauniversitaria.vistas.NuevoSemestreActivity;
 import cl.stomas.agendauniversitaria.vistas.SeleccionarCarreraActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -135,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
                 activityList.setAdapter(adapter);
             }else{
                 Toast.makeText(this, R.string.error_message_carrera_main_activity, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, NuevoSemestreActivity.class);
+                startActivity(intent);
             }
             promedioGral.setText(String.valueOf(carrera.promedio()));
         }

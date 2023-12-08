@@ -46,4 +46,5 @@
     <string name="nueva_carrera">Nueva Carrera</string>
     <string name="error_message_carrera_main_activity">No hay un semestre seleccionado!</string>
     <string name="label_subject_next_activities">Proximas actividades</string>
+    <string name="label_empty_subjects">No hay asignaturas</string>
 </resources>
