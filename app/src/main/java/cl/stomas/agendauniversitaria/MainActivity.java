@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         config.load();
 
+
         txtFechaHoy = findViewById(R.id.txtDia);
         txtCarrera = findViewById(R.id.txtCarrera);
         Button btnAgenda = findViewById(R.id.btnAbrirAgenda);
