@@ -3,6 +3,8 @@ package cl.stomas.agendauniversitaria.vistas;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,12 +14,18 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Date;
+
 import cl.stomas.agendauniversitaria.R;
+import cl.stomas.agendauniversitaria.controladores.SemestreControler;
 import cl.stomas.agendauniversitaria.db.DB;
 import cl.stomas.agendauniversitaria.modelos.Asignatura;
 
 public class AsignaturaDetail extends AppCompatActivity {
 
+    private RecyclerView lista;
+    private ListAdapter adapter;
+    private SemestreControler controller;
     private Asignatura asignatura;
     private TextView txtId, txtNombre, txtDescripcion, txtDocente, txtPromedio;
     @Override
@@ -49,7 +57,8 @@ public class AsignaturaDetail extends AppCompatActivity {
         txtDescripcion = findViewById(R.id.txt_subject_description);
         txtDocente = findViewById(R.id.txt_subject_teacher);
         txtPromedio = findViewById(R.id.txt_subject_average);
-
+        lista = findViewById(R.id.tablaA);
+        controller = new SemestreControler(this);
     }
 
     @Override
@@ -98,16 +107,24 @@ public class AsignaturaDetail extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        asignatura = DB.asignaturas(this).get(asignatura.getId());
-        Toast.makeText(this, "es nulo? "+ (asignatura == null), Toast.LENGTH_SHORT).show();
         setValues();
     }
 
     private void setValues(){
+        Asignatura updated = DB.asignaturas(this).get(asignatura.getId());
+        asignatura.setNombre(updated.getNombre());
+        asignatura.setDescripcion(updated.getDescripcion());
+        asignatura.setDocente(updated.getDocente());
+        asignatura.setColor(updated.getColor());
+
         txtId.setText(String.valueOf(asignatura.getId()));
         txtNombre.setText(asignatura.getNombre());
         txtDescripcion.setText(asignatura.getDescripcion());
         txtDocente.setText(asignatura.getDocente());
         txtPromedio.setText(String.valueOf(asignatura.promedio()));
+        adapter = new ListAdapter(asignatura.getActividadesFrom(new Date()),this);
+        lista.setAdapter(adapter);
+        lista.setLayoutManager(new LinearLayoutManager(this));
     }
+
 }

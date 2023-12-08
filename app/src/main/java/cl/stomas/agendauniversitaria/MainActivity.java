@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -30,6 +32,7 @@ import cl.stomas.agendauniversitaria.vistas.AgregarAsignaturasActivity;
 import cl.stomas.agendauniversitaria.vistas.AgregarCarreraActivity;
 import cl.stomas.agendauniversitaria.vistas.AsignaturasActivity;
 import cl.stomas.agendauniversitaria.vistas.CarreraActivity;
+import cl.stomas.agendauniversitaria.vistas.ListAdapter;
 import cl.stomas.agendauniversitaria.vistas.SeleccionarCarreraActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
     };
     private TextView txtFechaHoy, txtCarrera, promedioGral, promedioSemetre;
-    private Button btnAgenda;
+    private RecyclerView activityList;
+    private ListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +61,13 @@ public class MainActivity extends AppCompatActivity {
 
         config.load();
 
+
         txtFechaHoy = findViewById(R.id.txtDia);
         txtCarrera = findViewById(R.id.txtCarrera);
-        btnAgenda = findViewById(R.id.btnAbrirAgenda);
+        Button btnAgenda = findViewById(R.id.btnAbrirAgenda);
         promedioGral = findViewById(R.id.txtNotaGeneral);
         promedioSemetre = findViewById(R.id.txtNotaSemestre);
+        activityList = findViewById(R.id.recyclerMain);
 
         btnAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
                 config.setIdSemestre(id);
                 config.save();
                 promedioSemetre.setText(String.valueOf(semestre.promedio()));
+                // Rellenamos el recycler view
+                adapter = new ListAdapter(carrera.getSemestreActual().getAllActividadesDesde(new Date()), this);
+                activityList.setLayoutManager(new LinearLayoutManager(this));
+                activityList.setAdapter(adapter);
+            }else{
+                Toast.makeText(this, "No hay un semestre seleccionado!", Toast.LENGTH_SHORT).show();
             }
             promedioGral.setText(String.valueOf(carrera.promedio()));
         }
@@ -126,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         int dia_semana = calendar.get(Calendar.DAY_OF_WEEK);
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
         int mes = calendar.get(Calendar.MONTH);
-        txtFechaHoy.setText(dias[dia_semana-1]+" "+(dia-1)+" de "+meses[mes-1]);
+        txtFechaHoy.setText(dias[dia_semana]+" "+(dia)+" de "+meses[mes]);
     }
 
     private void initApplicationState(){

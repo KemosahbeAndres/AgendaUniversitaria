@@ -60,7 +60,8 @@ public class ActivityEdit extends AppCompatActivity {
         asigGet = (Spinner) findViewById(R.id.asigGet);
 
         porGet = (EditText) findViewById(R.id.porGet);
-        porGet.setText(String.valueOf(actividad.getPorcentaje())); // PORCENTAJE*
+
+        porGet.setText(String.valueOf(actividad.getPorcentaje())); // PORCENTAJE
 
         descGet = (EditText) findViewById(R.id.descGet);
         descGet.setText(actividad.getDescripcion()); // DESCRIPCION

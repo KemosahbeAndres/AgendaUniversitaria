@@ -1,7 +1,9 @@
 package cl.stomas.agendauniversitaria.modelos;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.function.Consumer;
 
 public class Asignatura implements Serializable {
@@ -97,6 +99,20 @@ public class Asignatura implements Serializable {
 
     public ArrayList<Actividad> getActividades() {
         return actividades;
+    }
+
+    public ArrayList<Actividad> getActividadesFrom(Date date){
+        ArrayList<Actividad> filtradas = new ArrayList<>();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        actividades.forEach(new Consumer<Actividad>() {
+            @Override
+            public void accept(Actividad actividad) {
+                if(formatter.format(date).equals(formatter.format(actividad.getFecha())) || date.before(actividad.getFecha())){
+                    filtradas.add(actividad);
+                }
+            }
+        });
+        return filtradas;
     }
 
     public void addActividades(ArrayList<Actividad> actividades) {
