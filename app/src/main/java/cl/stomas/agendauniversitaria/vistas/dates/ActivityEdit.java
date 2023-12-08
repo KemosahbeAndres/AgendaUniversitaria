@@ -60,7 +60,7 @@ public class ActivityEdit extends AppCompatActivity {
         asigGet = (Spinner) findViewById(R.id.asigGet);
 
         porGet = (EditText) findViewById(R.id.porGet);
-        porGet.setText(actividad.getPorcentaje()); // PORCENTAJE
+        porGet.setText(String.valueOf(actividad.getPorcentaje())); // PORCENTAJE
 
         descGet = (EditText) findViewById(R.id.descGet);
         descGet.setText(actividad.getDescripcion()); // DESCRIPCION
@@ -68,14 +68,14 @@ public class ActivityEdit extends AppCompatActivity {
         imporGet = (Spinner) findViewById(R.id.imporGet);
 
         duraGet = (EditText) findViewById(R.id.duraGet);
-        duraGet.setText(actividad.getDuracion()); // DURACION
+        duraGet.setText(String.valueOf(actividad.getDuracion())); // DURACION
 
         fechaGet = (EditText) findViewById(R.id.fechaGet);
         fechaGet.setText(actividad.getDia() + " " + actividad.getHora()); // FECHA Y HORA
 
         tipoGet = (Spinner) findViewById(R.id.tipoGet);
         notaGet =(EditText) findViewById(R.id.notaGet);
-        notaGet.setText(actividad.getNota()); // NOTA
+        notaGet.setText(String.valueOf(actividad.getNota())); // NOTA
 
         statGet = (Spinner) findViewById(R.id.statGet);
 

@@ -118,7 +118,7 @@ public class AgendaActivity extends AppCompatActivity {
             elements = new ArrayList<>();
             Semestre semestre = controller.execute(id);
 
-            elements.addAll(semestre.getAllActividadesDesde(fecha_seleccionada));
+            elements.addAll(semestre.getAllActividades(fecha_seleccionada));
 
             adapter = new ListAdapter(elements, this);
             RecyclerView recyclerView = findViewById(R.id.listRecyclerViw);

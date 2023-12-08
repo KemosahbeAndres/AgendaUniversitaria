@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Date;
+
 import cl.stomas.agendauniversitaria.R;
 import cl.stomas.agendauniversitaria.controladores.SemestreControler;
 import cl.stomas.agendauniversitaria.db.DB;
@@ -109,12 +111,18 @@ public class AsignaturaDetail extends AppCompatActivity {
     }
 
     private void setValues(){
+        Asignatura updated = DB.asignaturas(this).get(asignatura.getId());
+        asignatura.setNombre(updated.getNombre());
+        asignatura.setDescripcion(updated.getDescripcion());
+        asignatura.setDocente(updated.getDocente());
+        asignatura.setColor(updated.getColor());
+
         txtId.setText(String.valueOf(asignatura.getId()));
         txtNombre.setText(asignatura.getNombre());
         txtDescripcion.setText(asignatura.getDescripcion());
         txtDocente.setText(asignatura.getDocente());
         txtPromedio.setText(String.valueOf(asignatura.promedio()));
-        adapter = new ListAdapter(asignatura.getActividades(),this);
+        adapter = new ListAdapter(asignatura.getActividadesFrom(new Date()),this);
         lista.setAdapter(adapter);
         lista.setLayoutManager(new LinearLayoutManager(this));
     }
