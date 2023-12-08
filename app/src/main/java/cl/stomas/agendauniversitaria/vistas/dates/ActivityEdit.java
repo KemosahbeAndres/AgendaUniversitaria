@@ -60,6 +60,7 @@ public class ActivityEdit extends AppCompatActivity {
         asigGet = (Spinner) findViewById(R.id.asigGet);
 
         porGet = (EditText) findViewById(R.id.porGet);
+
         porGet.setText(String.valueOf(actividad.getPorcentaje())); // PORCENTAJE
 
         descGet = (EditText) findViewById(R.id.descGet);
@@ -79,15 +80,17 @@ public class ActivityEdit extends AppCompatActivity {
 
         statGet = (Spinner) findViewById(R.id.statGet);
 
-        String[] tipos = DB.actividades(this).allTypes();
+
         String[] importancias = new String[]{"Baja","Media","Alta"};
         ArrayAdapter<String> adapterImpor = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, importancias);
         adapterImpor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        imporGet.setAdapter(adapterImpor);
 
+        String[] tipos = DB.actividades(this).allTypes();
         ArrayAdapter<String> adapterTipos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tipos);
         adapterTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tipoGet.setAdapter(adapterTipos);
-        imporGet.setAdapter(adapterImpor);
+
 
         String[] status = new String[]{"Completado","Pendiente"};
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,status);
@@ -154,7 +157,6 @@ public class ActivityEdit extends AppCompatActivity {
 
                 Toast.makeText(ActivityEdit.this,"Actividad ACTUALIZADA", Toast.LENGTH_SHORT).show();
                 finish();
-
             }
         });
     }
