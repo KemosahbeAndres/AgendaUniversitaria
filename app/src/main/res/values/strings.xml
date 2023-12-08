@@ -44,6 +44,13 @@
     <string name="agregarmenuxml">Agregar</string>
     <string name="seleccionar_carrera">Seleccionar Carrera</string>
     <string name="nueva_carrera">Nueva Carrera</string>
+    <string name="agendaactionbar">Agenda</string>
+    <string name="agregar_actividad_action_bar">Agregar Actividad</string>
+    <string name="detalle_actividad_actionbar">Detalle Actividad</string>
+    <string name="agregar_asignatura_actionbar">Agregar Asignatura</string>
+    <string name="detalle_asignatura_actionbar">Detalle Asignatura</string>
+    <string name="lista_de_asignaturas_actionbar">Lista de Asignaturas</string>
+
     <string name="error_message_carrera_main_activity">No hay un semestre seleccionado!</string>
     <string name="label_subject_next_activities">Proximas actividades</string>
 </resources>

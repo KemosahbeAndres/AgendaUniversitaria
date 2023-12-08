@@ -70,7 +70,7 @@ public class AddDatesActivity extends AppCompatActivity {
 
         if(actionbar != null){
             actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setTitle("Agregar Actividad");
+            actionbar.setTitle(R.string.agregar_actividad_action_bar);
             actionbar.setSubtitle(R.string.actionbar_subtitle);
         }
 

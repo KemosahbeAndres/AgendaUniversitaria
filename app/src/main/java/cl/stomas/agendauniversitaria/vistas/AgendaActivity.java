@@ -40,15 +40,12 @@ public class AgendaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda);
-
-        // calling the action bar
         ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
 
-            // showing the back button in action bar
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Agenda");
+            actionBar.setTitle(R.string.agendaactionbar);
             actionBar.setSubtitle(R.string.actionbar_subtitle);
 
         }
