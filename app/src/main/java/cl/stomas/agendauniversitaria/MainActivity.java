@@ -108,6 +108,12 @@ public class MainActivity extends AppCompatActivity {
         initMainView();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initMainView();
+    }
+
     private void initMainView(){
         config = Config.getConfig(this);
         config.load();
@@ -128,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 activityList.setLayoutManager(new LinearLayoutManager(this));
                 activityList.setAdapter(adapter);
             }else{
-                Toast.makeText(this, "No hay un semestre seleccionado!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.error_message_carrera_main_activity, Toast.LENGTH_SHORT).show();
             }
             promedioGral.setText(String.valueOf(carrera.promedio()));
         }
