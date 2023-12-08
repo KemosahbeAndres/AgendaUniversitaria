@@ -37,4 +37,11 @@
     <string name="save">Guardar</string>
     <string name="edit_item_menu">Editar</string>
     <string name="delete_item_menu">Eliminar</string>
+    <string name="selecciona_tu_carrera">Selecciona tu carrera:</string>
+    <string name="agenda">Agenda</string>
+    <string name="asignaturas">Asignaturas</string>
+    <string name="agendamenu">AGENDA</string>
+    <string name="agregarmenuxml">Agregar</string>
+    <string name="seleccionar_carrera">Seleccionar Carrera</string>
+    <string name="nueva_carrera">Nueva Carrera</string>
 </resources>

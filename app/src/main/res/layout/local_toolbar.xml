@@ -37,7 +37,7 @@
                     android:layout_below="@id/btnAbrirAgenda"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="4dp"
-                    android:text="Agenda"
+                    android:text="@string/agenda"
                     android:textAlignment="center"
                     android:textColor="@color/white" />
             </RelativeLayout>
@@ -62,7 +62,7 @@
                     android:layout_below="@id/btnAbrirSemestre"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="4dp"
-                    android:text="Asignaturas"
+                    android:text="@string/asignaturas"
                     android:textAlignment="center"
                     android:textColor="@color/white" />
             </RelativeLayout>

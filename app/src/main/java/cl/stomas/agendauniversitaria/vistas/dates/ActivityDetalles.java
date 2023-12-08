@@ -28,6 +28,7 @@ public class ActivityDetalles extends AppCompatActivity {
     private TextView asigSet;
     private TextView porSet;
     private TextView statSet;
+    private TextView descSet, imporSet,fechaSet,duraSet,tipoSet,notaSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,16 +57,15 @@ public class ActivityDetalles extends AppCompatActivity {
         trabSet = (TextView) findViewById(R.id.trabSet);
         asigSet = (TextView) findViewById(R.id.asigSet);
         porSet = (TextView) findViewById(R.id.porSet);
+        descSet = (TextView) findViewById(R.id.descSet);
+        imporSet = (TextView) findViewById(R.id.imporSet);
+        duraSet = (TextView) findViewById(R.id.duraSet);
+        fechaSet = (TextView) findViewById(R.id.fechaSet);
+        tipoSet = (TextView) findViewById(R.id.tipoSet);
         statSet = (TextView) findViewById(R.id.statSet);
+        notaSet = (TextView) findViewById(R.id.notaSet);
         //Este boton seria para volver hacia atras
 
-        Button buttonBack = (Button) findViewById(R.id.buttonBack);
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     @Override
@@ -113,10 +113,19 @@ public class ActivityDetalles extends AppCompatActivity {
             asigSet.setText(actividad.getAsignatura().getNombre());
             String porcentaje = actividad.getPorcentaje() + "%";
             porSet.setText(porcentaje);
+            descSet.setText(actividad.getDescripcion());
+            imporSet.setText(actividad.getImportancia());
+            String duracion = String.valueOf(actividad.getDuracion());
+            duraSet.setText(duracion);
+            String fecha = String.valueOf(actividad.getFecha());
+            fechaSet.setText(fecha);
+            tipoSet.setText(actividad.getTipo());
             if(actividad.completado()){
                 statSet.setText("Completado");
+                notaSet.setText(String.valueOf(actividad.getNota()));
             }else{
                 statSet.setText("Pendiente");
+                notaSet.setText("Nota indefinida");
             }
         }
     }
