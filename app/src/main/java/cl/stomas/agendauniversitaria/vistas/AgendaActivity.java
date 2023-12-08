@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -19,13 +18,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import cl.stomas.agendauniversitaria.R;
 import cl.stomas.agendauniversitaria.controladores.SemestreControler;
 import cl.stomas.agendauniversitaria.db.Config;
 import cl.stomas.agendauniversitaria.modelos.Actividad;
 import cl.stomas.agendauniversitaria.modelos.Semestre;
+import cl.stomas.agendauniversitaria.vistas.dates.AddDatesActivity;
 
 public class AgendaActivity extends AppCompatActivity {
     private ArrayList<Actividad> elements;

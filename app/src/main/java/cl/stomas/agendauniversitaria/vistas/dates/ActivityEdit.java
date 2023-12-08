@@ -1,4 +1,4 @@
-package cl.stomas.agendauniversitaria.vistas;
+package cl.stomas.agendauniversitaria.vistas.dates;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,16 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
-
-import com.google.android.material.textfield.MaterialAutoCompleteTextView;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,42 +33,54 @@ public class ActivityEdit extends AppCompatActivity {
     private Spinner asigGet,tipoGet, imporGet, statGet;;
     private DAOActividad db;
     Calendar selectfechas = Calendar.getInstance();
-
-
     boolean orstat;
     int actId;
     String [] asigna;
 
-    @SuppressLint("MissingInflatedId")
+    private Actividad actividad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null){
+            actividad = (Actividad) extras.getSerializable("activity");
+            if(actividad == null){
+                Toast.makeText(this, "Error al mostrar la actividad!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+
         trabGet = (EditText) findViewById(R.id.trabGet);
-        String trabRec = getIntent().getStringExtra("trab");
-        trabGet.setText(trabRec);
+        trabGet.setText(actividad.getNombre()); // NOMBRE ACTIVIDAD
 
         asigGet = (Spinner) findViewById(R.id.asigGet);
 
         porGet = (EditText) findViewById(R.id.porGet);
-        String porRec = getIntent().getStringExtra("por");
-        porGet.setText(porRec);
+        porGet.setText(actividad.getPorcentaje()); // PORCENTAJE
 
         descGet = (EditText) findViewById(R.id.descGet);
-        String descRec = getIntent().getStringExtra("desc");
-        descGet.setText(descRec);
+        descGet.setText(actividad.getDescripcion()); // DESCRIPCION
 
         imporGet = (Spinner) findViewById(R.id.imporGet);
 
         duraGet = (EditText) findViewById(R.id.duraGet);
+        duraGet.setText(actividad.getDuracion()); // DURACION
+
         fechaGet = (EditText) findViewById(R.id.fechaGet);
+        fechaGet.setText(actividad.getDia() + " " + actividad.getHora()); // FECHA Y HORA
+
         tipoGet = (Spinner) findViewById(R.id.tipoGet);
         notaGet =(EditText) findViewById(R.id.notaGet);
+        notaGet.setText(actividad.getNota()); // NOTA
+
         statGet = (Spinner) findViewById(R.id.statGet);
-        actId= getIntent().getIntExtra("id",-1);
 
         String[] tipos = DB.actividades(this).allTypes();
-        String[] importancias = new String[]{"BAJA","MEDIA","ALTA"};
+        String[] importancias = new String[]{"Baja","Media","Alta"};
         ArrayAdapter<String> adapterImpor = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, importancias);
         adapterImpor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -119,7 +125,7 @@ public class ActivityEdit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String trab = trabGet.getText().toString();
-                String asig= asigGet.getSelectedItem().toString();
+                String asig = asigGet.getSelectedItem().toString();
                 int por= Integer.parseInt(porGet.getText().toString());
                 String desc= descGet.getText().toString();
                 String impor=imporGet.getSelectedItem().toString();
@@ -136,17 +142,15 @@ public class ActivityEdit extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
                 if (stat.equals("Completado")){
-                    orstat = false;
-                    Actividad activi = new Actividad(actId,tipo,trab,desc,fecha2,dura,impor,orstat,por,not);
-                    db = new DAOActividad(ActivityEdit.this);
-                    db.update(activi);
-                } else if (stat == "Pendiente") {
                     orstat = true;
-                    Actividad activi = new Actividad(actId,tipo,trab,desc,fecha2,dura,impor,orstat,por,not);
-                    db = new DAOActividad(ActivityEdit.this);
-                    db.update(activi);
-
+                } else if (stat.equals("Pendiente")) {
+                    orstat = false;
+                }else{
+                    orstat = false;
                 }
+                Actividad activi = new Actividad(actividad.getId(),tipo,trab,desc,fecha2,dura,impor,orstat,por,not);
+                db = new DAOActividad(ActivityEdit.this);
+                db.update(activi);
 
                 Toast.makeText(ActivityEdit.this,"Actividad ACTUALIZADA", Toast.LENGTH_SHORT).show();
                 finish();

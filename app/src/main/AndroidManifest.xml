@@ -16,7 +16,7 @@
             android:name=".vistas.AsignaturaDetail"
             android:exported="false" />
         <activity
-            android:name=".vistas.ActivityEdit"
+            android:name=".vistas.dates.ActivityEdit"
             android:exported="false" />
         <activity
             android:name=".vistas.AsignaturasActivity"
@@ -40,10 +40,10 @@
             android:name=".vistas.AgendaActivity"
             android:exported="false" />
         <activity
-            android:name=".vistas.AddDatesActivity"
+            android:name=".vistas.dates.AddDatesActivity"
             android:exported="false" />
         <activity
-            android:name=".vistas.ActivityDetalles"
+            android:name=".vistas.dates.ActivityDetalles"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

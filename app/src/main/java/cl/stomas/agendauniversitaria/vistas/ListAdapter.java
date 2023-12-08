@@ -3,7 +3,6 @@ package cl.stomas.agendauniversitaria.vistas;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import cl.stomas.agendauniversitaria.R;
 import cl.stomas.agendauniversitaria.modelos.Actividad;
-import cl.stomas.agendauniversitaria.modelos.Asignatura;
+import cl.stomas.agendauniversitaria.vistas.dates.ActivityDetalles;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private ArrayList<Actividad> mData;
@@ -57,7 +55,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     //Aquí se esta enviando cada elemento con putExtra
-                    Intent intento = new Intent(context,ActivityDetalles.class);
+                    Intent intento = new Intent(context, ActivityDetalles.class);
                     intento.putExtra("actividad", mData.get(position));
                     context.startActivity(intento);
                 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vistas.ActivityEdit">
+    tools:context=".vistas.dates.ActivityEdit">
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -39,8 +39,9 @@
                 android:id="@+id/trabGet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/hint_activity_name"
                 android:text=""
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
 
 
@@ -62,11 +63,11 @@
             <Spinner
                 android:id="@+id/tipoGet"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:clickable="false"
                 android:inputType="none"
                 android:text=""
-                android:textSize="20dp"
+                android:textSize="20sp"
                 app:simpleItems="@array/tipostrabajos" />
         </LinearLayout>
         <LinearLayout
@@ -93,6 +94,7 @@
                     android:id="@+id/descGet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/hint_activity_description"
                     android:text=""
                     android:textSize="20dp" />
             </LinearLayout>
@@ -117,9 +119,9 @@
             <Spinner
                 android:id="@+id/asigGet"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text=""
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
         <LinearLayout
@@ -140,10 +142,11 @@
                 android:id="@+id/fechaGet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:clickable="false"
                 android:focusable="false"
-                android:textSize="20dp" />
+                android:hint="@string/hint_activity_date"
+                android:text=""
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -156,16 +159,16 @@
                 android:id="@+id/imporText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Importancia: "
-                android:textSize="20dp"
+                android:text="@string/hint_activity_importance"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/imporGet"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text=""
-                android:textSize="20dp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -186,8 +189,9 @@
                 android:id="@+id/porGet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/hint_activity_percent_label"
                 android:text=""
-                android:textSize="20dp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -203,10 +207,11 @@
                 android:text="Estado: "
                 android:textSize="20dp"
                 android:textStyle="bold" />
+
             <Spinner
                 android:id="@+id/statGet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
 
             </Spinner>
 
@@ -229,6 +234,7 @@
                 android:id="@+id/duraGet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/hint_activity_duration"
                 android:text=""
                 android:textSize="20dp" />
         </LinearLayout>

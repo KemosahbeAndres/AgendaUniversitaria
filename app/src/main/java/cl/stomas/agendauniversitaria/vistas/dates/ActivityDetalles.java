@@ -1,23 +1,24 @@
-package cl.stomas.agendauniversitaria.vistas;
+package cl.stomas.agendauniversitaria.vistas.dates;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cl.stomas.agendauniversitaria.R;
+import cl.stomas.agendauniversitaria.db.DB;
 import cl.stomas.agendauniversitaria.modelos.Actividad;
+import cl.stomas.agendauniversitaria.vistas.ConfirmDialog;
+import cl.stomas.agendauniversitaria.vistas.onDialogResponseListener;
 
 public class ActivityDetalles extends AppCompatActivity {
 
@@ -32,6 +33,14 @@ public class ActivityDetalles extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
+
+        ActionBar actionbar = getSupportActionBar();
+
+        if(actionbar != null){
+            actionbar.setDisplayHomeAsUpEnabled(true);
+            actionbar.setTitle("Detalle Actividad");
+            actionbar.setSubtitle(R.string.actionbar_subtitle);
+        }
 
         try {
             Bundle parametros = getIntent().getExtras();
@@ -57,6 +66,43 @@ public class ActivityDetalles extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.detail_activity_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.edit_activity_item_menu){
+            Intent intent = new Intent(ActivityDetalles.this, ActivityEdit.class);
+            intent.putExtra("activity", actividad);
+            startActivity(intent);
+            return true;
+        } else if (item.getItemId() == R.id.delete_activity_item_menu){
+            ConfirmDialog.BuildConfirmDialog(this, "Eliminar", "¿Desea eliminar esta actividad?", new onDialogResponseListener() {
+                @Override
+                public void onDialogConfirm(boolean confirmed) {
+                    if(confirmed){
+                        DB.actividades(ActivityDetalles.this).delete(actividad);
+                        Toast.makeText(ActivityDetalles.this, "Haz eliminado una actividad!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+            }).show(getSupportFragmentManager(), "DELETE_ACTIVITY_DIALOG");
+            return true;
+        }else{
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

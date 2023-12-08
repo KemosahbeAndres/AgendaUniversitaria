@@ -5,8 +5,6 @@
 
     <string name="hint_promedio">0</string>
 
-    <string name="edit_subject_item_menu">Editar</string>
-    <string name="delete_subject_item_menu">Eliminar</string>
     <string name="hint_title_subject_name">Asignatura</string>
     <string name="label_subject_id">ID:</string>
     <string name="hint_subject_id">ID Asignatura</string>
@@ -37,4 +35,6 @@
     <string name="confirm">Aceptar</string>
     <string name="cancel">Cancelar</string>
     <string name="save">Guardar</string>
+    <string name="edit_item_menu">Editar</string>
+    <string name="delete_item_menu">Eliminar</string>
 </resources>

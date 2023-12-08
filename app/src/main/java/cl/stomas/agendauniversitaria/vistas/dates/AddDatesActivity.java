@@ -1,4 +1,4 @@
-package cl.stomas.agendauniversitaria.vistas;
+package cl.stomas.agendauniversitaria.vistas.dates;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;

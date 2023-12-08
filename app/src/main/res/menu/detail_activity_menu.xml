@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/edit_subject_item_menu"
+        android:id="@+id/edit_activity_item_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/baseline_edit_24"
@@ -11,7 +11,7 @@
         android:visible="true"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/delete_subject_item_menu"
+        android:id="@+id/delete_activity_item_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/baseline_delete_w_24"
