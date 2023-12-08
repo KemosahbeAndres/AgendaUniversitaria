@@ -70,7 +70,7 @@ public class AddDatesActivity extends AppCompatActivity {
 
         if(actionbar != null){
             actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setTitle("Agregar Actividad");
+            actionbar.setTitle(R.string.agregar_actividad_action_bar);
             actionbar.setSubtitle(R.string.actionbar_subtitle);
         }
 
@@ -101,7 +101,7 @@ public class AddDatesActivity extends AppCompatActivity {
         txttipo.setSimpleItems(DB.actividades(this).allTypes());
 
         txtimportance.setSimpleItems(new String[]{
-                "Baja", "Media", "Alta"
+                Actividad.Importancia.LOW, Actividad.Importancia.MID, Actividad.Importancia.HIGH
         });
 
         carrera = finder.execute(config.getIdCarrera());
@@ -149,15 +149,15 @@ public class AddDatesActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 String selectedImportance = editable.toString();
                 switch (selectedImportance){
-                    case "Baja":
+                    case Actividad.Importancia.LOW:
                         txtimportance.setTypeface(Typeface.DEFAULT_BOLD);
                         txtimportance.setTextColor(Color.GREEN);
                         break;
-                    case "Media":
+                    case Actividad.Importancia.MID:
                         txtimportance.setTypeface(Typeface.DEFAULT_BOLD);
                         txtimportance.setTextColor(Color.MAGENTA);
                         break;
-                    case "Alta":
+                    case Actividad.Importancia.HIGH:
                         txtimportance.setTypeface(Typeface.DEFAULT_BOLD);
                         txtimportance.setTextColor(Color.RED);
                         break;
@@ -197,7 +197,7 @@ public class AddDatesActivity extends AppCompatActivity {
             try {
                 fecha = sdf.parse(txtdate.getText().toString());
             } catch (ParseException e) {
-                throw new RuntimeException(e);
+                fecha = new Date();
             }
             Toast.makeText(AddDatesActivity.this, txttipo.getText().toString(), Toast.LENGTH_SHORT).show();
             Actividad envio = new Actividad(txttipo.getText().toString(), txtname.getText().toString(), txtdescr.getText().toString(), fecha,Integer.parseInt(txtdurac.getText().toString()),txtimportance.getText().toString(),false,Integer.parseInt(txtperc.getText().toString()),0);
