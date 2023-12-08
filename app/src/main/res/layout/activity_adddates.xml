@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:hint="@string/hint_activity_duration"
             android:inputType="number"
-            android:maxLength="2" />
+            android:maxLength="5" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
