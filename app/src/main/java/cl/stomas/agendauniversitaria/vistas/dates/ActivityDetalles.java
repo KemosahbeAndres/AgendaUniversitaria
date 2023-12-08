@@ -39,7 +39,7 @@ public class ActivityDetalles extends AppCompatActivity {
 
         if(actionbar != null){
             actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setTitle("Detalle Actividad");
+            actionbar.setTitle(R.string.detalle_actividad_actionbar);
             actionbar.setSubtitle(R.string.actionbar_subtitle);
         }
 

@@ -37,7 +37,7 @@ public class AsignaturaDetail extends AppCompatActivity {
 
         if(actionbar != null){
             actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setTitle("Detalle Asignatura");
+            actionbar.setTitle(R.string.detalle_asignatura_actionbar);
             actionbar.setSubtitle(R.string.actionbar_subtitle);
         }
 

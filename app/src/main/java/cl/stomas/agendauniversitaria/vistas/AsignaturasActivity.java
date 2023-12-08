@@ -39,15 +39,13 @@ public class AsignaturasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asignaturas);
 
-        // calling the action bar
         ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
 
-            // showing the back button in action bar
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle("Lista de Asignaturas");
+            actionBar.setTitle(R.string.lista_de_asignaturas_actionbar);
             actionBar.setSubtitle(R.string.actionbar_subtitle);
 
         }

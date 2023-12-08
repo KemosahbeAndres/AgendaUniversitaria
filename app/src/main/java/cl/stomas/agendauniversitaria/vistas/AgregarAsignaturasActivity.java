@@ -52,7 +52,7 @@ public class AgregarAsignaturasActivity extends AppCompatActivity {
 
         if(actionbar != null){
             actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setTitle("Agregar Asignatura");
+            actionbar.setTitle(R.string.agregar_asignatura_actionbar);
             actionbar.setSubtitle(R.string.actionbar_subtitle);
         }
 
