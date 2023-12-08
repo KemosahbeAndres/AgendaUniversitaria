@@ -60,7 +60,8 @@ public class ActivityEdit extends AppCompatActivity {
         asigGet = (Spinner) findViewById(R.id.asigGet);
 
         porGet = (EditText) findViewById(R.id.porGet);
-        porGet.setText(actividad.getPorcentaje()); // PORCENTAJE
+
+        porGet.setText(String.valueOf(actividad.getPorcentaje())); // PORCENTAJE
 
         descGet = (EditText) findViewById(R.id.descGet);
         descGet.setText(actividad.getDescripcion()); // DESCRIPCION
@@ -68,26 +69,28 @@ public class ActivityEdit extends AppCompatActivity {
         imporGet = (Spinner) findViewById(R.id.imporGet);
 
         duraGet = (EditText) findViewById(R.id.duraGet);
-        duraGet.setText(actividad.getDuracion()); // DURACION
+        duraGet.setText(String.valueOf(actividad.getDuracion())); // DURACION
 
         fechaGet = (EditText) findViewById(R.id.fechaGet);
         fechaGet.setText(actividad.getDia() + " " + actividad.getHora()); // FECHA Y HORA
 
         tipoGet = (Spinner) findViewById(R.id.tipoGet);
         notaGet =(EditText) findViewById(R.id.notaGet);
-        notaGet.setText(actividad.getNota()); // NOTA
+        notaGet.setText(String.valueOf(actividad.getNota())); // NOTA
 
         statGet = (Spinner) findViewById(R.id.statGet);
 
-        String[] tipos = DB.actividades(this).allTypes();
+
         String[] importancias = new String[]{"Baja","Media","Alta"};
         ArrayAdapter<String> adapterImpor = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, importancias);
         adapterImpor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        imporGet.setAdapter(adapterImpor);
 
+        String[] tipos = DB.actividades(this).allTypes();
         ArrayAdapter<String> adapterTipos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tipos);
         adapterTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tipoGet.setAdapter(adapterTipos);
-        imporGet.setAdapter(adapterImpor);
+
 
         String[] status = new String[]{"Completado","Pendiente"};
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,status);
@@ -154,7 +157,6 @@ public class ActivityEdit extends AppCompatActivity {
 
                 Toast.makeText(ActivityEdit.this,"Actividad ACTUALIZADA", Toast.LENGTH_SHORT).show();
                 finish();
-
             }
         });
     }
