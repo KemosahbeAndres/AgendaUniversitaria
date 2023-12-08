@@ -50,4 +50,7 @@
     <string name="agregar_asignatura_actionbar">Agregar Asignatura</string>
     <string name="detalle_asignatura_actionbar">Detalle Asignatura</string>
     <string name="lista_de_asignaturas_actionbar">Lista de Asignaturas</string>
+
+    <string name="error_message_carrera_main_activity">No hay un semestre seleccionado!</string>
+    <string name="label_subject_next_activities">Proximas actividades</string>
 </resources>
