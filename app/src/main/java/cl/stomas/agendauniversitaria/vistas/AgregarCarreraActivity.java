@@ -88,15 +88,6 @@ public class AgregarCarreraActivity extends AppCompatActivity {
                     editNombre.getText().toString(),
                     anio
                 );
-                long idCarrera = DB.carreras(AgregarCarreraActivity.this).insert(carrera);
-                if (idCarrera >= 0){
-                    carrera.setId(idCarrera);
-                    config.setIdCarrera(idCarrera);
-                    config.save();
-                }else{
-                    Toast.makeText(AgregarCarreraActivity.this, "No se pudo guardar la carrera!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 if(editFechaInicio.getText().toString().isEmpty()){
                     Toast.makeText(AgregarCarreraActivity.this, "Debes ingresar una fecha de inicio valida!", Toast.LENGTH_SHORT).show();
@@ -113,15 +104,27 @@ public class AgregarCarreraActivity extends AppCompatActivity {
                     Date end = sformat.parse(editFechaFin.getText().toString());
                     Date hoy = new Date();
                     if(start != null && end != null ){
+                        if(!start.before(hoy) || !end.after(hoy)){
+                            Toast.makeText(AgregarCarreraActivity.this, "Formato de fechas incorrecto!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        long idCarrera = DB.carreras(AgregarCarreraActivity.this).insert(carrera);
+                        if (idCarrera >= 0){
+                            carrera.setId(idCarrera);
+                            config.setIdCarrera(idCarrera);
+                            config.save();
+                        }else{
+                            Toast.makeText(AgregarCarreraActivity.this, "No se pudo guardar la carrera!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         Semestre semestre = new Semestre(start, end);
                         long idSemestre = DB.semestres(AgregarCarreraActivity.this).insert(semestre, carrera);
-                        if(start.before(hoy) && end.after(hoy) && idSemestre >= 0){
+                        if(idSemestre >= 0){
                             config.setIdSemestre(idSemestre);
                             config.save();
                         }else{
                             Toast.makeText(AgregarCarreraActivity.this, "No se pudo guardar el semestre!", Toast.LENGTH_SHORT).show();
-                            config.setIdSemestre(-1);
-                            config.save();
+                            return;
                         }
                     }else{
                         Toast.makeText(AgregarCarreraActivity.this, "Formato de fechas incorrecto!", Toast.LENGTH_SHORT).show();

@@ -21,7 +21,7 @@ public class SemestreControler {
     public Semestre execute(Semestre semestre){
         ArrayList<Asignatura> asignaturas = DB.asignaturas(context).getFrom(semestre);
         for(Asignatura asignatura: asignaturas){
-            asignatura.addBloques(DB.bloques(context).getFrom(asignatura));
+            //asignatura.addBloques(DB.bloques(context).getFrom(asignatura));
             asignatura.addActividades(DB.actividades(context).getFrom(asignatura));
         }
         semestre.addAsignaturas(asignaturas);
