@@ -19,7 +19,7 @@ public class Actividad implements Serializable {
         public final static String MID = "MEDIA";
         public final static String LOW = "BAJA";
     }
-    private int id;
+    private long id;
     private String tipo;
     private String nombre;
     private String descripcion;
@@ -31,12 +31,12 @@ public class Actividad implements Serializable {
     private int nota;
     private Asignatura asignatura;
 
-    public Actividad(int id, String tipo, String nombre, String descripcion, Date fecha, int duracion, String importancia, boolean completado, int porcentaje, int nota, Asignatura asignatura) {
+    public Actividad(long id, String tipo, String nombre, String descripcion, Date fecha, int duracion, String importancia, boolean completado, int porcentaje, int nota, Asignatura asignatura) {
         this(id, tipo, nombre, descripcion, fecha, duracion, importancia, completado, porcentaje, nota);
         this.asignatura = asignatura;
     }
 
-    public Actividad(int id, String tipo, String nombre, String descripcion, Date fecha, int duracion, String importancia, boolean completado, int porcentaje, int nota) {
+    public Actividad(long id, String tipo, String nombre, String descripcion, Date fecha, int duracion, String importancia, boolean completado, int porcentaje, int nota) {
         this(tipo, nombre, descripcion, fecha, duracion, importancia, completado, porcentaje, nota);
         this.id = id;
     }
@@ -59,11 +59,11 @@ public class Actividad implements Serializable {
         this.asignatura = null;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

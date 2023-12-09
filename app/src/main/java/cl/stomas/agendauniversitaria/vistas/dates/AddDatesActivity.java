@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -43,13 +44,8 @@ import cl.stomas.agendauniversitaria.modelos.Semestre;
 
 public class AddDatesActivity extends AppCompatActivity {
 
-    TextInputEditText txtdate;
-    TextInputEditText txtname;
-    TextInputEditText txtdescr;
-    TextInputEditText txtperc;
-    TextInputEditText txtdurac;
-    Button buttonadd;
-    Button backbutton;
+    TextInputEditText txtdate, txtname, txtdescr, txtperc, txtdurac;
+    EditText editHora;
     MaterialAutoCompleteTextView txttipo;
     MaterialAutoCompleteTextView txtmateria;
     MaterialAutoCompleteTextView txtimportance;
@@ -87,14 +83,17 @@ public class AddDatesActivity extends AppCompatActivity {
         txtperc = findViewById(R.id.txtpercent);
         txtdescr = findViewById(R.id.txtdescripcion);
         txtdurac = findViewById(R.id.txtduracion);
+        editHora = findViewById(R.id.editHora);
 
         Bundle extras = getIntent().getExtras();
 
         if(extras != null){
             Date fecha = (Date) extras.getSerializable("date");
             if(fecha != null){
-                SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-                txtdate.setText(formater.format(fecha));
+                SimpleDateFormat dayFormater = new SimpleDateFormat("yyyy/MM/dd");
+                SimpleDateFormat hourFormater = new SimpleDateFormat("HH:mm");
+                txtdate.setText(dayFormater.format(fecha));
+                editHora.setText(hourFormater.format(fecha));
             }
         }
 
@@ -136,6 +135,13 @@ public class AddDatesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EleccionFecha();
+            }
+        });
+
+        editHora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EleccionHora();
             }
         });
         txtimportance.addTextChangedListener(new TextWatcher() {
@@ -195,7 +201,7 @@ public class AddDatesActivity extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             Date fecha;
             try {
-                fecha = sdf.parse(txtdate.getText().toString());
+                fecha = sdf.parse(txtdate.getText().toString()+ " " + editHora.getText().toString());
             } catch (ParseException e) {
                 fecha = new Date();
             }
@@ -213,8 +219,8 @@ public class AddDatesActivity extends AppCompatActivity {
     private boolean checkedValues(){
         if (txtname.getText().toString().equals("")){
             Toast.makeText(AddDatesActivity.this,"No dejar el campo nombre actividad vacio", Toast.LENGTH_SHORT).show();
-        }else if (txtdescr.getText().toString().equals("")){
-            Toast.makeText(AddDatesActivity.this,"No dejar el campo descripcion vacio", Toast.LENGTH_SHORT).show();
+        //}else if (txtdescr.getText().toString().equals("")){
+            //Toast.makeText(AddDatesActivity.this,"No dejar el campo descripcion vacio", Toast.LENGTH_SHORT).show();
         }else if (txtperc.getText().toString().isEmpty()){
             Toast.makeText(AddDatesActivity.this,"No dejar el campo porcentaje vacio", Toast.LENGTH_SHORT).show();
         }else if(txtperc.getText().toString().equals("0") || txtperc.getText().toString().equals("00")){
@@ -227,8 +233,10 @@ public class AddDatesActivity extends AppCompatActivity {
             Toast.makeText(AddDatesActivity.this,"No dejar el campo importancia vacio", Toast.LENGTH_SHORT).show();
         }else if (txttipo.getText().toString().equals("")){
             Toast.makeText(AddDatesActivity.this,"No dejar el campo tipo vacio", Toast.LENGTH_SHORT).show();
-        }else if (txtdurac.getText().toString().equals("")){
-            Toast.makeText(AddDatesActivity.this,"No dejar el campo duracion vacio", Toast.LENGTH_SHORT).show();
+        }else if (txtdurac.getText().toString().equals("")) {
+            Toast.makeText(AddDatesActivity.this, "No dejar el campo duracion vacio", Toast.LENGTH_SHORT).show();
+        } else if (editHora.getText().toString().isEmpty()) {
+            Toast.makeText(AddDatesActivity.this,"No dejar el campo hora vacio", Toast.LENGTH_SHORT).show();
         }else{
             return true;
         }
@@ -240,7 +248,6 @@ public class AddDatesActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 txtdate.setText(year +"/"+(month+1)+"/"+dayOfMonth);
-                EleccionHora();
             }
         }, fechas.get(Calendar.YEAR),fechas.get(Calendar.MONTH),fechas.get(Calendar.DAY_OF_MONTH));
         select.show();

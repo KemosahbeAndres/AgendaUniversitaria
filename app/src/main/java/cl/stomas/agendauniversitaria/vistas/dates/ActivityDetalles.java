@@ -47,7 +47,7 @@ public class ActivityDetalles extends AppCompatActivity {
             Bundle parametros = getIntent().getExtras();
             actividad = (Actividad) parametros.getSerializable("actividad");
             if(actividad == null){
-                throw new Exception();
+                finish();
             }
         } catch (Exception e) {
             Toast.makeText(this, "No pudimos obtener la actividad!", Toast.LENGTH_SHORT).show();
@@ -108,6 +108,29 @@ public class ActivityDetalles extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        updateModel();
+        fillData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateModel();
+        fillData();
+    }
+    private void updateModel() {
+        Actividad updated = DB.actividades(this).get(actividad.getId());
+        actividad.setNombre(updated.getNombre());
+        actividad.setDescripcion(updated.getDescripcion());
+        actividad.setFecha(updated.getFecha());
+        actividad.setDuracion(updated.getDuracion());
+        actividad.setImportancia(updated.getImportancia());
+        actividad.completar(updated.completado());
+        actividad.setPorcentaje(updated.getPorcentaje());
+        actividad.setNota(updated.getNota());
+    }
+
+    private void fillData(){
         if(actividad != null){
             trabSet.setText(actividad.getNombre());
             asigSet.setText(actividad.getAsignatura().getNombre());
@@ -117,7 +140,7 @@ public class ActivityDetalles extends AppCompatActivity {
             imporSet.setText(actividad.getImportancia());
             String duracion = String.valueOf(actividad.getDuracion());
             duraSet.setText(duracion);
-            String fecha = String.valueOf(actividad.getFecha());
+            String fecha = actividad.getDia() + " " + actividad.getHora();
             fechaSet.setText(fecha);
             tipoSet.setText(actividad.getTipo());
             if(actividad.completado()){

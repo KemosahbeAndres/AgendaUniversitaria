@@ -8,18 +8,18 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutduracion"
-        android:layout_width="362dp"
-        android:layout_height="69dp"
+        android:layout_width="186dp"
+        android:layout_height="57dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.937"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.372">
+        app:layout_constraintVertical_bias="0.239">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtduracion"
@@ -175,19 +175,19 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/clicarfecha"
-        android:layout_width="190dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="200dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="30dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="32dp"
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.274">
+        app:layout_constraintVertical_bias="0.4">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtfechaentrega"
@@ -209,5 +209,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/editHora"
+        android:layout_width="128dp"
+        android:layout_height="55dp"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="@string/hint_activity_hour"
+        android:inputType="datetime|date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.876"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

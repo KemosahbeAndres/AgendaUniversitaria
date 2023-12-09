@@ -54,4 +54,12 @@
     <string name="error_message_carrera_main_activity">No hay un semestre seleccionado!</string>
     <string name="label_subject_next_activities">Proximas actividades</string>
     <string name="label_empty_subjects">No hay asignaturas</string>
+    <string name="hint_activity_hour">Hora</string>
+    <string name="label_activity_trabajo">Trabajo:</string>
+    <string name="label_activity_tipo">Tipo:</string>
+    <string name="label_activity_descripcion">Descripción:</string>
+    <string name="label_activity_fecha_de_entrega">Fecha de entrega:</string>
+    <string name="label_activity_estado">Estado:</string>
+    <string name="label_activity_duracion">Duración:</string>
+    <string name="label_activity_nota">Nota:</string>
 </resources>

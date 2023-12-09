@@ -41,13 +41,6 @@ import cl.stomas.agendauniversitaria.vistas.SeleccionarCarreraActivity;
 public class MainActivity extends AppCompatActivity {
     private Config config;
     private CarreraController finder;
-    private final static String[] dias = new String[]{
-            "Sabado", "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes"
-    };
-    private final static String[] meses = new String[]{
-            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    };
     private TextView txtFechaHoy, txtCarrera, promedioGral, promedioSemetre;
     private RecyclerView activityList;
     private ListAdapter adapter;
@@ -150,7 +143,13 @@ public class MainActivity extends AppCompatActivity {
         int dia_semana = calendar.get(Calendar.DAY_OF_WEEK);
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
         int mes = calendar.get(Calendar.MONTH);
-        txtFechaHoy.setText(dias[dia_semana]+" "+(dia)+" de "+meses[mes]);
+        try {
+            String hoy = getResources().getStringArray(R.array.days)[dia_semana - 1]
+                    + " " + (dia - 1) + " de " + getResources().getStringArray(R.array.months)[mes];
+            txtFechaHoy.setText(hoy);
+        }catch (Exception e){
+            txtFechaHoy.setText("Hoy");
+        }
     }
 
     private void initApplicationState(){
