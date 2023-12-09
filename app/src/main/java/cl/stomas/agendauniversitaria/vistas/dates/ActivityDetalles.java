@@ -144,10 +144,10 @@ public class ActivityDetalles extends AppCompatActivity {
             fechaSet.setText(fecha);
             tipoSet.setText(actividad.getTipo());
             if(actividad.completado()){
-                statSet.setText("Completado");
+                statSet.setText(getResources().getStringArray(R.array.estados)[0]);
                 notaSet.setText(String.valueOf(actividad.getNota()));
             }else{
-                statSet.setText("Pendiente");
+                statSet.setText(getResources().getStringArray(R.array.estados)[1]);
                 notaSet.setText("Nota indefinida");
             }
         }
