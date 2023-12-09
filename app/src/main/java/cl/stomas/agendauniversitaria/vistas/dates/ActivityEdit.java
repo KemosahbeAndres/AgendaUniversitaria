@@ -149,7 +149,7 @@ public class ActivityEdit extends AppCompatActivity {
     private void fillData(){
         trabGet.setText(actividad.getNombre()); // NOMBRE ACTIVIDAD
         descGet.setText(actividad.getDescripcion()); // DESCRIPCION
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy HH:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         fechaGet.setText(formatter.format(actividad.getFecha())); // FECHA Y HORA
         duraGet.setText(String.valueOf(actividad.getDuracion())); // DURACION
         porGet.setText(String.valueOf(actividad.getPorcentaje())); // PORCENTAJE
