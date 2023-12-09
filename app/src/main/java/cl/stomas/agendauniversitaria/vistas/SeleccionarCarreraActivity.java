@@ -48,6 +48,8 @@ public class SeleccionarCarreraActivity extends AppCompatActivity {
 
         vistaCarreras = findViewById(R.id.listaCarreras);
 
+        nombres = new ArrayList<String>();
+
         config = Config.getConfig(this);
 
         controller = new CarreraController(this);

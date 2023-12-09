@@ -89,4 +89,5 @@
     <string name="a_o_ingreso">Año Ingreso</string>
     <string name="nombre_carrera">Nombre Carrera</string>
     <string name="your_name">Tu nombre</string>
+    <string name="hint_greeting_user">Hola usuario</string>
 </resources>

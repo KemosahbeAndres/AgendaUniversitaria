@@ -41,7 +41,7 @@ import cl.stomas.agendauniversitaria.vistas.SeleccionarCarreraActivity;
 public class MainActivity extends AppCompatActivity {
     private Config config;
     private CarreraController finder;
-    private TextView txtFechaHoy, txtCarrera, promedioGral, promedioSemetre;
+    private TextView txtFechaHoy, txtCarrera, promedioGral, promedioSemetre, userName;
     private RecyclerView activityList;
     private ListAdapter adapter;
 
@@ -57,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
 
         config.load();
 
-
         txtFechaHoy = findViewById(R.id.txtDia);
         txtCarrera = findViewById(R.id.txtCarrera);
         Button btnAgenda = findViewById(R.id.btnAbrirAgenda);
         promedioGral = findViewById(R.id.txtNotaGeneral);
         promedioSemetre = findViewById(R.id.txtNotaSemestre);
         activityList = findViewById(R.id.recyclerMain);
+        userName = findViewById(R.id.txtUserName);
 
         btnAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,8 +133,15 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.error_message_carrera_main_activity, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, NuevoSemestreActivity.class);
                 startActivity(intent);
+                return;
             }
             promedioGral.setText(String.valueOf(carrera.promedio()));
+        }
+
+        if(!config.getUsername().isEmpty()){
+            userName.setText(config.getUsername());
+        }else{
+            userName.setText(getString(R.string.hint_greeting_user));
         }
 
         Calendar calendar = Calendar.getInstance();
