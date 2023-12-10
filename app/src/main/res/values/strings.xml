@@ -20,7 +20,7 @@
 
     <string name="hint_activity_time">19:20</string>
     <string name="hint_activity_name">Nombre actividad</string>
-    <string name="hint_activity_description">Descripcion actividad</string>
+    <string name="hint_activity_description">Descripcion actividad (Opcional)</string>
     <string name="hint_activity_date">Fecha entrega</string>
     <string name="hint_activity_duration">Duracion (minutos)</string>
     <string name="hint_activity_subject">Nombre asignatura</string>
@@ -57,7 +57,7 @@
     <string name="hint_activity_hour">Hora</string>
     <string name="label_activity_trabajo">Trabajo:</string>
     <string name="label_activity_tipo">Tipo:</string>
-    <string name="label_activity_descripcion">Descripción:</string>
+    <string name="label_activity_descripcion">Descripción (Opcional):</string>
     <string name="label_activity_fecha_de_entrega">Fecha de entrega:</string>
     <string name="label_activity_estado">Estado:</string>
     <string name="label_activity_duracion">Duración:</string>
@@ -67,8 +67,6 @@
     <string name="fecha_termino_semestre">Fecha termino semestre</string>
 
     <string name="guardar">Guardar</string>
-    <string name="a_o_ingreso">Año Ingreso</string>
-    <string name="nombre">Nombre</string>
     <string name="tu_carrera">Tu Carrera</string>
     <string name="a_o">Año:</string>
     <string name="semestres">Semestres:</string>
