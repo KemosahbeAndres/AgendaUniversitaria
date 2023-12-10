@@ -30,10 +30,15 @@ public class Actividad implements Serializable {
     private int porcentaje;
     private int nota;
     private Asignatura asignatura;
+    private int idasignatura;
 
     public Actividad(long id, String tipo, String nombre, String descripcion, Date fecha, int duracion, String importancia, boolean completado, int porcentaje, int nota, Asignatura asignatura) {
         this(id, tipo, nombre, descripcion, fecha, duracion, importancia, completado, porcentaje, nota);
         this.asignatura = asignatura;
+    }
+    public Actividad(long id, String tipo, String nombre, String descripcion, Date fecha, int duracion, String importancia, boolean completado, int porcentaje, int nota, int idasignatura) {
+        this(id, tipo, nombre, descripcion, fecha, duracion, importancia, completado, porcentaje, nota);
+        this.idasignatura=idasignatura;
     }
 
     public Actividad(long id, String tipo, String nombre, String descripcion, Date fecha, int duracion, String importancia, boolean completado, int porcentaje, int nota) {
@@ -61,6 +66,14 @@ public class Actividad implements Serializable {
 
     public long getId() {
         return id;
+    }
+
+    public int getIdasignatura() {
+        return idasignatura;
+    }
+
+    public void setIdasignatura(int idasignatura) {
+        this.idasignatura = idasignatura;
     }
 
     public void setId(long id) {

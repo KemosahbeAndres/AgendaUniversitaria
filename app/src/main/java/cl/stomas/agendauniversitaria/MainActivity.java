@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(!config.getUsername().isEmpty()){
-            userName.setText(config.getUsername());
+            userName.setText("Bienvenido "+config.getUsername());
         }else{
             userName.setText(getString(R.string.hint_greeting_user));
         }

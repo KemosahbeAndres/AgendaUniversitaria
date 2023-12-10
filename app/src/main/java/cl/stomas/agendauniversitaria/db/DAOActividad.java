@@ -122,6 +122,7 @@ public class DAOActividad {
             int idxCOMPLETED = cursor.getColumnIndex(DBContract.TABLA_ACTIVIDADES.COL_COMPLETADO);
             int idxPERCENT = cursor.getColumnIndex(DBContract.TABLA_ACTIVIDADES.COL_PORCENTAJE);
             int idxVALUE = cursor.getColumnIndex(DBContract.TABLA_ACTIVIDADES.COL_NOTA);
+            int idxASIGN= cursor.getColumnIndex(DBContract.TABLA_ACTIVIDADES.COL_ID_ASIGNATURA);
             boolean completed = false;
             if(cursor.getInt(idxCOMPLETED) >= 1){
                 completed = true;
@@ -136,8 +137,10 @@ public class DAOActividad {
                     cursor.getString(idxIMPORTANCE),
                     completed,
                     cursor.getInt(idxPERCENT),
-                    cursor.getInt(idxVALUE)
+                    cursor.getInt(idxVALUE),
+                    cursor.getInt(idxASIGN)
             );
+
         }
         cursor.close();
         return actividad;
@@ -170,6 +173,7 @@ public class DAOActividad {
         values.put(DBContract.TABLA_ACTIVIDADES.COL_FECHA, actividad.getFecha().getTime()/1000);
         values.put(DBContract.TABLA_ACTIVIDADES.COL_DURACION, actividad.getDuracion());
         values.put(DBContract.TABLA_ACTIVIDADES.COL_IMPORTANCIA, actividad.getImportancia());
+        values.put(DBContract.TABLA_ACTIVIDADES.COL_ID_ASIGNATURA, actividad.getAsignatura().getId());
         int completedVal = 0;
         if(actividad.completado()){
             completedVal = 1;

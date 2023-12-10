@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cl.stomas.agendauniversitaria.R;
+import cl.stomas.agendauniversitaria.db.DAOAsignatura;
 import cl.stomas.agendauniversitaria.db.DB;
 import cl.stomas.agendauniversitaria.modelos.Actividad;
 import cl.stomas.agendauniversitaria.vistas.ConfirmDialog;
@@ -53,7 +54,7 @@ public class ActivityDetalles extends AppCompatActivity {
             Toast.makeText(this, "No pudimos obtener la actividad!", Toast.LENGTH_SHORT).show();
             finish();
         }
-        Toast.makeText(this, "Actividad lista", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Actividad lista", Toast.LENGTH_SHORT).show();
         trabSet = (TextView) findViewById(R.id.trabSet);
         asigSet = (TextView) findViewById(R.id.asigSet);
         porSet = (TextView) findViewById(R.id.porSet);
@@ -90,7 +91,7 @@ public class ActivityDetalles extends AppCompatActivity {
                 public void onDialogConfirm(boolean confirmed) {
                     if(confirmed){
                         DB.actividades(ActivityDetalles.this).delete(actividad);
-                        Toast.makeText(ActivityDetalles.this, "Haz eliminado una actividad!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityDetalles.this, "La actividad se elimino correctamente!", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }
@@ -116,7 +117,9 @@ public class ActivityDetalles extends AppCompatActivity {
     }
     private void updateModel() {
         Actividad updated = DB.actividades(this).get(actividad.getId());
+        DAOAsignatura updateasign=new DAOAsignatura(this);
         actividad.setNombre(updated.getNombre());
+        actividad.setAsignatura(updateasign.get(updated.getIdasignatura()));
         actividad.setDescripcion(updated.getDescripcion());
         actividad.setFecha(updated.getFecha());
         actividad.setDuracion(updated.getDuracion());
