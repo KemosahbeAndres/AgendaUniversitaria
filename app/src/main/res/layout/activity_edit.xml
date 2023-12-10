@@ -227,7 +227,7 @@
 
             <EditText
                 android:id="@+id/notaGet"
-                android:layout_width="match_parent"
+                android:layout_width="94dp"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="20sp" />

@@ -62,4 +62,9 @@
     <string name="label_activity_estado">Estado:</string>
     <string name="label_activity_duracion">Duración:</string>
     <string name="label_activity_nota">Nota:</string>
+    <string name="agrega_una_carrera">Agrega una Carrera</string>
+    <string name="fecha_inicio_semestre">Fecha inicio semestre</string>
+    <string name="fecha_termino_semestre">Fecha termino semestre</string>
+    <string name="a_o_ingreso">Año Ingreso</string>
+    <string name="nombre">Nombre</string>
 </resources>
