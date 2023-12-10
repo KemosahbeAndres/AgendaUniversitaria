@@ -77,13 +77,10 @@ public class ActivityEdit extends AppCompatActivity {
         adapterImpor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         imporGet.setAdapter(adapterImpor);
 
-
         tipos = DB.actividades(this).allTypes();
         ArrayAdapter<String> adapterTipos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tipos);
         adapterTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tipoGet.setAdapter(adapterTipos);
-
-
 
         String[] status = getResources().getStringArray(R.array.estados);
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,status);
@@ -101,35 +98,38 @@ public class ActivityEdit extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String trab = trabGet.getText().toString();
-                int por= Integer.parseInt(porGet.getText().toString());
-                String desc= descGet.getText().toString();
-                String impor=imporGet.getSelectedItem().toString();
-                int dura=Integer.parseInt(duraGet.getText().toString());
-                String fecha=fechaGet.getText().toString();
-                String tipo= tipoGet.getSelectedItem().toString();
-                String stat = statGet.getSelectedItem().toString();
-                int not = Integer.parseInt(notaGet.getText().toString());
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-                Date fecha2;
-                try {
-                    fecha2 = sdf.parse(fecha);
-                } catch (ParseException e) {
-                    fecha2 = new Date();
-                }
-                if (stat.equals("Completado")){
-                    orstat = true;
-                } else if (stat.equals("Pendiente")) {
-                    orstat = false;
-                }else{
-                    orstat = false;
-                }
-                Actividad activi = new Actividad(actividad.getId(),tipo,trab,desc,fecha2,dura,impor,orstat,por,not);
-                db = new DAOActividad(ActivityEdit.this);
-                db.update(activi);
+                if (validacionEdit()) {
+                    String trab = trabGet.getText().toString();
+                    String asig = asigGet.getSelectedItem().toString();
+                    int por = Integer.parseInt(porGet.getText().toString());
+                    String desc = descGet.getText().toString();
+                    String impor = imporGet.getSelectedItem().toString();
+                    int dura = Integer.parseInt(duraGet.getText().toString());
+                    String fecha = fechaGet.getText().toString();
+                    String tipo = tipoGet.getSelectedItem().toString();
+                    String stat = statGet.getSelectedItem().toString();
+                    int not = Integer.parseInt(notaGet.getText().toString());
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+                    Date fecha2;
+                    try {
+                        fecha2 = sdf.parse(fecha);
+                    } catch (ParseException e) {
+                        fecha2 = new Date();
+                    }
+                    if (stat.equals("Completado")) {
+                        orstat = true;
+                    } else if (stat.equals("Pendiente")) {
+                        orstat = false;
+                    } else {
+                        orstat = false;
+                    }
+                    Actividad activi = new Actividad(actividad.getId(), tipo, trab, desc, fecha2, dura, impor, orstat, por, not);
+                    db = new DAOActividad(ActivityEdit.this);
+                    db.update(activi);
 
-                Toast.makeText(ActivityEdit.this,"Actividad ACTUALIZADA", Toast.LENGTH_SHORT).show();
-                finish();
+                    Toast.makeText(ActivityEdit.this, "Actividad ACTUALIZADA", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         });
     }
@@ -182,6 +182,28 @@ public class ActivityEdit extends AppCompatActivity {
             }
         }, selectfechas.get(Calendar.YEAR),selectfechas.get(Calendar.MONTH),selectfechas.get(Calendar.DAY_OF_MONTH));
         select.show();
+    }
+    private boolean validacionEdit(){
+        if (trabGet.getText().toString().equals("")) {
+            Toast.makeText(ActivityEdit.this, "No dejar el campo nombre actividad vacio", Toast.LENGTH_SHORT).show();
+        }else if (porGet.getText().toString().isEmpty()){
+            Toast.makeText(ActivityEdit.this,"No dejar el campo porcentaje vacio", Toast.LENGTH_SHORT).show();
+        }else if(porGet.getText().toString().equals("0") || porGet.getText().toString().equals("00")){
+            Toast.makeText(ActivityEdit.this,"El porcentaje no puede ser igual a 0 o 00", Toast.LENGTH_SHORT).show();
+        }else if (fechaGet.getText().toString().equals("")){
+            Toast.makeText(ActivityEdit.this,"No dejar el campo fecha vacio", Toast.LENGTH_SHORT).show();
+        }else if (asigGet.getSelectedItem().toString().equals("")){
+            Toast.makeText(ActivityEdit.this,"No dejar el campo materia vacio", Toast.LENGTH_SHORT).show();
+        }else if (imporGet.getSelectedItem().toString().equals("")){
+            Toast.makeText(ActivityEdit.this,"No dejar el campo importancia vacio", Toast.LENGTH_SHORT).show();
+        }else if (tipoGet.getSelectedItem().toString().equals("")){
+            Toast.makeText(ActivityEdit.this,"No dejar el campo tipo vacio", Toast.LENGTH_SHORT).show();
+        }else if (duraGet.getText().toString().equals("")){
+            Toast.makeText(ActivityEdit.this,"No dejar el campo duracion vacio", Toast.LENGTH_SHORT).show();
+        }else{
+            return true;
+        }
+        return false;
     }
     private void EleccionHora(){
         TimePickerDialog select = new TimePickerDialog(

@@ -102,6 +102,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="0dp">
+
+            <TextView
+                android:id="@+id/asigText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Asignatura: "
+                android:textSize="20dp"
+                android:textStyle="bold"
+                />
+
+            <Spinner
+                android:id="@+id/asigGet"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text=""
+                android:textSize="20sp"
+                android:autofillHints="Elige:"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="0dp">
 
@@ -164,7 +188,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_activity_percent_label"
-                android:textSize="20sp" />
+                android:text=""
+                android:textSize="20sp"
+                android:maxLength="2"
+                android:inputType="number"/>
         </LinearLayout>
 
         <LinearLayout
@@ -209,7 +236,9 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_activity_duration"
                 android:text=""
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:maxLength="5"
+                android:inputType="number"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -230,7 +259,9 @@
                 android:layout_width="94dp"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:maxLength="2"
+                android:inputType="number"/>
         </LinearLayout>
 
     </LinearLayout>
