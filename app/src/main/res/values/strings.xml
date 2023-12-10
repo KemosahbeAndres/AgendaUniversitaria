@@ -67,8 +67,6 @@
     <string name="fecha_termino_semestre">Fecha termino semestre</string>
 
     <string name="guardar">Guardar</string>
-    <string name="a_o_ingreso">Año Ingreso</string>
-    <string name="nombre">Nombre</string>
     <string name="tu_carrera">Tu Carrera</string>
     <string name="a_o">Año:</string>
     <string name="semestres">Semestres:</string>
@@ -89,5 +87,6 @@
     <string name="inicio_semestre">Inicio Semestre</string>
     <string name="fin_semestre">Fin Semestre</string>
     <string name="a_o_ingreso">Año Ingreso</string>
-    <string name="nombre">Nombre</string>
+    <string name="nombre_carrera">Nombre Carrera</string>
+    <string name="your_name">Tu nombre</string>
 </resources>
