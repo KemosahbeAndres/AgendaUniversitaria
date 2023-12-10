@@ -64,10 +64,7 @@ public class ActivityDetalles extends AppCompatActivity {
         tipoSet = (TextView) findViewById(R.id.tipoSet);
         statSet = (TextView) findViewById(R.id.statSet);
         notaSet = (TextView) findViewById(R.id.notaSet);
-        //Este boton seria para volver hacia atras
-
     }
-
     @Override
     public boolean onSupportNavigateUp() {
         finish();
@@ -80,7 +77,6 @@ public class ActivityDetalles extends AppCompatActivity {
         inflater.inflate(R.menu.detail_activity_menu, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.edit_activity_item_menu){
@@ -116,7 +112,7 @@ public class ActivityDetalles extends AppCompatActivity {
             descSet.setText(actividad.getDescripcion());
             imporSet.setText(actividad.getImportancia());
             String duracion = String.valueOf(actividad.getDuracion());
-            duraSet.setText(duracion);
+            duraSet.setText(duracion + " min");
             String fecha = String.valueOf(actividad.getFecha());
             fechaSet.setText(fecha);
             tipoSet.setText(actividad.getTipo());

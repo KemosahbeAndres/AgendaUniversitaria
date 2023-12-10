@@ -114,14 +114,16 @@
                 android:layout_height="wrap_content"
                 android:text="Asignatura: "
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <Spinner
                 android:id="@+id/asigGet"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text=""
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:autofillHints="Elige:"/>
 
         </LinearLayout>
         <LinearLayout
@@ -191,7 +193,9 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_activity_percent_label"
                 android:text=""
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:maxLength="2"
+                android:inputType="number"/>
         </LinearLayout>
 
         <LinearLayout
@@ -236,7 +240,9 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_activity_duration"
                 android:text=""
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:maxLength="5"
+                android:inputType="number"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -257,7 +263,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:maxLength="2"
+                android:inputType="number"/>
         </LinearLayout>
 
     </LinearLayout>
