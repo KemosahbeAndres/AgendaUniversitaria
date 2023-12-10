@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <!-- PROTOTIPO DE INTERFAZ PRINCIPAL,
+    POR ESO LA FALTA DE LOS STRINGS EN SUS XML,
+    NO SE UTILIZA ESTA EN EL PROYECTO-->
     <Button
         android:id="@+id/btnAgenda"
         android:layout_width="359dp"

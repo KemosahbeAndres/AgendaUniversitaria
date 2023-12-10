@@ -41,6 +41,7 @@ public class AgregarCarreraActivity extends AppCompatActivity {
         EditText editAnio = findViewById(R.id.editAge);
         EditText editFechaInicio = findViewById(R.id.editStartDate);
         EditText editFechaFin = findViewById(R.id.editEndDate);
+        EditText editUserName = findViewById(R.id.editUserName);
 
         editFechaInicio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +62,12 @@ public class AgregarCarreraActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(editUserName.getText().toString().isEmpty()){
+                    Toast.makeText(AgregarCarreraActivity.this, "Debes ingresar tu nombre!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (editNombre.getText().toString().isEmpty()){
-                    Toast.makeText(AgregarCarreraActivity.this, "Debes ingresar un nombre!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarCarreraActivity.this, "Debes ingresar un nombre de carrera!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (editAnio.getText().toString().isEmpty()){
@@ -71,9 +76,12 @@ public class AgregarCarreraActivity extends AppCompatActivity {
                 }
                 config = Config.getConfig(AgregarCarreraActivity.this);
                 config.load();
+
+                config.setUsername(editUserName.getText().toString());
+
                 int anio = Integer.parseInt(editAnio.getText().toString());
                 int actual = Calendar.getInstance().get(Calendar.YEAR);
-                if(anio < 2000 || anio > actual){
+                if(anio < 2000 || anio > actual+2){
                     anio = actual;
                 }
                 Carrera carrera = new Carrera(

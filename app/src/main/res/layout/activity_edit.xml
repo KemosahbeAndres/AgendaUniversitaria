@@ -31,8 +31,8 @@
                 android:id="@+id/trabText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Trabajo: "
-                android:textSize="20dp"
+                android:text="@string/label_activity_trabajo"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -40,10 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_activity_name"
-                android:text=""
                 android:textSize="20sp" />
-
-
 
         </LinearLayout>
         <LinearLayout
@@ -56,8 +53,8 @@
                 android:id="@+id/tipoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipo: "
-                android:textSize="20dp"
+                android:text="@string/label_activity_tipo"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <Spinner
@@ -86,8 +83,8 @@
                     android:id="@+id/descText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Descripción: "
-                    android:textSize="20dp"
+                    android:text="@string/label_activity_descripcion"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -96,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_activity_description"
                     android:text=""
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
 
@@ -136,8 +133,8 @@
                 android:id="@+id/fechaText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fecha de entrega: "
-                android:textSize="20dp"
+                android:text="@string/label_activity_fecha_de_entrega"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -169,7 +166,6 @@
                 android:id="@+id/imporGet"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text=""
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -183,8 +179,8 @@
                 android:id="@+id/porText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Porcentaje: "
-                android:textSize="20dp"
+                android:text="@string/hint_activity_percent_label"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -208,8 +204,8 @@
                 android:id="@+id/statText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estado: "
-                android:textSize="20dp"
+                android:text="@string/label_activity_estado"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <Spinner
@@ -230,8 +226,8 @@
                 android:id="@+id/duraText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Duración: "
-                android:textSize="20dp"
+                android:text="@string/label_activity_duracion"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -240,7 +236,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_activity_duration"
                 android:text=""
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:maxLength="5"
                 android:inputType="number"/>
         </LinearLayout>
@@ -254,41 +250,34 @@
                 android:id="@+id/notaText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nota: "
-                android:textSize="20dp"
+                android:text="@string/label_activity_nota"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/notaGet"
-                android:layout_width="match_parent"
+                android:layout_width="94dp"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:maxLength="2"
                 android:inputType="number"/>
         </LinearLayout>
 
     </LinearLayout>
-    <Button
-        android:id="@+id/buttonNewBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Volver"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.944"></Button>
 
-    <Button
-        android:id="@+id/buttonSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Guardar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.944"></Button>
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,12 +19,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import cl.stomas.agendauniversitaria.controladores.CarreraController;
 import cl.stomas.agendauniversitaria.db.Config;
 import cl.stomas.agendauniversitaria.db.DB;
+import cl.stomas.agendauniversitaria.modelos.Asignatura;
 import cl.stomas.agendauniversitaria.modelos.Carrera;
 import cl.stomas.agendauniversitaria.modelos.Semestre;
 import cl.stomas.agendauniversitaria.vistas.AgendaActivity;
@@ -33,18 +35,12 @@ import cl.stomas.agendauniversitaria.vistas.AgregarCarreraActivity;
 import cl.stomas.agendauniversitaria.vistas.AsignaturasActivity;
 import cl.stomas.agendauniversitaria.vistas.CarreraActivity;
 import cl.stomas.agendauniversitaria.vistas.ListAdapter;
+import cl.stomas.agendauniversitaria.vistas.NuevoSemestreActivity;
 import cl.stomas.agendauniversitaria.vistas.SeleccionarCarreraActivity;
 
 public class MainActivity extends AppCompatActivity {
     private Config config;
     private CarreraController finder;
-    private final static String[] dias = new String[]{
-            "Sabado", "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes"
-    };
-    private final static String[] meses = new String[]{
-            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    };
     private TextView txtFechaHoy, txtCarrera, promedioGral, promedioSemetre;
     private RecyclerView activityList;
     private ListAdapter adapter;
@@ -135,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
                 activityList.setAdapter(adapter);
             }else{
                 Toast.makeText(this, R.string.error_message_carrera_main_activity, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, NuevoSemestreActivity.class);
+                startActivity(intent);
             }
             promedioGral.setText(String.valueOf(carrera.promedio()));
         }
@@ -142,10 +140,16 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
 
-        int dia_semana = calendar.get(Calendar.DAY_OF_WEEK);
+        int dia_semana = (calendar.get(Calendar.DAY_OF_WEEK) + 7) % 7;
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
         int mes = calendar.get(Calendar.MONTH);
-        txtFechaHoy.setText(dias[dia_semana]+" "+(dia)+" de "+meses[mes]);
+        try {
+            String hoy = getResources().getStringArray(R.array.days)[dia_semana]
+                    + " " + dia + " de " + getResources().getStringArray(R.array.months)[mes];
+            txtFechaHoy.setText(hoy);
+        }catch (Exception e){
+            txtFechaHoy.setText("Hoy");
+        }
     }
 
     private void initApplicationState(){

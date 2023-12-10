@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -35,8 +37,7 @@ public class ActivityEdit extends AppCompatActivity {
     Calendar selectfechas = Calendar.getInstance();
     boolean orstat;
     int actId;
-    String [] asigna;
-
+    String [] asigna, importancias, tipos;
     private Actividad actividad;
 
     @Override
@@ -55,71 +56,41 @@ public class ActivityEdit extends AppCompatActivity {
         }
 
         trabGet = (EditText) findViewById(R.id.trabGet);
-        trabGet.setText(actividad.getNombre()); // NOMBRE ACTIVIDAD
-
-        asigGet = (Spinner) findViewById(R.id.asigGet);
 
         porGet = (EditText) findViewById(R.id.porGet);
 
-        porGet.setText(String.valueOf(actividad.getPorcentaje())); // PORCENTAJE
-
         descGet = (EditText) findViewById(R.id.descGet);
-        descGet.setText(actividad.getDescripcion()); // DESCRIPCION
 
         imporGet = (Spinner) findViewById(R.id.imporGet);
 
         duraGet = (EditText) findViewById(R.id.duraGet);
-        duraGet.setText(String.valueOf(actividad.getDuracion())); // DURACION
 
         fechaGet = (EditText) findViewById(R.id.fechaGet);
-        fechaGet.setText(actividad.getDia() + " " + actividad.getHora()); // FECHA Y HORA
 
         tipoGet = (Spinner) findViewById(R.id.tipoGet);
         notaGet =(EditText) findViewById(R.id.notaGet);
-        notaGet.setText(String.valueOf(actividad.getNota())); // NOTA
 
         statGet = (Spinner) findViewById(R.id.statGet);
 
-
-        String[] importancias = new String[]{"Baja","Media","Alta"};
+        importancias = getResources().getStringArray(R.array.importancias);
         ArrayAdapter<String> adapterImpor = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, importancias);
         adapterImpor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         imporGet.setAdapter(adapterImpor);
 
-        String[] tipos = DB.actividades(this).allTypes();
+        tipos = DB.actividades(this).allTypes();
         ArrayAdapter<String> adapterTipos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tipos);
         adapterTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tipoGet.setAdapter(adapterTipos);
 
-
-        String[] status = new String[]{"Completado","Pendiente"};
+        String[] status = getResources().getStringArray(R.array.estados);
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,status);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         statGet.setAdapter(statusAdapter);
-        DAOAsignatura listasigna=new DAOAsignatura(ActivityEdit.this);
 
-        ArrayList<Asignatura> asignaturas = listasigna.getAll();
-        ArrayList<String> asigText = new ArrayList<>();
-        for(Asignatura newasig : asignaturas){
-            asigText.add(newasig.getNombre());
-        }
-
-        ArrayAdapter<String> adapterAsig = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, asigText);
-        adapterAsig.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        asigGet.setAdapter(adapterAsig);
         fechaGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EleccionFecha();
-            }
-        });
-
-
-        Button buttonNewBack = (Button) findViewById(R.id.buttonNewBack);
-        buttonNewBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
 
@@ -138,12 +109,12 @@ public class ActivityEdit extends AppCompatActivity {
                     String tipo = tipoGet.getSelectedItem().toString();
                     String stat = statGet.getSelectedItem().toString();
                     int not = Integer.parseInt(notaGet.getText().toString());
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
                     Date fecha2;
                     try {
                         fecha2 = sdf.parse(fecha);
                     } catch (ParseException e) {
-                        throw new RuntimeException(e);
+                        fecha2 = new Date();
                     }
                     if (stat.equals("Completado")) {
                         orstat = true;
@@ -162,16 +133,56 @@ public class ActivityEdit extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        fillData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fillData();
+    }
+
+    private void fillData(){
+        trabGet.setText(actividad.getNombre()); // NOMBRE ACTIVIDAD
+        descGet.setText(actividad.getDescripcion()); // DESCRIPCION
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        fechaGet.setText(formatter.format(actividad.getFecha())); // FECHA Y HORA
+        duraGet.setText(String.valueOf(actividad.getDuracion())); // DURACION
+        porGet.setText(String.valueOf(actividad.getPorcentaje())); // PORCENTAJE
+        notaGet.setText(String.valueOf(actividad.getNota())); // NOTA
+        for (int i = 0; i < importancias.length; i++){ //IMPORTANCIA
+            if(importancias[i].equals(actividad.getImportancia().toUpperCase())){
+                imporGet.setSelection(i);
+                break;
+            }
+        }
+        for (int i = 0; i < tipos.length; i++){ // TIPO
+            if(tipos[i].equals(actividad.getTipo().toUpperCase())){
+                tipoGet.setSelection(i);
+                break;
+            }
+        }
+        if(actividad.completado()){ //COMPLETADO
+            statGet.setSelection(0);
+        }else{
+            statGet.setSelection(1);
+        }
+    }
+
     private void EleccionFecha(){
         DatePickerDialog select = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 fechaGet.setText(year +"/"+(month+1)+"/"+dayOfMonth);
+                EleccionHora();
             }
         }, selectfechas.get(Calendar.YEAR),selectfechas.get(Calendar.MONTH),selectfechas.get(Calendar.DAY_OF_MONTH));
         select.show();
     }
-
     private boolean validacionEdit(){
         if (trabGet.getText().toString().equals("")) {
             Toast.makeText(ActivityEdit.this, "No dejar el campo nombre actividad vacio", Toast.LENGTH_SHORT).show();
@@ -193,5 +204,28 @@ public class ActivityEdit extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+    private void EleccionHora(){
+        TimePickerDialog select = new TimePickerDialog(
+                this,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        String hprefix = "";
+                        String mprefix = "";
+                        if(String.valueOf(hourOfDay).length() < 2){
+                            hprefix += "0";
+                        }
+                        if(String.valueOf(minute).length() < 2){
+                            mprefix += "0";
+                        }
+                        fechaGet.setText(fechaGet.getText() + " "+hprefix+hourOfDay+":"+mprefix+minute);
+                    }
+                },
+                selectfechas.get(Calendar.HOUR_OF_DAY),
+                selectfechas.get(Calendar.MINUTE),
+                true
+        );
+        select.show();
     }
 }

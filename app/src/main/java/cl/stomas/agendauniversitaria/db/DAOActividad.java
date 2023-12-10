@@ -88,7 +88,7 @@ public class DAOActividad {
                 completed = true;
             }
             actividad = new Actividad(
-                    cursor.getInt(idxID),
+                    cursor.getLong(idxID),
                     this.getNombreTipo(cursor.getInt(idxTYPEID)),
                     cursor.getString(idxNAME),
                     cursor.getString(idxDESC),
@@ -104,7 +104,7 @@ public class DAOActividad {
         cursor.close();
         return actividades;
     }
-    public Actividad get(int id){
+    public Actividad get(long id){
         Actividad actividad = null;
         SQLiteDatabase db = manager.getReadableDatabase();
         Cursor cursor = db.rawQuery(
@@ -127,7 +127,7 @@ public class DAOActividad {
                 completed = true;
             }
             actividad = new Actividad(
-                    cursor.getInt(idxID),
+                    cursor.getLong(idxID),
                     this.getNombreTipo(cursor.getInt(idxTYPEID)),
                     cursor.getString(idxNAME),
                     cursor.getString(idxDESC),
