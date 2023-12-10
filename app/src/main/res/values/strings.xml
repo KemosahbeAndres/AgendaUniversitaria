@@ -65,6 +65,29 @@
     <string name="agrega_una_carrera">Agrega una Carrera</string>
     <string name="fecha_inicio_semestre">Fecha inicio semestre</string>
     <string name="fecha_termino_semestre">Fecha termino semestre</string>
+
+    <string name="guardar">Guardar</string>
+    <string name="a_o_ingreso">Año Ingreso</string>
+    <string name="nombre">Nombre</string>
+    <string name="tu_carrera">Tu Carrera</string>
+    <string name="a_o">Año:</string>
+    <string name="semestres">Semestres:</string>
+    <string name="trabajo">Trabajo:</string>
+    <string name="tipo">Tipo:</string>
+    <string name="descripci_n">Descripción:</string>
+    <string name="asignatura">Asignatura:</string>
+    <string name="fecha_de_entrega">Fecha de entrega:</string>
+    <string name="importancia">Importancia:</string>
+    <string name="porcentaje">Porcentaje:</string>
+    <string name="estado">Estado:</string>
+    <string name="duraci_n">Duración:</string>
+    <string name="nota">Nota:</string>
+    <string name="ingenieria_en_informatica">Ingenieria en Informatica</string>
+    <string name="promedio_general">Promedio General</string>
+    <string name="promedio_semestre">Promedio Semestre</string>
+    <string name="nuevo_semestre">Nuevo Semestre</string>
+    <string name="inicio_semestre">Inicio Semestre</string>
+    <string name="fin_semestre">Fin Semestre</string>
     <string name="a_o_ingreso">Año Ingreso</string>
     <string name="nombre">Nombre</string>
 </resources>
