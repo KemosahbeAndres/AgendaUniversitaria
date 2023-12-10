@@ -127,7 +127,7 @@ public class AddDatesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectedAsignatura = Math.toIntExact(idsAsignaturas.get(position));
-                Toast.makeText(AddDatesActivity.this, "id-asignatura: "+selectedAsignatura, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AddDatesActivity.this, "id-asignatura: "+selectedAsignatura, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -205,7 +205,7 @@ public class AddDatesActivity extends AppCompatActivity {
             } catch (ParseException e) {
                 fecha = new Date();
             }
-            Toast.makeText(AddDatesActivity.this, txttipo.getText().toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(AddDatesActivity.this, txttipo.getText().toString(), Toast.LENGTH_SHORT).show();
             Actividad envio = new Actividad(txttipo.getText().toString(), txtname.getText().toString(), txtdescr.getText().toString(), fecha,Integer.parseInt(txtdurac.getText().toString()),txtimportance.getText().toString(),false,Integer.parseInt(txtperc.getText().toString()),0);
             DAOAsignatura asignaturaclase = DB.asignaturas(AddDatesActivity.this);
             Asignatura asignaturaenvio= asignaturaclase.get(selectedAsignatura);

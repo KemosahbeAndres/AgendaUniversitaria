@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -34,11 +35,13 @@ public class ActivityEdit extends AppCompatActivity {
     private EditText descGet,fechaGet,duraGet,notaGet;
     private Spinner asigGet,tipoGet, imporGet, statGet;;
     private DAOActividad db;
+    DAOAsignatura listasigna=new DAOAsignatura(ActivityEdit.this);
     Calendar selectfechas = Calendar.getInstance();
     boolean orstat;
     int actId;
     String [] asigna, importancias, tipos;
     private Actividad actividad;
+    int selectedAsignatura;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +69,7 @@ public class ActivityEdit extends AppCompatActivity {
         duraGet = (EditText) findViewById(R.id.duraGet);
 
         fechaGet = (EditText) findViewById(R.id.fechaGet);
-
+        asigGet = (Spinner) findViewById(R.id.asigGet);
         tipoGet = (Spinner) findViewById(R.id.tipoGet);
         notaGet =(EditText) findViewById(R.id.notaGet);
 
@@ -87,10 +90,34 @@ public class ActivityEdit extends AppCompatActivity {
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         statGet.setAdapter(statusAdapter);
 
+        ArrayList<Asignatura> asignaturas = listasigna.getAll();
+        ArrayList<String> asigText = new ArrayList<>();
+        ArrayList<Long> idsAsignaturas= new ArrayList<>();
+        for(Asignatura newasig : asignaturas){
+            asigText.add(newasig.getNombre());
+            idsAsignaturas.add(newasig.getId());
+        }
+
+        ArrayAdapter<String> adapterAsig = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, asigText);
+        adapterAsig.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        asigGet.setAdapter(adapterAsig);
+
         fechaGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EleccionFecha();
+            }
+        });
+        asigGet.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedAsignatura = Math.toIntExact(idsAsignaturas.get(position));
+                //Toast.makeText(ActivityEdit.this, "id-asignatura: "+selectedAsignatura, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -123,11 +150,10 @@ public class ActivityEdit extends AppCompatActivity {
                     } else {
                         orstat = false;
                     }
-                    Actividad activi = new Actividad(actividad.getId(), tipo, trab, desc, fecha2, dura, impor, orstat, por, not);
                     db = new DAOActividad(ActivityEdit.this);
+                    Actividad activi = new Actividad(actividad.getId(), tipo, trab, desc, fecha2, dura, impor, orstat, por, not,listasigna.get(selectedAsignatura));
                     db.update(activi);
-
-                    Toast.makeText(ActivityEdit.this, "Actividad ACTUALIZADA", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityEdit.this, "Actividad Actualizada", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
