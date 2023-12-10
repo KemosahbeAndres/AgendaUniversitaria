@@ -140,12 +140,12 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
 
-        int dia_semana = calendar.get(Calendar.DAY_OF_WEEK);
+        int dia_semana = (calendar.get(Calendar.DAY_OF_WEEK) + 7) % 7;
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
         int mes = calendar.get(Calendar.MONTH);
         try {
-            String hoy = getResources().getStringArray(R.array.days)[dia_semana - 1]
-                    + " " + (dia - 1) + " de " + getResources().getStringArray(R.array.months)[mes];
+            String hoy = getResources().getStringArray(R.array.days)[dia_semana]
+                    + " " + dia + " de " + getResources().getStringArray(R.array.months)[mes];
             txtFechaHoy.setText(hoy);
         }catch (Exception e){
             txtFechaHoy.setText("Hoy");

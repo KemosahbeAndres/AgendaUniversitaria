@@ -32,7 +32,7 @@
           android:id="@+id/trabText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Trabajo: "
+          android:text="@string/trabajo"
           android:textSize="20dp"
           android:textStyle="bold" />
 
@@ -40,7 +40,6 @@
           android:id="@+id/trabSet"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="TextView"
           android:textSize="20dp" />
 
 
@@ -56,7 +55,7 @@
           android:id="@+id/tipoText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Tipo: "
+          android:text="@string/tipo"
           android:textSize="20dp"
           android:textStyle="bold" />
 
@@ -64,7 +63,6 @@
           android:id="@+id/tipoSet"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="TextView"
           android:textSize="20dp" />
     </LinearLayout>
     <LinearLayout
@@ -83,7 +81,7 @@
             android:id="@+id/descText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descripción: "
+            android:text="@string/descripci_n"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -91,7 +89,6 @@
             android:id="@+id/descSet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
             android:textSize="20dp" />
       </LinearLayout>
 
@@ -108,7 +105,7 @@
           android:id="@+id/asigText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Asignatura: "
+          android:text="@string/asignatura"
           android:textSize="20dp"
           android:textStyle="bold" />
 
@@ -116,7 +113,6 @@
           android:id="@+id/asigSet"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="TextView"
           android:textSize="20dp" />
 
     </LinearLayout>
@@ -130,7 +126,7 @@
           android:id="@+id/fechaText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Fecha de entrega: "
+          android:text="@string/fecha_de_entrega"
           android:textSize="20dp"
           android:textStyle="bold" />
 
@@ -138,7 +134,6 @@
           android:id="@+id/fechaSet"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="TextView"
           android:textSize="20dp" />
     </LinearLayout>
 
@@ -152,7 +147,7 @@
           android:id="@+id/imporText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Importancia: "
+          android:text="@string/importancia"
           android:textSize="20dp"
           android:textStyle="bold" />
 
@@ -160,7 +155,6 @@
           android:id="@+id/imporSet"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="TextView"
           android:textSize="20dp" />
     </LinearLayout>
 
@@ -174,7 +168,7 @@
           android:id="@+id/porText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Porcentaje: "
+          android:text="@string/porcentaje"
           android:textSize="20dp"
           android:textStyle="bold" />
 
@@ -182,7 +176,6 @@
           android:id="@+id/porSet"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="TextView"
           android:textSize="20dp" />
     </LinearLayout>
 
@@ -196,14 +189,13 @@
           android:id="@+id/statText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Estado: "
+          android:text="@string/estado"
           android:textSize="20dp"
           android:textStyle="bold" />
       <TextView
           android:id="@+id/statSet"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="TextView"
           android:textSize="20dp"
           >
 
@@ -220,7 +212,7 @@
           android:id="@+id/duraText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Duración: "
+          android:text="@string/duraci_n"
           android:textSize="20dp"
           android:textStyle="bold" />
 
@@ -228,7 +220,6 @@
           android:id="@+id/duraSet"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="TextView"
           android:textSize="20dp" />
     </LinearLayout>
     <LinearLayout
@@ -241,7 +232,7 @@
           android:id="@+id/notaText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Nota: "
+          android:text="@string/nota"
           android:textSize="20dp"
           android:textStyle="bold" />
 
@@ -249,7 +240,6 @@
           android:id="@+id/notaSet"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="TextView"
           android:textSize="20dp" />
     </LinearLayout>
 
