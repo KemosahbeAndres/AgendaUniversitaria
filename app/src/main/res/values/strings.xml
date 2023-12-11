@@ -90,4 +90,5 @@
     <string name="nombre_carrera">Nombre Carrera</string>
     <string name="your_name">Tu nombre</string>
     <string name="hint_greeting_user">Hola usuario</string>
+    <string name="label_activity_subject">Asignatura:</string>
 </resources>

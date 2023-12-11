@@ -18,14 +18,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.026">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
-            tools:ignore="MissingConstraints">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/trabText"
@@ -46,8 +42,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tipoText"
@@ -71,8 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="0dp"
-            tools:ignore="MissingConstraints">
+            android:padding="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -109,8 +103,8 @@
                 android:id="@+id/asigText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Asignatura: "
-                android:textSize="20dp"
+                android:text="@string/label_activity_subject"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 />
 

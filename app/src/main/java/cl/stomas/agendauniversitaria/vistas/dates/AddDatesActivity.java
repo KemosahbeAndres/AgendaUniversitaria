@@ -221,10 +221,10 @@ public class AddDatesActivity extends AppCompatActivity {
             Toast.makeText(AddDatesActivity.this,"No dejar el campo nombre actividad vacio", Toast.LENGTH_SHORT).show();
         //}else if (txtdescr.getText().toString().equals("")){
             //Toast.makeText(AddDatesActivity.this,"No dejar el campo descripcion vacio", Toast.LENGTH_SHORT).show();
-        }else if (txtperc.getText().toString().isEmpty()){
-            Toast.makeText(AddDatesActivity.this,"No dejar el campo porcentaje vacio", Toast.LENGTH_SHORT).show();
-        }else if(txtperc.getText().toString().equals("0") || txtperc.getText().toString().equals("00")){
-            Toast.makeText(AddDatesActivity.this,"El porcentaje no puede ser igual a 0 o 00", Toast.LENGTH_SHORT).show();
+        //}else if (txtperc.getText().toString().isEmpty()){
+            //Toast.makeText(AddDatesActivity.this,"No dejar el campo porcentaje vacio", Toast.LENGTH_SHORT).show();
+        //}else if(txtperc.getText().toString().equals("0") || txtperc.getText().toString().equals("00")){
+            //Toast.makeText(AddDatesActivity.this,"El porcentaje no puede ser igual a 0 o 00", Toast.LENGTH_SHORT).show();
         }else if (txtdate.getText().toString().equals("")){
             Toast.makeText(AddDatesActivity.this,"No dejar el campo fecha vacio", Toast.LENGTH_SHORT).show();
         }else if (txtmateria.getText().toString().equals("")){

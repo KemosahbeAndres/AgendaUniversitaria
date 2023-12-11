@@ -167,27 +167,44 @@ public class DAOActividad {
     }
     public int update(Actividad actividad){
         SQLiteDatabase db = manager.getWritableDatabase();
+        ContentValues values = this.getAcivityValues(actividad);
+        return db.update(DBContract.TABLA_ACTIVIDADES.NOMBRE, values, "id="+actividad.getId(), null);
+    }
+
+    public int update(Actividad actividad, Asignatura asignatura){
+        int result = this.update(actividad);
+        if(result >= 0){
+            SQLiteDatabase db = manager.getWritableDatabase();
+            ContentValues values = getAcivityValues(actividad);
+            values.put(DBContract.TABLA_ACTIVIDADES.COL_ID_ASIGNATURA, asignatura.getId());
+            result = db.update(DBContract.TABLA_ACTIVIDADES.NOMBRE, values, "id="+actividad.getId(), null);
+        }
+        return result;
+    }
+    private ContentValues getAcivityValues(Actividad actividad){
         ContentValues values = new ContentValues();
         values.put(DBContract.TABLA_ACTIVIDADES.COL_NOMBRE, actividad.getNombre().trim());
         values.put(DBContract.TABLA_ACTIVIDADES.COL_DESCRIPCION, actividad.getDescripcion().trim());
         values.put(DBContract.TABLA_ACTIVIDADES.COL_FECHA, actividad.getFecha().getTime()/1000);
         values.put(DBContract.TABLA_ACTIVIDADES.COL_DURACION, actividad.getDuracion());
         values.put(DBContract.TABLA_ACTIVIDADES.COL_IMPORTANCIA, actividad.getImportancia());
-        values.put(DBContract.TABLA_ACTIVIDADES.COL_ID_ASIGNATURA, actividad.getAsignatura().getId());
         int completedVal = 0;
         if(actividad.completado()){
             completedVal = 1;
         }
         values.put(DBContract.TABLA_ACTIVIDADES.COL_COMPLETADO, completedVal);
-        values.put(DBContract.TABLA_ACTIVIDADES.COL_PORCENTAJE, actividad.getPorcentaje());
+        try {
+            values.put(DBContract.TABLA_ACTIVIDADES.COL_PORCENTAJE, actividad.getPorcentaje());
+        }catch (Exception e){
+            values.put(DBContract.TABLA_ACTIVIDADES.COL_PORCENTAJE, 0);
+        }
         values.put(DBContract.TABLA_ACTIVIDADES.COL_NOTA, actividad.getNota());
         long tipo = this.getIdTipo(actividad.getTipo());
         if(tipo < 0){
             tipo = this.getIdTipo(Actividad.Tipo.ACTIVIDAD);
         }
         values.put(DBContract.TABLA_ACTIVIDADES.COL_ID_TIPO, tipo);
-
-        return db.update(DBContract.TABLA_ACTIVIDADES.NOMBRE, values, "id="+actividad.getId(), null);
+        return values;
     }
     public void delete(Actividad actividad){
         SQLiteDatabase db = manager.getWritableDatabase();

@@ -1,5 +1,6 @@
 package cl.stomas.agendauniversitaria.vistas.dates;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -35,18 +36,25 @@ public class ActivityEdit extends AppCompatActivity {
     private EditText descGet,fechaGet,duraGet,notaGet;
     private Spinner asigGet,tipoGet, imporGet, statGet;;
     private DAOActividad db;
-    DAOAsignatura listasigna=new DAOAsignatura(ActivityEdit.this);
+    DAOAsignatura listasigna = DB.asignaturas(this);
     Calendar selectfechas = Calendar.getInstance();
     boolean orstat;
     int actId;
     String [] asigna, importancias, tipos;
     private Actividad actividad;
+    private ArrayList<Asignatura> asignaturas;
     int selectedAsignatura;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+
+        ActionBar actionbar = getSupportActionBar();
+
+        if(actionbar != null){
+            actionbar.setDisplayHomeAsUpEnabled(true);
+        }
 
         Bundle extras = getIntent().getExtras();
 
@@ -90,12 +98,15 @@ public class ActivityEdit extends AppCompatActivity {
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         statGet.setAdapter(statusAdapter);
 
-        ArrayList<Asignatura> asignaturas = listasigna.getAll();
+        asignaturas = listasigna.getAll();
         ArrayList<String> asigText = new ArrayList<>();
-        ArrayList<Long> idsAsignaturas= new ArrayList<>();
-        for(Asignatura newasig : asignaturas){
-            asigText.add(newasig.getNombre());
-            idsAsignaturas.add(newasig.getId());
+        ArrayList<Long> idsAsignaturas = new ArrayList<>();
+        for(int i = 0; i < asignaturas.size(); i++){
+            asigText.add(asignaturas.get(i).getNombre());
+            if(actividad.getId() == asignaturas.get(i).getId()){
+                selectedAsignatura = i;
+            }
+            idsAsignaturas.add(asignaturas.get(i).getId());
         }
 
         ArrayAdapter<String> adapterAsig = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, asigText);
@@ -128,7 +139,10 @@ public class ActivityEdit extends AppCompatActivity {
                 if (validacionEdit()) {
                     String trab = trabGet.getText().toString();
                     String asig = asigGet.getSelectedItem().toString();
-                    int por = Integer.parseInt(porGet.getText().toString());
+                    int por = 0;
+                    try {
+                        por = Integer.parseInt(porGet.getText().toString());
+                    }catch (Exception e){ }
                     String desc = descGet.getText().toString();
                     String impor = imporGet.getSelectedItem().toString();
                     int dura = Integer.parseInt(duraGet.getText().toString());
@@ -151,13 +165,19 @@ public class ActivityEdit extends AppCompatActivity {
                         orstat = false;
                     }
                     db = new DAOActividad(ActivityEdit.this);
-                    Actividad activi = new Actividad(actividad.getId(), tipo, trab, desc, fecha2, dura, impor, orstat, por, not,listasigna.get(selectedAsignatura));
-                    db.update(activi);
+                    Actividad activi = new Actividad(actividad.getId(), tipo, trab, desc, fecha2, dura, impor, orstat, por, not);
+                    db.update(activi, listasigna.get(selectedAsignatura));
                     Toast.makeText(ActivityEdit.this, "Actividad Actualizada", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 
     @Override
@@ -175,6 +195,12 @@ public class ActivityEdit extends AppCompatActivity {
     private void fillData(){
         trabGet.setText(actividad.getNombre()); // NOMBRE ACTIVIDAD
         descGet.setText(actividad.getDescripcion()); // DESCRIPCION
+        for(int i = 0; i < asignaturas.size(); i++){ // ASIGNATURA
+            if(asignaturas.get(i).getNombre().equals(actividad.getAsignatura().getNombre())){
+                asigGet.setSelection(i);
+                break;
+            }
+        }
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         fechaGet.setText(formatter.format(actividad.getFecha())); // FECHA Y HORA
         duraGet.setText(String.valueOf(actividad.getDuracion())); // DURACION
@@ -212,10 +238,10 @@ public class ActivityEdit extends AppCompatActivity {
     private boolean validacionEdit(){
         if (trabGet.getText().toString().equals("")) {
             Toast.makeText(ActivityEdit.this, "No dejar el campo nombre actividad vacio", Toast.LENGTH_SHORT).show();
-        }else if (porGet.getText().toString().isEmpty()){
-            Toast.makeText(ActivityEdit.this,"No dejar el campo porcentaje vacio", Toast.LENGTH_SHORT).show();
-        }else if(porGet.getText().toString().equals("0") || porGet.getText().toString().equals("00")){
-            Toast.makeText(ActivityEdit.this,"El porcentaje no puede ser igual a 0 o 00", Toast.LENGTH_SHORT).show();
+        //}else if (porGet.getText().toString().isEmpty()){
+            //Toast.makeText(ActivityEdit.this,"No dejar el campo porcentaje vacio", Toast.LENGTH_SHORT).show();
+        //}else if(porGet.getText().toString().equals("0") || porGet.getText().toString().equals("00")){
+            //Toast.makeText(ActivityEdit.this,"El porcentaje no puede ser igual a 0 o 00", Toast.LENGTH_SHORT).show();
         }else if (fechaGet.getText().toString().equals("")){
             Toast.makeText(ActivityEdit.this,"No dejar el campo fecha vacio", Toast.LENGTH_SHORT).show();
         }else if (asigGet.getSelectedItem().toString().equals("")){

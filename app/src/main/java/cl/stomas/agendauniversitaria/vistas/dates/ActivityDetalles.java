@@ -117,7 +117,7 @@ public class ActivityDetalles extends AppCompatActivity {
     }
     private void updateModel() {
         Actividad updated = DB.actividades(this).get(actividad.getId());
-        DAOAsignatura updateasign=new DAOAsignatura(this);
+        DAOAsignatura updateasign = DB.asignaturas(this);
         actividad.setNombre(updated.getNombre());
         actividad.setAsignatura(updateasign.get(updated.getIdasignatura()));
         actividad.setDescripcion(updated.getDescripcion());
