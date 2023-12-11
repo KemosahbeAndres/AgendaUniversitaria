@@ -148,7 +148,7 @@ public class ActivityDetalles extends AppCompatActivity {
                 notaSet.setText(String.valueOf(actividad.getNota()));
             }else{
                 statSet.setText(getResources().getStringArray(R.array.estados)[1]);
-                notaSet.setText("Nota indefinida");
+                notaSet.setText(R.string.nota_indefinida);
             }
         }
     }
