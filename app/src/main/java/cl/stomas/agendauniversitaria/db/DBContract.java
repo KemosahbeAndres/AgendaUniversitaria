@@ -2,7 +2,7 @@ package cl.stomas.agendauniversitaria.db;
 
 public class DBContract {
 
-    public final static String DB_NAME = "t2_agenda_universitaria.db";
+    public final static String DB_NAME = "agenda_universitaria.db";
     public final static int DB_VERSION = 1;
 
     public final static class TABLA_CARRERAS {

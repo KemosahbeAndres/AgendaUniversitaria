@@ -267,7 +267,7 @@ public class AddDatesActivity extends AppCompatActivity {
                         if(String.valueOf(minute).length() < 2){
                             mprefix += "0";
                         }
-                        txtdate.setText(txtdate.getText() + " "+hprefix+hourOfDay+":"+mprefix+minute);
+                        editHora.setText(hprefix+hourOfDay+":"+mprefix+minute);
                     }
                 },
                 fechas.get(Calendar.HOUR_OF_DAY),
