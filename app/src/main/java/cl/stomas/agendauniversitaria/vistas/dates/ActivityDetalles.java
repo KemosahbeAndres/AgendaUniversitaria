@@ -121,6 +121,7 @@ public class ActivityDetalles extends AppCompatActivity {
         actividad.setNombre(updated.getNombre());
         actividad.setAsignatura(updateasign.get(updated.getIdasignatura()));
         actividad.setDescripcion(updated.getDescripcion());
+        actividad.setTipo(updated.getTipo());
         actividad.setFecha(updated.getFecha());
         actividad.setDuracion(updated.getDuracion());
         actividad.setImportancia(updated.getImportancia());
